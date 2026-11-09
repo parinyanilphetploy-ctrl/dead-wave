@@ -905,6 +905,7 @@ const W = 960, H = 540;          // logical resolution (landscape 16:9)
 const GROUND = 450;              // ground line (feet of ground enemies)
 const ROCK_TOP = GROUND - 36;    // player stands on a ruined altar
 const PLATFORM = { x1: 610, x2: W + 60, y: 300 }; // manor balcony
+const TOPDECK = { x1: 800, y: 200 };                // pirate ship: roof of the stern cabin, one level above the deck
 const BX = PLATFORM.x1 + 30;     // manor wall left edge
 const TAU = Math.PI * 2;
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
@@ -1038,7 +1039,10 @@ const dynGlow = makeInst(new THREE.MeshBasicMaterial(), 6000, false);
 const dynTrans = makeInst(new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.45, depthWrite: false }), 5000, false);
 const dynFaint = makeInst(new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.16, depthWrite: false }), 4000, false);
 // pick the mesh for a colour: faint / translucent / unlit glow / lit solid
-const meshFor = (a, glow) => a < 0.35 ? dynFaint : a < 0.95 ? dynTrans : glow ? dynGlow : dynSolid;
+// enemies draw into their own solid mesh that receives but never casts shadows, so a crowd doesn't darken itself
+const enemySolid = makeInst(voxelMaterial(false), 14000, false);
+enemySolid.receiveShadow = true;
+const meshFor = (a, glow) => a < 0.35 ? dynFaint : a < 0.95 ? dynTrans : glow ? dynGlow : (V.solidMesh || dynSolid);
 
 // ---- soft light: camera-facing quads with a radial-gradient texture (additive) — no blocky glows ----
 function makeGlowTexture() {
@@ -1188,8 +1192,9 @@ const V = {
     if (a < 0.95) {
       // see-through rects are light or haze: draw them as soft, round glows instead of boxes
       const sw = ww * 1.7 + 8, sh = hh * 1.7 + 8;
-      if (p.bright) glowAt(gx, gy, z + d / 2 + 1, sw, sh, p.col, Math.min(1.6, a * 1.9), Math.atan2(m[1], m[0]));
-      else pushBox(softMix, gx, gy, z + d / 2 + 1, sw, sh, 1, Math.atan2(m[1], m[0]), p.col);
+      const gm = this.glowMul ?? 1;                       // enemies draw with a lower glow so overlapping figures stay readable
+      if (p.bright) glowAt(gx, gy, z + d / 2 + 1, sw * (gm < 1 ? 0.75 : 1), sh * (gm < 1 ? 0.75 : 1), p.col, Math.min(1.6, a * 1.9) * gm, Math.atan2(m[1], m[0]));
+      else if (gm >= 1) pushBox(softMix, gx, gy, z + d / 2 + 1, sw, sh, 1, Math.atan2(m[1], m[0]), p.col);
       return;
     }
     if (this.spin) {                      // rotate the box position around the vertical spin axis
@@ -1465,7 +1470,9 @@ const MAPS = {
   pirate:    { name: 'อ่าวโจรสลัดกระดูก', icon: '🏴‍☠️', desc: 'ชายหาดยามค่ำคืนข้างเรือโจรสลัดเกยตื้น ลูกเรือโครงกระดูกลุกขึ้นจากทราย',
     look: { fog: '#0c1c26', sky: '#9cc4d8', ground: '#2c2a22' }, bosses: ['captain'],
     // third way in: deckhands / cutthroats dig themselves up out of the beach, much closer than the pier entrance
-    sand: { chance: 0.25, after: 10, x: [360, 560], types: ['walker', 'runner'] } },
+    sand: { chance: 0.25, after: 10, x: [360, 560], types: ['walker', 'runner'] },
+    // fourth way in: the top deck on the stern cabin roof; they drop to the deck, then to the beach
+    top: { chance: 0.2, after: 20, types: ['walker', 'runner', 'bandit'] } },
 };
 const MAP_IDS = Object.keys(MAPS);
 const curMap = () => MAPS[save.map] || MAPS.graveyard;
@@ -1513,7 +1520,7 @@ const LIGHTS_GRAVEYARD = [
 const LIGHTS_PIRATE = [
   { x: 212, y: GROUND - 78, z: -50, r: 95, c: '255,140,60', i: 1, flame: 'torch' },
   { x: 600, y: GROUND - 78, z: -50, r: 95, c: '255,140,60', i: 1, flame: 'torch' },
-  { x: BX + 196, y: PLATFORM.y - 50, z: -24, r: 70, c: '255,170,80', i: 0.9, flame: 'lantern' },
+  { x: BX + 120, y: PLATFORM.y - 50, z: -24, r: 70, c: '255,170,80', i: 0.9, flame: 'lantern' },
   { x: 64, y: ROCK_TOP - 13, z: 0, r: 38, c: '255,180,100', i: 0.8, flame: 'candle' },
   { x: 176, y: ROCK_TOP - 13, z: 0, r: 38, c: '255,180,100', i: 0.8, flame: 'candle' },
 ];
@@ -1725,6 +1732,7 @@ function chooseType() {
 
 function spawnEnemy(type = chooseType(), onPlatform) {
   const def = enemyDef(type);
+  const autoLane = onPlatform === undefined;           // lane picked here (not forced by a caller such as a boss summon)
   const D = curDiff();
   const hp = Math.max(1, Math.round(def.hp * D.hp * (1 + time * D.ramp / TUNING.hpRamp)));
   const speed = rand(...def.speed) * D.speed * (1 + time * D.ramp / TUNING.speedRamp);
@@ -1746,7 +1754,12 @@ function spawnEnemy(type = chooseType(), onPlatform) {
     standing: false, aimT: rand(1.0, 1.6),
     ...lookFor(type),
   });
-  const sand = curMap().sand, e = enemies[enemies.length - 1];
+  const sand = curMap().sand, top = curMap().top, e = enemies[enemies.length - 1];
+  if (top && autoLane && !onPlatform && top.types.includes(type) && time >= top.after && Math.random() < top.chance) {
+    e.onTop = true; e.y = TOPDECK.y;
+    if (def.ranged) e.standX = rand(TOPDECK.x1 + 20, TOPDECK.x1 + 140);
+    return;
+  }
   if (sand && !onPlatform && sand.types.includes(type) && time >= sand.after && Math.random() < sand.chance) {
     e.x = rand(sand.x[0], sand.x[1]);
     e.emergeT = EMERGE;                                   // rising out of the sand (can be shot, can't act yet)
@@ -2407,12 +2420,15 @@ function updateEnemies(dt) {
     }
     // ground-type enemies
     const stopX = player.x + 52;
+    if (e.onTop && e.x < TOPDECK.x1) { e.onTop = false; e.vy = -120; e.dropping = true; }
     if (e.onPlatform && e.x < PLATFORM.x1) { e.onPlatform = false; e.vy = -120; }
-    if (!e.onPlatform && e.y < GROUND) {
+    if (!e.onPlatform && !e.onTop && e.y < GROUND) {
       e.vy += 1200 * dt;
-      e.y = Math.min(GROUND, e.y + e.vy * dt);
+      const floor = e.dropping && e.x > PLATFORM.x1 ? PLATFORM.y : GROUND;   // from the top deck: land on the ship deck first
+      e.y = Math.min(floor, e.y + e.vy * dt);
+      if (e.y >= floor && floor === PLATFORM.y) { e.onPlatform = true; e.dropping = false; e.vy = 0; }
     }
-    const grounded = e.onPlatform || e.y >= GROUND;
+    const grounded = e.onPlatform || e.onTop || e.y >= GROUND;
     if (e.type === 'abom' || e.type === 'lich') {    // bosses call in minions
       e.sumT -= adt;
       if (e.sumT <= 0) {
@@ -3054,15 +3070,22 @@ function buildPirate(r) {
   for (let x = PLATFORM.x1; x < hullR; x += 18) sbox(x, PLATFORM.y - 0.2, 1.2, 0.5, 0, 64, '#3a2818');
   for (let x = PLATFORM.x1 + 6; x < hullR; x += 22) sbox(x, PLATFORM.y - 24, 4, 24, -30, 4, '#4a3420');
   sbox(PLATFORM.x1, PLATFORM.y - 26, hullR - PLATFORM.x1, 4, -30, 6, '#5a4028');
-  sbox(BX + 193, PLATFORM.y - 44, 6, 44, -24, 6, '#3a2818');
-  // stern castle with lit cabin windows
-  sbox(BX + 300, 196, 260, PLATFORM.y - 196, -60, 60, '#3a2818');
-  for (let y = 204; y < PLATFORM.y; y += 10) sbox(BX + 300, y, 260, 1.2, -29.6, 1, '#24180e');
-  sbox(BX + 296, 190, 268, 8, -58, 66, '#5a4028');
-  for (const wx of [BX + 330, BX + 380, BX + 430]) {
-    sbox(wx - 3, 220, 28, 38, -29.4, 1.5, '#0e0806');
-    sbox(wx, 223, 22, 32, -28.8, 1, '#f0a040', true);
-    sbox(wx + 10, 223, 2, 32, -28.2, 1, '#0e0806'); sbox(wx, 238, 22, 2, -28.2, 1, '#0e0806');
+  sbox(BX + 117, PLATFORM.y - 44, 6, 44, -24, 6, '#3a2818');
+  // stern cabin with lit windows; its roof is the top deck (the fourth way in)
+  const T = TOPDECK;
+  sbox(T.x1 + 6, T.y + 10, hullR - T.x1 - 6, PLATFORM.y - T.y - 10, -62, 60, '#3a2818');
+  for (let y = T.y + 18; y < PLATFORM.y; y += 10) sbox(T.x1 + 6, y, hullR - T.x1 - 6, 1.2, -31.6, 1, '#24180e');
+  sbox(T.x1, T.y, hullR - T.x1, 10, 0, 64, '#5a4028');                                     // top deck slab (z = 0 like the lane)
+  for (let x = T.x1; x < hullR; x += 18) sbox(x, T.y - 0.2, 1.2, 0.5, 0, 64, '#3a2818');
+  sbox(T.x1, T.y + 8, hullR - T.x1, 2, 32.4, 1, '#c9a35a');                                 // gilded edge
+  for (let x = T.x1 + 4; x < hullR; x += 90) sbox(x, T.y + 10, 5, PLATFORM.y - T.y - 10, 28, 5, '#4a3420');   // support posts
+  for (let x = T.x1 + 6; x < hullR; x += 22) sbox(x, T.y - 22, 4, 22, -30, 4, '#4a3420');   // back rail
+  sbox(T.x1, T.y - 24, hullR - T.x1, 4, -30, 6, '#5a4028');
+  for (let i = 0; i < 6; i++) sbox(T.x1 - 10 - i * 7, T.y + 10 + i * 15, 12, 4, -20, 22, '#4e3826');   // stairs down to the deck
+  for (const wx of [T.x1 + 30, T.x1 + 80, T.x1 + 130]) {
+    sbox(wx - 3, 220, 28, 38, -31.4, 1.5, '#0e0806');
+    sbox(wx, 223, 22, 32, -30.8, 1, '#f0a040', true);
+    sbox(wx + 10, 223, 2, 32, -30.2, 1, '#0e0806'); sbox(wx, 238, 22, 2, -30.2, 1, '#0e0806');
   }
   // masts, yards, tattered sails, crow's nest and the black flag
   for (const [mx, top] of [[BX + 130, -70], [BX + 250, -20]]) {
@@ -3079,7 +3102,7 @@ function buildPirate(r) {
     sbox(mx + 14, top - 18, 8, 6, -44, 1, '#e8e0cc'); sbox(mx + 12, top - 10, 12, 2, -44, 1, '#e8e0cc');
   }
   sboxC(BX + 190, 60, 2, 280, -45, 2, '#2a2016', 0.62); sboxC(BX + 70, 120, 2, 240, -45, 2, '#2a2016', -0.5);   // rigging
-  addGlass([[BX + 330, 223, 22, 32, -28], [BX + 380, 223, 22, 32, -28], [BX + 430, 223, 22, 32, -28], [262, 356, 26, 30, -179], [328, 356, 26, 30, -179]]);
+  addGlass([[TOPDECK.x1 + 30, 223, 22, 32, -30], [TOPDECK.x1 + 80, 223, 22, 32, -30], [TOPDECK.x1 + 130, 223, 22, 32, -30], [262, 356, 26, 30, -179], [328, 356, 26, 30, -179]]);
 }
 
 // painted backdrop for the cove: indigo sky, pale moon, stars, the horizon with a moon road, a ghost ship and an island
@@ -3903,7 +3926,7 @@ function drawFlame(L, t) {
 
 // fixed light sources in the scenery: [x, y, z, w, h, colour, intensity]
 const GLOWS_PIRATE = [
-  [BX + 341, 240, -26, 60, 70, '#ff9a40', 0.34], [BX + 391, 240, -26, 60, 70, '#ff9a40', 0.34], [BX + 441, 240, -26, 60, 70, '#ff9a40', 0.34],
+  [TOPDECK.x1 + 41, 240, -28, 60, 70, '#ff9a40', 0.34], [TOPDECK.x1 + 91, 240, -28, 60, 70, '#ff9a40', 0.34], [TOPDECK.x1 + 141, 240, -28, 60, 70, '#ff9a40', 0.34],
   [275, 371, -178, 60, 60, '#ff9a40', 0.32], [341, 371, -178, 60, 60, '#ff9a40', 0.32],
   [335, GROUND - 20, -84, 70, 40, '#ffc84a', 0.45],                                   // treasure gold
   [120, GROUND - 22, 44, 40, 20, '#ffb04a', 0.18],
@@ -3922,7 +3945,7 @@ const STATIC_GLOWS = GLOWS_GRAVEYARD.slice();
 
 // Build every moving thing as voxel boxes for this frame (via the V context)
 function drawWorld() {
-  dynSolid.count = dynGlow.count = dynTrans.count = dynFaint.count = softAdd.count = softMix.count = smokeMesh.count = 0;
+  dynSolid.count = enemySolid.count = dynGlow.count = dynTrans.count = dynFaint.count = softAdd.count = softMix.count = smokeMesh.count = 0;
   ctx = V;
   const t = performance.now() / 1000;
   // player aura from high-tier gear (drawn first so it sits behind everything)
@@ -3970,11 +3993,13 @@ function drawWorld() {
   for (const d of drops) { V.begin(10, 8, true); drawDrop(d); }
   for (const e of enemies) {
     V.begin(0, e.type === 'abom' ? 44 : e.type === 'captain' ? 30 : e.type === 'vamp' ? 18 : e.type === 'lich' ? 22 : e.type === 'tank' ? 26 : isFly(e) ? 10 : 16);
+    V.glowMul = 0.35; V.solidMesh = enemySolid;
     const sunk = emergeOff(e);
     if (sunk) { V.save(); V.translate(0, sunk); }            // the sand hides whatever is still below ground
     e.type === 'captain' ? drawCaptain(e) : e.def.skeleton ? (isFly(e) ? drawParrot(e) : drawSkeleton(e)) : isFly(e) ? drawBat(e) : drawHumanoid(e);
     drawStatus(e);
     if (sunk) V.restore();
+    V.glowMul = 1; V.solidMesh = null;
   }
   V.begin(0, 3, true); drawAimGuide();
   V.begin(0, 18); drawPlayer();
@@ -4035,8 +4060,8 @@ function drawWorld() {
   for (const s of eShots) if (s.active) glowAt(s.x, s.y, 8, 54, 54, '#b060ff', 0.9);
   for (const e of enemies) {
     if (e.hp <= 0) continue;
-    if (e.def.ranged) { const o = orbPos(e), big = e.type === 'lich' ? 1.8 : 1; glowAt(o.x, o.y, 10, 46 * big, 46 * big, e.type === 'lich' ? '#5affc0' : '#a050ff', 0.7 + (e.standing && e.aimT < 0.6 ? 0.6 : 0)); }
-    if (e.def.boss) { const c = centerOf(e); glowAt(c.x, c.y, -6, 200, 220, e.type === 'lich' || (e.type === 'captain' && e.rage) ? '#3affb0' : e.type === 'captain' ? '#ffb04a' : '#ff2a3a', 0.22 + Math.sin(t * 3) * 0.06); }
+    if (e.def.ranged) { const o = orbPos(e), big = e.type === 'lich' ? 1.8 : 1; glowAt(o.x, o.y, 10, 30 * big, 30 * big, e.type === 'lich' ? '#5affc0' : '#a050ff', 0.3 + (e.standing && e.aimT < 0.6 ? 0.35 : 0)); }
+    if (e.def.boss) { const c = centerOf(e); glowAt(c.x, c.y, -20, 150, 170, e.type === 'lich' || (e.type === 'captain' && e.rage) ? '#3affb0' : e.type === 'captain' ? '#ffb04a' : '#ff2a3a', 0.08 + Math.sin(t * 3) * 0.03); }
     if (e.burnT > 0) { const c = centerOf(e); glowAt(c.x, c.y, 10, 70, 90, '#ff7a2a', 0.45 * fl()); }
     if (e.frozenT > 0) { const c = centerOf(e); glowAt(c.x, c.y, 10, 60, 90, '#a8d8ff', 0.4); }
   }
@@ -4057,7 +4082,7 @@ function drawWorld() {
 
   ctx = ctx2d;
   smokeAlpha.needsUpdate = true; smokeMesh.instanceMatrix.needsUpdate = true; if (smokeMesh.instanceColor) smokeMesh.instanceColor.needsUpdate = true;
-  for (const m of [dynSolid, dynGlow, dynTrans, dynFaint, softAdd, softMix]) { m.instanceMatrix.needsUpdate = true; m.instanceColor.needsUpdate = true; }
+  for (const m of [dynSolid, enemySolid, dynGlow, dynTrans, dynFaint, softAdd, softMix]) { m.instanceMatrix.needsUpdate = true; m.instanceColor.needsUpdate = true; }
 }
 
 // tint the world for the chosen mode (hell = red haze, endless = violet, ...)
