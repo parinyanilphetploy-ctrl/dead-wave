@@ -47,6 +47,68 @@
     font-family: system-ui, sans-serif; color: #e8dcc8;
   }
   .hidden { display: none !important; }
+  /* ---------- home screen: hunter by the campfire (3D scene) + menu on the right ---------- */
+  #home { background: linear-gradient(90deg, transparent 0%, transparent 48%, rgba(6,2,6,0.55) 70%, rgba(4,1,6,0.85) 100%); justify-content: flex-end; }
+  .homeBox { width: min(380px, 44vw); margin-right: clamp(8px, 5vw, 70px); text-align: center; display: flex; flex-direction: column; align-items: stretch; gap: clamp(6px, 1.6vh, 12px); }
+  .homeBox h1 { margin: 0; font: 400 clamp(44px, 13vh, 96px) 'Pirata One', Georgia, serif; letter-spacing: 4px; line-height: 1;
+    color: #d8283a; text-shadow: 0 0 24px #ff203a99, 4px 4px 0 #000; animation: titleGlow 3s ease-in-out infinite; }
+  @keyframes titleGlow { 0%, 100% { text-shadow: 0 0 18px #ff203a88, 4px 4px 0 #000; } 50% { text-shadow: 0 0 34px #ff5a3acc, 4px 4px 0 #000; } }
+  .homeBox .tagline { margin: 0 0 clamp(2px, 1vh, 8px); }
+  .homeCoins { font: bold clamp(15px, 3.2vh, 20px) system-ui, sans-serif; color: #e8c062; text-shadow: 2px 2px 0 #000; }
+  .homeBtn { display: flex; align-items: center; gap: 14px; text-align: left; padding: clamp(7px, 1.8vh, 12px) 18px; min-width: 0;
+    font: bold clamp(16px, 3.6vh, 22px) system-ui, sans-serif; position: relative; }
+  .homeBtn .hi { font-size: 1.35em; width: 1.6em; text-align: center; filter: drop-shadow(2px 2px 0 #000); }
+  .homeBtn small { display: block; font: 12px system-ui, sans-serif; color: #b8a898; font-weight: normal; margin-top: 1px; }
+  .homeBtn .badge { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: #c0202e; color: #fff; font-size: 12px;
+    border-radius: 10px; padding: 1px 8px; box-shadow: 0 0 8px #ff304a99; }
+  .homeHint { color: #7a6a72; font-size: 12px; margin-top: 2px; }
+  @media (max-height: 420px) { .homeBtn small { display: none; } }
+  .profSwitch { background: none; border: 1px solid #5a1a24; color: #b8a898; font: 12px system-ui, sans-serif; padding: 3px 10px; cursor: pointer; align-self: center; border-radius: 12px; }
+  .profSwitch:hover { color: #f0e4d0; border-color: #c9a35a; }
+  /* ---------- dev difficulty tuning ---------- */
+  .tunePanel { max-width: 640px; }
+  .devBadge { font: bold 12px system-ui, sans-serif; color: #8ac0ff; border: 1px solid #3a5a8a; padding: 2px 8px; border-radius: 10px; }
+  .tuneTabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 6px; }
+  .tuneTabs button { flex: 1; min-width: 80px; padding: 6px 8px; font: bold 13px system-ui, sans-serif; color: #c8b8a8; cursor: pointer;
+    background: #160a10; border: 2px solid #3a1420; border-bottom-width: 3px; }
+  .tuneTabs button.on { color: #fff; border-color: var(--dc); box-shadow: 0 0 12px var(--dc) inset; }
+  .tuneTabs button small { display: block; font-weight: normal; font-size: 10px; color: #e8c062; min-height: 1em; }
+  .tuneBase { margin: 0 0 4px; font-size: 12px; color: #9a8a8e; text-align: left; }
+  .tuneRows { display: grid; gap: 8px; text-align: left; }
+  .tuneRow { display: grid; grid-template-columns: 1fr auto 96px; align-items: center; gap: 10px; background: #160a10; border: 1px solid #3a1420; padding: 6px 10px; }
+  .tuneRow input[type=number] { width: 100%; box-sizing: border-box; background: #0c0609; color: #e8c062; border: 1px solid #5a1a24; padding: 5px 6px;
+    font: bold 16px system-ui, sans-serif; text-align: right; }
+  .tuneRow input[type=number]:focus { outline: none; border-color: #c9a35a; box-shadow: 0 0 8px #c9a35a55; }
+  .tuneRow input.bad { border-color: #ff3a4a; }
+  .tuneRow .std { font-size: 11px; color: #8a7a7e; white-space: nowrap; text-align: right; }
+  .tuneRow .std button { margin-left: 4px; background: none; border: 1px solid #5a1a24; color: #c8b8a8; font-size: 11px; cursor: pointer; padding: 0 5px; }
+  .tuneRow b { font-size: 14px; color: #f0e4d0; } .tuneRow small { display: block; font-size: 11px; color: #8a7a7e; font-weight: normal; }
+  .tuneRow input[type=range] { width: 100%; accent-color: #c0202e; }
+  .tuneRow output { font: bold 15px system-ui, sans-serif; color: #e8c062; text-align: right; }
+  .tuneRow.changed { border-color: #c9a35a88; }
+  .tuneGod { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 10px; background: #160a10; border: 1px solid #3a1420; cursor: pointer; text-align: left; font-size: 14px; }
+  @media (max-width: 520px) { .tuneRow { grid-template-columns: 1fr 84px; } .tuneRow .std { grid-column: 1 / -1; grid-row: 2; text-align: left; } }
+  /* ---------- profile picker (before the home screen) ---------- */
+  #profile { background: radial-gradient(ellipse at 30% 70%, rgba(40,10,4,0.35), rgba(4,1,6,0.88) 70%); }
+  .profBox { position: relative; text-align: center; width: min(760px, 100%); }
+  .profBox h1 { margin: 0; font: 400 clamp(40px, 11vh, 80px) 'Pirata One', Georgia, serif; letter-spacing: 4px; color: #d8283a; text-shadow: 0 0 24px #ff203a99, 4px 4px 0 #000; line-height: 1.05; }
+  .mockTag { display: inline-block; font: bold 11px system-ui, sans-serif; letter-spacing: 3px; color: #1a0a10; background: #c9a35a; padding: 2px 10px; border-radius: 3px; }
+  .profCards { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 2.5vw, 22px); margin-top: clamp(8px, 2vh, 16px); }
+  .profCard { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: clamp(10px, 2.4vh, 20px) 14px; cursor: pointer; color: #e8dcc8; text-align: center;
+    font-family: system-ui, sans-serif; background: linear-gradient(180deg, #1e1018, #10070d); border: 2px solid #3a1420;
+    box-shadow: inset 0 0 0 1px #c9a35a33, 0 6px 0 #050206; transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s; }
+  .profCard:hover { transform: translateY(-3px); border-color: #c9a35a; box-shadow: inset 0 0 0 1px #c9a35a77, 0 0 24px var(--pc), 0 9px 0 #050206; }
+  .profCard.dev { --pc: #3a8aff66; } .profCard.player { --pc: #ff3a4a66; }
+  .profCard .pIcon { font-size: clamp(30px, 7vh, 46px); filter: drop-shadow(2px 3px 0 #000); }
+  .profCard b { font-size: clamp(18px, 4vh, 24px); color: #f0e4d0; }
+  .profCard.dev b { color: #8ac0ff; } .profCard.player b { color: #ff8a8a; }
+  .profCard .pDesc { font-size: 13px; color: #cbbca8; }
+  .profCard ul { margin: 4px 0 0; padding: 0; list-style: none; font-size: 12px; color: #9a8a8e; line-height: 1.6; }
+  .profCard ul li::before { content: '✦ '; color: #c9a35a; }
+  .profCard .pStat { margin-top: 4px; font-size: 12px; color: #e8c062; min-height: 1em; }
+  .profReset { margin-top: clamp(8px, 2vh, 14px); min-width: 0; font-size: 12px; padding: 4px 12px; opacity: 0.75; }
+  .profReset.armed { background: linear-gradient(180deg, #b02020, #6a0c0c); opacity: 1; }
+  @media (max-height: 420px) { .profCard ul { display: none; } }
   .panel {
     position: relative;
     background: linear-gradient(180deg, #1c0e16 0%, #10070d 100%);
@@ -86,7 +148,11 @@
   .btn:disabled { opacity: 0.4; cursor: default; }
   .btn.primary { background: linear-gradient(180deg, #9a1a2a, #5a0c18); box-shadow: inset 0 0 0 1px #ff6a7a66, 0 0 16px #a0102a66, 0 4px 0 #050206; }
   .btn.gold { background: linear-gradient(180deg, #6a4a1a, #3e2a0c); color: #ffe6a8; }
-  .shopHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .shopHead { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: -20px -24px 10px; padding: 16px 24px 10px;
+    position: sticky; top: -20px; z-index: 6; background: linear-gradient(180deg, #1c0e16 85%, rgba(28,14,22,0)); }
+  .headRight { display: flex; align-items: center; gap: 12px; }
+  .topBack { min-width: 0; padding: 6px 14px; font-size: clamp(13px, 2.6vh, 16px); }
+  .cornerBack { position: absolute; top: 12px; right: 14px; z-index: 6; }
   .coins { font-size: clamp(18px, 4vh, 24px); font-weight: bold; color: #e8c062; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 10px; text-align: left; }
   .card { background: linear-gradient(180deg, #1e1018, #140a10); border: 2px solid #3a1420; padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
@@ -107,6 +173,13 @@
   .petCard img { width: 72px; height: 72px; image-rendering: pixelated; }
   .petCard .eff { min-height: 34px; }
   .petStats { font-size: 12px; color: #9a8a8e; }
+  .mapRow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 4px 0 2px; }
+  .mapCard { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; text-align: left; padding: 8px 10px; cursor: pointer; color: #e8dcc8;
+    font-family: system-ui, sans-serif; background: linear-gradient(180deg, #1e1018, #10070d); border: 2px solid #3a1420; }
+  .mapCard.on { border-color: #c9a35a; box-shadow: 0 0 14px #c9a35a55 inset; }
+  .mapCard .mIcon { font-size: 22px; } .mapCard b { font-size: 15px; color: #f0e4d0; }
+  .mapCard .mDesc { font-size: 11px; color: #b8a898; } .mapCard .mFoes { font-size: 11px; color: #e8c062; }
+  @media (max-height: 420px) { .mapCard .mDesc { display: none; } }
   .diffRow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 10px 0 4px; }
   @media (max-width: 560px) { .diffRow { grid-template-columns: repeat(3, 1fr); } }
   .diffBtn { font: bold 14px system-ui, sans-serif; color: #f0e4d0; background: #160a10; border: 2px solid #3a1420; padding: 6px 4px; cursor: pointer; }
@@ -124,6 +197,11 @@
   .secTitle { font: 400 20px 'Pirata One', Georgia, serif; color: #c9a35a; margin: 0 0 6px; letter-spacing: 1px; }
   .eqHead { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
   .eqHead .secTitle { margin: 0; }
+  .autoPick { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: -2px 0 8px; font-size: 12px; color: #c8b8a8; }
+  .petPick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 0 0 10px; padding: 6px 10px; font-size: 13px;
+    background: rgba(30, 10, 20, 0.6); border: 1px solid #4a1a24; border-radius: 6px; color: #c8b8a8; }
+  .petPick label { display: flex; align-items: center; gap: 4px; cursor: pointer; font-weight: bold; }
+  .autoPick label { display: flex; align-items: center; gap: 3px; cursor: pointer; }
   .btn.mini { min-width: 0; padding: 5px 10px; font-size: 13px; }
   .notice { color: #e8c062; }
   .eqSlot { display: flex; align-items: center; gap: 8px; background: #160a10; border: 2px solid #3a1420; padding: 6px 8px; margin-bottom: 6px; cursor: pointer; }
@@ -196,6 +274,7 @@
 <div id="stage"><canvas id="gl"></canvas><canvas id="game"></canvas></div>
 <div id="menu" class="overlay hidden">
   <div class="panel">
+    <button id="mapBack" class="btn topBack cornerBack hidden">✕ กลับ</button>
     <h1 id="menuTitle">Dead Wave</h1>
     <p class="tagline" id="menuTag">คืนพระจันทร์สีเลือด... พวกมันกำลังมา</p>
     <div class="divider"></div>
@@ -205,24 +284,79 @@
       <button id="gearBtn" class="btn">อุปกรณ์</button>
       <button id="petBtn" class="btn">สัตว์เลี้ยง</button>
       <button id="shopBtn" class="btn gold">อัปเกรด</button>
+      <button id="homeBtn" class="btn">🏠 หน้าแรก</button>
     </div>
     <p class="hint" id="menuHint"></p>
   </div>
 </div>
+<div id="profile" class="overlay hidden">
+  <div class="profBox">
+    <span class="mockTag">MOCKUP</span>
+    <h1>Dead Wave</h1>
+    <p class="tagline">เลือกโหมดการเล่น</p>
+    <div class="profCards">
+      <button class="profCard dev" data-prof="dev">
+        <span class="pIcon">🛠️</span><b>ผู้พัฒนา</b>
+        <span class="pDesc">ปลดล็อกทุกอย่างเพื่อทดสอบ</span>
+        <ul><li>ทุกด่าน รวม ยาก / นรก</li><li>สัตว์เลี้ยงครบทุกตัว</li><li>ปืน อุปกรณ์ Mod ระดับตำนานครบชุด</li><li>เหรียญ 999,999</li></ul>
+        <span class="pStat" id="profDevStat"></span>
+      </button>
+      <button class="profCard player" data-prof="player">
+        <span class="pIcon">🎮</span><b>ผู้เล่น</b>
+        <span class="pDesc">เริ่มจาก 0 เหมือนผู้เล่นใหม่</span>
+        <ul><li>ใช้ทดสอบระดับความยาก</li><li>ต้องผ่านด่านเพื่อปลดล็อกด่านถัดไป</li><li>เก็บเหรียญและของเองทั้งหมด</li></ul>
+        <span class="pStat" id="profPlayerStat"></span>
+      </button>
+    </div>
+    <button id="profReset" class="btn mini profReset">↺ ล้างเซฟผู้เล่น (เริ่มใหม่จาก 0)</button>
+  </div>
+</div>
+<div id="tune" class="overlay hidden">
+  <div class="panel tunePanel">
+    <div class="shopHead"><h2>ปรับแต่งความยาก</h2><div class="headRight"><span class="devBadge">🛠️ ผู้พัฒนา</span><button id="tuneBack" class="btn topBack">✕ กลับ</button></div></div>
+    <p class="sub" style="text-align:left;margin-top:0">เลือกแผนที่แล้วกรอกค่าจริงของด่านนั้น (ไม่มีตัวคูณซ้อน) • ใช้กับ<b>ทั้งผู้พัฒนาและผู้เล่น</b></p>
+    <div class="tuneTabs" id="tuneTabs"></div>
+    <p class="tuneBase" id="tuneBase"></p>
+    <div id="tuneRows" class="tuneRows"></div>
+    <label class="tuneGod"><input type="checkbox" id="tuneGod"> 🛡️ อมตะ — ไม่เสียเลือด (ทดสอบด่าน / บอสได้นานๆ)</label>
+    <div class="buttons"><button id="tuneReset" class="btn">↺ รีเซ็ตด่านนี้เป็นค่ามาตรฐาน</button></div>
+  </div>
+</div>
+<div id="home" class="overlay hidden">
+  <div class="homeBox">
+    <h1>Dead Wave</h1>
+    <p class="tagline">พักข้างกองไฟก่อนคืนพระจันทร์เลือดจะมาถึง...</p>
+    <div class="homeCoins">🪙 <span id="homeCoins">0</span></div>
+    <button class="btn primary homeBtn" data-go="map"><span class="hi">🗺️</span><span>แผนที่<small id="homeMapSub">เลือกด่านแล้วออกล่า</small></span></button>
+    <button class="btn homeBtn" data-go="inv"><span class="hi">🎒</span><span>กระเป๋า<small>อุปกรณ์ ปืน และ Mod</small></span><b class="badge hidden" id="homeInvBadge"></b></button>
+    <button class="btn homeBtn" data-go="pet"><span class="hi">🐾</span><span>สัตว์เลี้ยง<small id="homePetSub">คู่หูเก็บของ</small></span></button>
+    <button class="btn homeBtn devOnly hidden" data-go="tune" id="homeTuneBtn"><span class="hi">⚙️</span><span>ปรับแต่งความยาก<small id="homeTuneSub">ผู้พัฒนา: ตั้งตัวคูณ</small></span></button>
+    <button class="btn gold homeBtn" data-go="up"><span class="hi">⚒️</span><span>อัปเกรด<small>เพิ่มพลังนักล่า</small></span><b class="badge hidden" id="homeUpBadge"></b></button>
+    <p class="homeHint" id="homeHint"></p>
+    <button id="homeProfile" class="profSwitch"></button>
+  </div>
+</div>
 <div id="pets" class="overlay hidden">
   <div class="panel wide">
-    <div class="shopHead"><h2>สัตว์เลี้ยง</h2><div class="coins">🪙 <span id="petCoins">0</span></div></div>
-    <p class="sub" style="text-align:left;margin-top:0">สัตว์เลี้ยงจะบินไปเก็บของที่ศัตรูดรอปให้อัตโนมัติ (เลือกพาไปได้ 1 ตัว)</p>
+    <div class="shopHead"><h2>สัตว์เลี้ยง</h2><div class="headRight"><div class="coins">🪙 <span id="petCoins">0</span></div><button id="petBack" class="btn topBack">✕ กลับ</button></div></div>
+    <p class="sub" style="text-align:left;margin-top:0">สัตว์เลี้ยงจะบินไปเก็บของที่ศัตรูดรอปให้อัตโนมัติ (เลือกพาไปได้ 1 ตัว) • ของระดับที่ไม่ได้เลือกจะถูกปล่อยทิ้งไว้จนหายไป</p>
+    <div class="petPick" id="petPick"></div>
     <div id="petGrid" class="grid petGrid"></div>
-    <button id="petBack" class="btn">กลับ</button>
   </div>
 </div>
 <div id="gear" class="overlay hidden">
   <div class="panel wide gearPanel">
-    <div class="shopHead"><h2>อุปกรณ์นักล่า</h2><div class="coins">🪙 <span id="gearCoins">0</span></div></div>
+    <div class="shopHead"><h2>อุปกรณ์นักล่า</h2><div class="headRight"><div class="coins">🪙 <span id="gearCoins">0</span></div><button id="gearBack" class="btn topBack">✕ กลับ</button></div></div>
     <div class="gearLayout">
       <div>
         <div class="eqHead"><p class="secTitle">สวมใส่อยู่</p><button id="autoEquip" class="btn primary mini">⚔ สวมใส่อุปกรณ์แนะนำ</button></div>
+        <div class="autoPick" id="autoPick">
+          <span>ใส่ให้:</span>
+          <label><input type="checkbox" data-k="gear"> 🛡 อุปกรณ์</label>
+          <label><input type="checkbox" data-k="weapon"> 🔫 ปืน</label>
+          <label><input type="checkbox" data-k="mod"> 💎 Mod</label>
+          <label><input type="checkbox" data-k="wmod"> ⚙ Mod ปืน</label>
+        </div>
         <div id="eqSlots"></div>
         <div id="statBox" class="statBox"></div>
       </div>
@@ -252,20 +386,25 @@
         <div id="detail" class="detail"></div>
       </div>
     </div>
-    <button id="gearBack" class="btn">กลับ</button>
   </div>
 </div>
 <div id="shop" class="overlay hidden">
   <div class="panel wide">
-    <div class="shopHead"><h2>คลังอาวุธนักล่า</h2><div class="coins">🪙 <span id="shopCoins">0</span></div></div>
+    <div class="shopHead"><h2>คลังอาวุธนักล่า</h2><div class="headRight"><div class="coins">🪙 <span id="shopCoins">0</span></div><button id="backBtn" class="btn topBack">✕ กลับ</button></div></div>
     <div id="shopGrid" class="grid"></div>
     <p class="secTitle" style="margin-top:14px;text-align:left">ร้านอาวุธ <span class="muted" style="font:13px system-ui">— ซื้อแล้วไปถือได้ที่หน้า "อุปกรณ์" (ปืนระดับสูงหาได้จากการดรอป)</span></p>
     <div id="weaponShop" class="grid"></div>
-    <button id="backBtn" class="btn">กลับ</button>
   </div>
 </div>
 <div id="rotate"><div class="phone"></div>หมุนมือถือเป็นแนวนอน<small>เกมจะหยุดไว้จนกว่าจะหมุนจอ</small></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FXAAShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 <script>
 'use strict';
 
@@ -274,30 +413,32 @@ const TUNING = {
   // player base stats at Lv 0 (kept low on purpose; upgrades scale them, see UPGRADES)
   magSize: 4, reloadTime: 1.6, shotCooldown: 0.34, damage: 14, bulletSpeed: 1100, maxHp: 60,
   // coins per kill, before the coin upgrade multiplier
-  coins: { walker: 3, runner: 3, bat: 3, bandit: 6, tank: 15, abom: 70, lich: 70, vamp: 70 }, headshotCoinBonus: 2,
+  coins: { walker: 3, runner: 3, bat: 3, bandit: 6, tank: 15, abom: 70, lich: 70, vamp: 70, captain: 90 }, headshotCoinBonus: 2,
   // spawning: interval shrinks from spawnStart to spawnMin by spawnRamp seconds per second
-  spawnStart: 2.2, spawnMin: 0.6, spawnRamp: 0.012,
+  spawnStart: 1.7, spawnMin: 0.42, spawnRamp: 0.016,
   hordeMul: 1.5,       // Endless: spawn rate x1.5 after each boss kill (stacks)
   spawnFloor: 0.12, maxAlive: 80,   // shortest gap between spawn ticks (packs beyond that); alive cap
   // enemy stats grow with time: stat * (1 + time / ramp)
-  hpRamp: 90, speedRamp: 300,
+  hpRamp: 70, speedRamp: 240,
   platformAfter: 15,      // ghouls/ferals/cultists may use the balcony after this
   platformChance: 0.45,
   // after = first second it can appear, weight = relative spawn chance, atk = seconds between attacks
   enemies: {
     walker: { after: 0,  weight: 1,    hp: 26,  speed: [28, 46],  dmg: 6,  atk: 1,   w: 22, h: 70, headH: 22 },
-    runner: { after: 25, weight: 0.5,  hp: 14,  speed: [80, 105], dmg: 5,  atk: 0.7, w: 20, h: 60, headH: 20 },
-    bat:    { after: 35, weight: 0.35, hp: 12,  speed: [70, 95],  dmg: 4,  atk: 1 },
-    bandit: { after: 40, weight: 0.3,  hp: 34,  speed: [32, 42],  dmg: 8,  atk: 2.6, w: 22, h: 74, headH: 22, ranged: true },
-    tank:   { after: 50, weight: 0.2,  hp: 120, speed: [16, 22],  dmg: 12, atk: 1.2, w: 34, h: 92, headH: 26, helmet: 30 },
+    runner: { after: 18, weight: 0.5,  hp: 14,  speed: [80, 105], dmg: 5,  atk: 0.7, w: 20, h: 60, headH: 20 },
+    bat:    { after: 26, weight: 0.35, hp: 12,  speed: [70, 95],  dmg: 4,  atk: 1 },
+    bandit: { after: 30, weight: 0.3,  hp: 34,  speed: [32, 42],  dmg: 8,  atk: 2.6, w: 22, h: 74, headH: 22, ranged: true },
+    tank:   { after: 38, weight: 0.2,  hp: 120, speed: [16, 22],  dmg: 12, atk: 1.2, w: 34, h: 92, headH: 26, helmet: 30 },
     // bosses (never random; one arrives every bossEvery seconds, rotating abom -> lich -> vamp)
     abom:   { after: 1e9, weight: 0, boss: true, name: 'อสุรกายเนื้อเน่า', hp: 380, speed: [13, 15], dmg: 26, atk: 1.8, w: 56, h: 142, headH: 36, helmet: 160 },
     lich:   { after: 1e9, weight: 0, boss: true, ranged: true, name: 'ราชันย์ลิช', hp: 300, speed: [26, 30], dmg: 12, atk: 2.1, w: 30, h: 114, headH: 30 },
     vamp:   { after: 1e9, weight: 0, boss: true, name: 'เจ้าแห่งแวมไพร์', hp: 260, speed: [120, 140], dmg: 16, atk: 1 },
+    // pirate cove boss: pistol volleys, cannon barrage from the ship, calls crew onto the deck, rages below half health
+    captain: { after: 1e9, weight: 0, boss: true, skeleton: true, name: 'กัปตันกระดูกดำ', hp: 340, speed: [20, 24], dmg: 22, atk: 1.6, w: 40, h: 128, headH: 32 },
   },
   banditShotSpeed: 260,
   // loot: each kill may drop a gear piece and/or a mod (shoot it to collect). Brutes multiply the chance.
-  gearChance: 0.12, modChance: 0.10, weaponChance: 0.03, wmodChance: 0.06, tankLootMul: 4, dropLife: 8, invCap: 60,
+  gearChance: 0.06, modChance: 0.05, weaponChance: 0.015, wmodChance: 0.03, tankLootMul: 4, dropLife: 8, invCap: 1000,   // drop chances halved; bag holds 1000 items
   baseCrit: 5,
   bossEvery: 30,          // seconds between bosses
   bossOrder: ['abom', 'lich', 'vamp'],            // % crit chance before mods; crits deal x2
@@ -312,48 +453,73 @@ const UPGRADES = [
   { id: 'reload', icon: '⏳', name: 'รีโหลดไว',        max: 12, base: 20, growth: 1.4,  fmt: l => `${(TUNING.reloadTime * 0.92 ** l).toFixed(2)} วิ` },
   { id: 'hp',     icon: '🩸', name: 'เลือดสูงสุด',      max: 20, base: 15, growth: 1.3,  fmt: l => `${TUNING.maxHp + 12 * l} HP` },
   { id: 'head',   icon: '🎯', name: 'ดาเมจ Headshot',  max: 8,  base: 35, growth: 1.5,  fmt: l => `x${(2 + 0.25 * l).toFixed(2)}` },
-  { id: 'luck',   icon: '🔮', name: 'โอกาสดรอปของ',   max: 10, base: 25, growth: 1.45, fmt: l => `+${10 * l}%` },
   { id: 'coin',   icon: '🪙', name: 'เหรียญเพิ่ม',      max: 10, base: 30, growth: 1.45, fmt: l => `x${(1 + 0.1 * l).toFixed(1)}` },
-  { id: 'bag',    icon: '🎒', name: 'ช่องกระเป๋า',      max: 10, base: 40, growth: 1.35, fmt: l => `${TUNING.invCap + 10 * l} ช่อง` },
 ];
-const invCap = () => TUNING.invCap + 10 * (save.up.bag || 0);   // bag size: 60 + 10 per upgrade level
+const invCap = () => TUNING.invCap;   // bag size: a flat 1000 (the bag upgrade was removed)
 const upgradeCost = (u, level) => Math.round(u.base * u.growth ** level);
 
 // ===================== Save data (localStorage, survives reloads) =====================
-const save = (() => {
+// Each profile has its own slot: the developer slot unlocks everything, the player slot starts from zero.
+const PROFILES = { dev: 'deadwave_dev', player: 'deadwave_player' };
+let profile = 'player', SAVE_KEY = PROFILES.player;
+const devOn = () => profile === 'dev';
+try { localStorage.removeItem('deadwave_tune'); } catch (_) {}   // old multiplier-on-top format, replaced by real per-map values
+function loadSave(key) {
   let s = {};
-  try { s = JSON.parse(localStorage.getItem('deadwave_save') || '{}') || {}; } catch (_) {}
-  let oldBest = 0;
-  try { oldBest = Number(localStorage.getItem('deadwave_best')) || 0; } catch (_) {}
+  try { s = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch (_) {}
   return {
-    coins: s.coins || 0, best: s.best || oldBest, up: s.up || {}, auto: !!s.auto,
+    coins: s.coins || 0, best: s.best || 0, up: s.up || {}, auto: !!s.auto,
     inv: Array.isArray(s.inv) ? s.inv : [],
     eq: Object.assign({ head: null, chest: null, gloves: null, legs: null, boots: null }, s.eq),
     nextId: s.nextId || 1,
     pets: Array.isArray(s.pets) && s.pets.length ? s.pets : ['crow'],
     pet: s.pet || 'crow',
+    map: s.map === 'pirate' ? 'pirate' : 'graveyard',
     diff: s.diff || 'normal',
     cleared: s.cleared || {},
     bests: s.bests || {},
+    petPick: Array.isArray(s.petPick) && s.petPick.length === 5 ? s.petPick : [true, true, true, true, true],   // rarities the pet collects
+    autoPick: Object.assign({ gear: true, weapon: true, mod: true, wmod: true }, s.autoPick),   // what the recommended-gear button may change
+    devSeeded: !!s.devSeeded,
+    devTune: { god: !!(s.devTune && s.devTune.god) },      // developer-only switches (invincible)
   };
-})();
+}
+const save = loadSave(SAVE_KEY);
 
 // ===================== Difficulty / map modes =====================
 // goal = seconds to survive to win (0 = endless). hp/dmg/speed/spawn multiply enemies; ramp = how fast it escalates;
+// boss = seconds between bosses. These are the real values the game uses; the developer menu can override them per map.
 // coin/lootMul/luck/ilvl improve rewards; need = mode that must be cleared to unlock this one.
 const DIFFS = {
-  beginner: { name: 'เริ่มต้น', goal: 90,  hp: 0.7, dmg: 0.6, speed: 0.9,  spawn: 0.75, ramp: 0.8, coin: 0.8, lootMul: 1,   luck: 0,   ilvl: 0, bonus: 60,  reward: 1, color: '#7adc8a', need: null,
+  beginner: { name: 'เริ่มต้น', goal: 90,  hp: 0.94, dmg: 0.81, speed: 0.99,  spawn: 0.75, boss: 30, ramp: 0.8, coin: 0.8, lootMul: 1,   luck: 0,   ilvl: 0, bonus: 60,  reward: 1, color: '#7adc8a', need: null,
               look: { fog: '#2a1a2a', sky: '#c8a8d8', ground: '#3e2a34', hemi: 1.15 } },
-  normal:   { name: 'ปานกลาง', goal: 120, hp: 1,   dmg: 1,   speed: 1,    spawn: 1,    ramp: 1,   coin: 1,   lootMul: 1.1, luck: 0.2, ilvl: 1, bonus: 150, reward: 2, color: '#e8c062', need: null,
+  normal:   { name: 'ปานกลาง', goal: 120, hp: 1.35,   dmg: 1.35,   speed: 1.1,    spawn: 1,    boss: 30, ramp: 1,   coin: 1,   lootMul: 1.1, luck: 0.2, ilvl: 1, bonus: 150, reward: 2, color: '#e8c062', need: null,
               look: { fog: '#2a1626', sky: '#c0a0d0', ground: '#3a2430', hemi: 1.0 } },
-  hard:     { name: 'ยาก',     goal: 150, hp: 1.5, dmg: 1.4, speed: 1.1,  spawn: 1.25, ramp: 1.2, coin: 1.6, lootMul: 1.3, luck: 0.6, ilvl: 4, bonus: 350, reward: 3, color: '#ff7a3a', need: 'normal',
+  hard:     { name: 'ยาก',     goal: 150, hp: 2.03, dmg: 1.89, speed: 1.21,  spawn: 1.25, boss: 30, ramp: 1.2, coin: 1.6, lootMul: 1.3, luck: 0.6, ilvl: 4, bonus: 350, reward: 3, color: '#ff7a3a', need: 'normal',
               look: { fog: '#30101e', sky: '#d09090', ground: '#401a24', hemi: 0.95 } },
-  hell:     { name: 'นรก',     goal: 180, hp: 2.4, dmg: 2,   speed: 1.22, spawn: 1.5,  ramp: 1.4, coin: 2.6, lootMul: 1.6, luck: 1.2, ilvl: 8, bonus: 800, reward: 4, color: '#ff3a3a', need: 'hard',
+  hell:     { name: 'นรก',     goal: 180, hp: 3.24, dmg: 2.7,   speed: 1.34, spawn: 1.5,  boss: 30, ramp: 1.4, coin: 2.6, lootMul: 1.6, luck: 1.2, ilvl: 8, bonus: 800, reward: 4, color: '#ff3a3a', need: 'hard',
               look: { fog: '#4a0c10', sky: '#ff8a70', ground: '#5a1010', hemi: 1.0 } },
-  endless:  { name: 'Endless', goal: 0,   hp: 1,   dmg: 1,   speed: 1,    spawn: 1,    ramp: 1.35, coin: 1.25, lootMul: 1.2, luck: 0.4, ilvl: 2, bonus: 0, reward: 0, color: '#b48aff', need: null,
+  endless:  { name: 'Endless', goal: 0,   hp: 1.35,   dmg: 1.35,   speed: 1.1,    spawn: 1,    boss: 30, ramp: 1.35, coin: 1.25, lootMul: 1.2, luck: 0.4, ilvl: 2, bonus: 0, reward: 0, color: '#b48aff', need: null,
               look: { fog: '#1c1030', sky: '#a8a0e0', ground: '#2a2040', hemi: 1.0 } },
 };
 const DIFF_IDS = Object.keys(DIFFS);
+// Per-map overrides set in the developer's "ปรับแต่งความยาก" menu. Game config shared by every profile (kept outside
+// the save slots), written straight onto DIFFS so the numbers shown are exactly the numbers used.
+const TUNE_KEY = 'deadwave_modes';
+const TUNE_FIELDS = ['hp', 'dmg', 'speed', 'spawn', 'ramp', 'boss', 'goal', 'lootMul', 'coin'];
+const DIFFS_BASE = {};
+for (const id of DIFF_IDS) { DIFFS_BASE[id] = {}; for (const k of TUNE_FIELDS) DIFFS_BASE[id][k] = DIFFS[id][k]; }
+(() => {
+  let o = {};
+  try { o = JSON.parse(localStorage.getItem(TUNE_KEY) || '{}') || {}; } catch (_) {}
+  for (const id of DIFF_IDS) for (const k of TUNE_FIELDS) if (o[id] && typeof o[id][k] === 'number') DIFFS[id][k] = o[id][k];
+})();
+function persistTune() {
+  const o = {};
+  for (const id of DIFF_IDS) for (const k of TUNE_FIELDS) if (DIFFS[id][k] !== DIFFS_BASE[id][k]) (o[id] = o[id] || {})[k] = DIFFS[id][k];
+  try { localStorage.setItem(TUNE_KEY, JSON.stringify(o)); } catch (_) {}
+}
+const bossEvery = () => curDiff().boss;
 const curDiff = () => DIFFS[save.diff] || DIFFS.normal;
 const diffUnlocked = id => !DIFFS[id].need || !!save.cleared[DIFFS[id].need];
 
@@ -365,10 +531,20 @@ const PETS = {
   gbat: { name: 'ค้างคาวทองคำ', cost: 800,  speed: 230, magnet: 40, coin: 0.2,  luck: 0,    desc: 'นำโชคลาภ เหรียญจากการฆ่า +20%' },
   imp:  { name: 'ปีศาจน้อย',     cost: 1500, speed: 300, magnet: 60, coin: 0.1,  luck: 0.25, desc: 'เร็วที่สุด ของดรอปบ่อยขึ้น +25% และเหรียญ +10%' },
 };
+// removed upgrades (drop chance, bag size): refund whatever was spent on them
+function refundRemovedUpgrades() {
+  let refund = 0;
+  for (const [id, base, growth] of [['luck', 25, 1.45], ['bag', 40, 1.35]]) {
+    for (let l = 0; l < (save.up[id] || 0); l++) refund += Math.round(base * growth ** l);
+    delete save.up[id];
+  }
+  if (refund) { save.coins += refund; try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (_) {} }
+}
+refundRemovedUpgrades();
 const PET_IDS = Object.keys(PETS);
 const curPet = () => PETS[save.pet] || PETS.crow;
 function persist() {
-  try { localStorage.setItem('deadwave_save', JSON.stringify(save)); } catch (_) {}
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (_) {}
 }
 const lvl = id => save.up[id] || 0;
 
@@ -548,7 +724,7 @@ function computeStats() {
     weapon: Wp, wtype, wm,
     shots: 1 + wm.extra,                    // projectiles (or pellet volleys) per trigger pull
     headMul: 2 + 0.25 * lvl('head') + (Wp.headBonus || 0) + wm.head,
-    luck: 0.1 * lvl('luck') + curPet().luck + curDiff().luck,
+    luck: curPet().luck + curDiff().luck,
     coinMul: (1 + 0.1 * lvl('coin')) * (1 + curPet().coin) * curDiff().coin,
     mods: g.mods,
   };
@@ -579,7 +755,7 @@ const WMODS = {
   long:    { name: 'ลำกล้องยาว',     icon: '📏', color: '#c8c8d8', roll: r => ({ v: 20 + r * 8 }),                      desc: m => `ความเร็วกระสุน +${m.v}% • กระจายน้อยลง ${Math.min(80, Math.round(m.v * 1.5))}%` },
   trigger: { name: 'ไกปืนไว',        icon: '👆', color: '#ffe08a', roll: r => ({ v: 10 + r * 4, p: 5 }),                desc: m => `ยิงเร็วขึ้น +${m.v}% • ดาเมจ -${m.p}%` },
   drum:    { name: 'แม็กกาซีนกลอง',  icon: '🥁', color: '#b8c8ff', roll: r => ({ v: 30 + r * 10, p: 15 }),              desc: m => `ขนาดแม็ก +${m.v}% • รีโหลดช้าลง ${m.p}%` },
-  heavy:   { name: 'กระสุนหนัก',     icon: '🪨', color: '#a08a6a', roll: r => ({ v: 15 + r * 6, p: 10 }),               desc: m => `ดาเมจ +${m.v}% • ผลักศัตรูแรงขึ้น • ยิงช้าลง ${m.p}%` },
+  heavy:   { name: 'กระสุนหนัก',     icon: '🪨', color: '#a08a6a', roll: r => ({ v: 15 + r * 6, p: 10 }),               desc: m => `ดาเมจ +${m.v}% • ยิงช้าลง ${m.p}%` },
   bounce:  { name: 'กระสุนสะท้อน',   icon: '🎱', color: '#7ac8ff', roll: r => ({ v: r >= 3 ? 2 : 1, p: 30 }),           desc: m => `กระสุนเด้งไปหาศัตรูอีก ${m.v} ครั้ง (ครั้งละ -${m.p}%)` },
   laser:   { name: 'ศูนย์เลเซอร์',   icon: '🔴', color: '#ff4a5a', roll: r => ({ v: 20 + r * 8 }),                      desc: m => `ดาเมจ Headshot +${m.v}%` },
   seeker:  { name: 'ชิปนำวิถี',      icon: '🛰️', color: '#4af0ff', roll: r => ({ v: 1, p: [15, 13, 11, 9, 7][r] }),     desc: m => `กระสุนเลี้ยวหาลำตัวศัตรูเล็กน้อย (ไม่นับ Headshot) • ดาเมจ -${m.p}%` },
@@ -597,7 +773,7 @@ function makeWMod(ilvl, type = pick(WMOD_IDS), r = rollRarity(player ? player.st
 
 // combine the weapon mods socketed in the equipped gun
 function weaponModTotals() {
-  const t = { extra: 0, fan: false, projMul: 1, speed: 1, spread: 1, rate: 1, dmg: 1, magMul: 1, reload: 1, knock: 1, ric: 0, head: 0, seek: false, last: 1 };
+  const t = { extra: 0, fan: false, projMul: 1, speed: 1, spread: 1, rate: 1, dmg: 1, magMul: 1, reload: 1, ric: 0, head: 0, seek: false, last: 1 };
   const w = save.eq.weapon;
   if (!w) return t;
   for (const m of w.sockets) {
@@ -608,7 +784,7 @@ function weaponModTotals() {
       case 'long': t.speed += m.v / 100; t.spread *= Math.max(0.2, 1 - m.v * 1.5 / 100); break;
       case 'trigger': t.rate *= 1 + m.v / 100; t.dmg *= 1 - m.p / 100; break;
       case 'drum': t.magMul += m.v / 100; t.reload *= 1 + m.p / 100; break;
-      case 'heavy': t.dmg *= 1 + m.v / 100; t.rate *= 1 - m.p / 100; t.knock += 1; break;
+      case 'heavy': t.dmg *= 1 + m.v / 100; t.rate *= 1 - m.p / 100; break;
       case 'bounce': t.ric += m.v; break;
       case 'laser': t.head += m.v / 100; break;
       case 'seeker': t.seek = true; t.dmg *= 1 - m.p / 100; break;
@@ -632,7 +808,8 @@ function makeWeapon(ilvl, type = pick(WEAPON_IDS), r = rollRarity(player ? playe
     name: r ? `${WEAPONS[type].name} ${RARITY_SUFFIX[r]}` : WEAPONS[type].name,
   };
 }
-if (!save.eq.weapon) { save.eq.weapon = makeWeapon(0, 'musket', 0); save.eq.weapon.sockets = []; }
+function ensureWeapon() { if (!save.eq.weapon) { save.eq.weapon = makeWeapon(0, 'musket', 0); save.eq.weapon.sockets = []; } }
+ensureWeapon();
 
 // Guns hold only weapon mods; armour holds only armour mods. Older saves may have mixed them —
 // pop any wrong-family mod out of its socket and put it back in the bag.
@@ -735,15 +912,16 @@ const canFullscreen = !!(document.fullscreenEnabled && document.documentElement.
 const AUTO_BTN = { x: W - 52, y: H - 36, r: isTouch ? 24 : 18 }; // small pill, drawn wider than r
 const MUTE_BTN = { x: W - 34, y: 62, r: isTouch ? 22 : 18 };
 const FS_BTN = { x: W - 84, y: 62, r: isTouch ? 22 : 18 };
+const END_BTN = { x: W - 158, y: 62, w: 84, h: isTouch ? 40 : 32 };   // Endless only: finish the run and bank the rewards
 let vignette;
 
 // ---- three.js: renderer, camera (side view tilted ~13°), lights ----
 const renderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: false, powerPreference: 'high-performance' });
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;   // soft-edged shadows
 renderer.setClearColor('#0a050c');
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog('#2a1626', 1500, 3200);
+scene.fog = new THREE.Fog('#2a1626', 950, 2600);       // distant layers fade into the haze for depth
 const camera = new THREE.PerspectiveCamera(32, W / H, 50, 6000);
 const CAM = { tx: 505, ty: -290, tilt: 0, yaw: 0, dist: 950 };   // straight side view (set tilt/yaw for an angled look)
 function placeCamera(jx = 0, jy = 0) {
@@ -753,18 +931,54 @@ function placeCamera(jx = 0, jy = 0) {
 }
 placeCamera();
 
+// Post-processing: bloom (flames, windows, magic glow), colour grade with vignette + film grain, then FXAA.
+// Falls back to a plain render if the add-on scripts did not load. G toggles; very slow frames turn it off.
+const GradeShader = {
+  uniforms: { tDiffuse: { value: null }, uTime: { value: 0 }, uRes: { value: new THREE.Vector2(W, H) } },
+  vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: `uniform sampler2D tDiffuse; uniform float uTime; uniform vec2 uRes; varying vec2 vUv;
+    void main() {
+      vec3 c = texture2D(tDiffuse, vUv).rgb;
+      float l = dot(c, vec3(0.299, 0.587, 0.114));
+      c = mix(c, c * vec3(0.92, 0.9, 1.1), (1.0 - smoothstep(0.0, 0.45, l)) * 0.5);   // cool violet shadows
+      c = mix(c, c * vec3(1.08, 1.0, 0.9), smoothstep(0.55, 1.0, l) * 0.6);           // warm highlights
+      c = mix(vec3(l), c, 1.1);                                                       // a touch more saturation
+      c = c * c * (3.0 - 2.0 * c) * 0.32 + c * 0.68;                                  // gentle S-curve
+      vec2 q = vUv - 0.5; q.x *= uRes.x / uRes.y;
+      c *= 1.0 - smoothstep(0.45, 1.05, length(q)) * 0.5;                             // vignette
+      float gr = fract(sin(dot(vUv * uRes + uTime * 61.0, vec2(12.9898, 78.233))) * 43758.5453);
+      c += (gr - 0.5) * 0.028;                                                        // film grain
+      gl_FragColor = vec4(c, 1.0);
+    }`,
+};
+const FX = { ok: !!(THREE.EffectComposer && THREE.UnrealBloomPass && THREE.RenderPass && THREE.ShaderPass), on: false, composer: null, bloom: null, grade: null, fxaa: null };
+if (FX.ok) {
+  FX.composer = new THREE.EffectComposer(renderer);
+  FX.composer.addPass(new THREE.RenderPass(scene, camera));
+  FX.bloom = new THREE.UnrealBloomPass(new THREE.Vector2(W, H), 0.7, 0.55, 0.8);   // strength, radius, threshold
+  FX.composer.addPass(FX.bloom);
+  FX.grade = new THREE.ShaderPass(GradeShader);
+  FX.composer.addPass(FX.grade);
+  if (THREE.FXAAShader) { FX.fxaa = new THREE.ShaderPass(THREE.FXAAShader); FX.composer.addPass(FX.fxaa); }
+  FX.on = true;
+}
+const setFX = on => { FX.on = FX.ok && on; };
+
 const hemi = new THREE.HemisphereLight('#c0a0d0', '#3a2430', 1.0);
 scene.add(hemi);
 const moonLight = new THREE.DirectionalLight('#ffb8b0', 0.7);
 moonLight.position.set(250, 500, 700);
 moonLight.target.position.set(520, -420, -150);
 moonLight.castShadow = true;
-moonLight.shadow.mapSize.set(1024, 1024);
+moonLight.shadow.mapSize.set(2048, 2048);
 Object.assign(moonLight.shadow.camera, { left: -760, right: 760, top: 520, bottom: -520, near: 50, far: 3000 });
-moonLight.shadow.bias = -0.002;
+moonLight.shadow.bias = -0.0015;
+moonLight.shadow.normalBias = 0.8;
 scene.add(moonLight, moonLight.target);
 const muzzleLight = new THREE.PointLight('#ffb070', 0, 320, 2);
 scene.add(muzzleLight);
+const campLight = new THREE.PointLight('#ff9a48', 0, 420, 2);   // home-screen campfire
+scene.add(campLight);
 
 // ---- instanced unit cubes: everything in the world is a box ----
 const BOX = new THREE.BoxGeometry(1, 1, 1);
@@ -778,8 +992,48 @@ function makeInst(material, max, shadows) {
   scene.add(m);
   return m;
 }
+// Polished voxel surface: per-pixel (Phong) lighting so torch light falls off smoothly across a face,
+// darkened bevel at every box edge, a fine 2px speckle, and wood grain on brown surfaces.
+// worldNoise: static scenery takes the speckle from world space; moving figures from box space (no swimming).
+function voxelMaterial(worldNoise) {
+  const m = new THREE.MeshPhongMaterial({ shininess: 10, specular: new THREE.Color('#141018') });
+  m.onBeforeCompile = sh => {
+    const vary = 'varying vec3 vDwLp; varying vec3 vDwHalf; varying vec3 vDwN; varying vec3 vDwWp;\n';
+    sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\n' + vary).replace('#include <begin_vertex>', `#include <begin_vertex>
+      #ifdef USE_INSTANCING
+        vec3 dwScl = vec3(length(instanceMatrix[0].xyz), length(instanceMatrix[1].xyz), length(instanceMatrix[2].xyz));
+        vDwWp = (modelMatrix * instanceMatrix * vec4(position, 1.0)).xyz;
+      #else
+        vec3 dwScl = vec3(1.0);
+        vDwWp = (modelMatrix * vec4(position, 1.0)).xyz;
+      #endif
+      vDwLp = position * dwScl; vDwHalf = dwScl * 0.5; vDwN = abs(normal);`);
+    sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\n' + vary).replace('#include <color_fragment>', `#include <color_fragment>
+      {
+        vec3 dd = vDwHalf - abs(vDwLp);
+        float edge = 1e4;
+        if (vDwN.x < 0.5) edge = min(edge, dd.x);
+        if (vDwN.y < 0.5) edge = min(edge, dd.y);
+        if (vDwN.z < 0.5) edge = min(edge, dd.z);
+        float bw = clamp(min(min(vDwHalf.x, vDwHalf.y), vDwHalf.z) * 0.45, 0.25, 1.6);
+        float bev = smoothstep(0.0, bw, edge);
+        vec3 cell = floor(${worldNoise ? 'vDwWp' : '(vDwLp + vDwHalf)'} * 0.5);
+        float n = fract(sin(dot(cell, vec3(12.9898, 78.233, 37.719))) * 43758.5453);
+        float k = 0.93 + 0.11 * n;
+        vec3 c = diffuseColor.rgb;
+        if (c.r > c.g * 1.12 && c.g > c.b * 1.02 && c.r < 0.62) {          // brown = wood: grain along the long axis
+          bool wide = vDwHalf.x > vDwHalf.y;
+          float across = wide ? vDwLp.y : vDwLp.x, along = wide ? vDwLp.x : vDwLp.y;
+          float g = sin(across * 1.9 + sin(along * 0.09) * 2.6 + sin(along * 0.31) * 0.6);
+          k *= 0.88 + 0.16 * smoothstep(-0.3, 1.0, g);
+        }
+        diffuseColor.rgb *= k * (0.74 + 0.26 * bev);
+      }`);
+  };
+  return m;
+}
 // solid = lit, glow = unlit (eyes, flames, magic), trans = see-through (glows, beams, ice, smoke)
-const dynSolid = makeInst(new THREE.MeshLambertMaterial(), 16000, true);
+const dynSolid = makeInst(voxelMaterial(false), 16000, true);
 const dynGlow = makeInst(new THREE.MeshBasicMaterial(), 6000, false);
 const dynTrans = makeInst(new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.45, depthWrite: false }), 5000, false);
 const dynFaint = makeInst(new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.16, depthWrite: false }), 4000, false);
@@ -815,13 +1069,46 @@ function makeSoft(blending, max, opacity = 1) {
 }
 const softAdd = makeSoft(THREE.AdditiveBlending, 3500);         // light: flames, magic, glows, auras
 const softMix = makeSoft(THREE.NormalBlending, 1800, 0.55);     // soft smoke / mist / ice haze
+// smoke, ground mist and drifting cloud: soft quads with their own alpha per instance (so they can fade)
+const SMOKE_MAX = 900;
+const smokeAlpha = new THREE.InstancedBufferAttribute(new Float32Array(SMOKE_MAX), 1);
+smokeAlpha.setUsage(THREE.DynamicDrawUsage);
+const smokeGeo = new THREE.PlaneGeometry(1, 1);
+smokeGeo.setAttribute('aAlpha', smokeAlpha);
+const smokeMesh = new THREE.InstancedMesh(smokeGeo, new THREE.ShaderMaterial({
+  uniforms: { map: { value: GLOW_TEX } },
+  vertexShader: `attribute float aAlpha; varying float vA; varying vec2 vUv; varying vec3 vC;
+    void main() { vA = aAlpha; vUv = uv;
+      #ifdef USE_INSTANCING_COLOR
+        vC = instanceColor;
+      #else
+        vC = vec3(1.0);
+      #endif
+      gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0); }`,
+  fragmentShader: `uniform sampler2D map; varying float vA; varying vec2 vUv; varying vec3 vC;
+    void main() { float a = texture2D(map, vUv).a; gl_FragColor = vec4(vC, a * a * vA); }`,
+  transparent: true, depthWrite: false,
+}), SMOKE_MAX);
+smokeMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+smokeMesh.setColorAt(0, new THREE.Color());
+smokeMesh.count = 0;
+smokeMesh.frustumCulled = false;
+smokeMesh.renderOrder = 9;
+scene.add(smokeMesh);
+const _scol = new THREE.Color();
+function smokeAt(gx, gy, z, size, color, alpha, rot = 0) {
+  const i = smokeMesh.count;
+  if (i >= SMOKE_MAX) return;
+  pushBox(smokeMesh, gx, gy, z, size, size * 0.86, 1, rot, typeof color === 'string' ? parseColor(color).col : color);
+  smokeAlpha.array[i] = alpha;
+}
 const _gcol = new THREE.Color();
 // soft glow centred at a game point; w/h = size, intensity scales brightness (additive)
 function glowAt(gx, gy, z, w, h, color, intensity = 1, rot = 0) {
   _gcol.copy(typeof color === 'string' ? parseColor(color).col : color).multiplyScalar(intensity);
   pushBox(softAdd, gx, gy, z, w, h, 1, rot, _gcol);
 }
-const stSolid = makeInst(new THREE.MeshLambertMaterial(), 9000, true);
+const stSolid = makeInst(voxelMaterial(true), 9000, true);
 const stGlow = makeInst(new THREE.MeshBasicMaterial(), 1500, false);
 
 const _m4 = new THREE.Matrix4(), _pos = new THREE.Vector3(), _q = new THREE.Quaternion(), _qy = new THREE.Quaternion(), _scl = new THREE.Vector3(), _zAxis = new THREE.Vector3(0, 0, 1), _yAxis = new THREE.Vector3(0, 1, 0);
@@ -959,6 +1246,13 @@ function resize() {
   ctx2d.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
   renderer.setPixelRatio(Math.min(dpr, 1.5));
   renderer.setSize(cw, ch, false);
+  if (FX.ok) {
+    const pr = renderer.getPixelRatio();
+    FX.composer.setPixelRatio(pr);
+    FX.composer.setSize(cw, ch);
+    FX.grade.uniforms.uRes.value.set(cw * pr, ch * pr);
+    if (FX.fxaa) FX.fxaa.material.uniforms.resolution.value.set(1 / (cw * pr), 1 / (ch * pr));
+  }
   document.getElementById('rotate').classList.toggle('show', portrait());
   vignette = ctx2d.createRadialGradient(W / 2, H * 0.55, H * 0.4, W / 2, H * 0.55, W * 0.66);
   vignette.addColorStop(0, 'rgba(8,0,6,0)');
@@ -1113,6 +1407,7 @@ canvas.addEventListener('pointerdown', e => {
   toGame(e);
   if (near(pointer.x, pointer.y, MUTE_BTN)) { sfx.toggle(); return; }
   if (canFullscreen && near(pointer.x, pointer.y, FS_BTN)) { toggleFullscreen(); return; }
+  if (endBtnShown() && Math.abs(pointer.x - END_BTN.x) < END_BTN.w / 2 + 4 && Math.abs(pointer.y - END_BTN.y) < END_BTN.h / 2 + 4) { pressEnd(); return; }
   if (portrait() || state !== 'playing') return; // menus are HTML buttons
   if (Math.abs(pointer.x - AUTO_BTN.x) < AUTO_BTN.r * 1.5 && Math.abs(pointer.y - AUTO_BTN.y) < AUTO_BTN.r) { toggleAuto(); return; }
   pointer.down = true;
@@ -1139,6 +1434,8 @@ addEventListener('keydown', e => {
     if (e.code === 'KeyT') toggleAuto();
     if (e.code === 'KeyM') sfx.toggle();
     if (e.code === 'KeyF') toggleFullscreen();
+    if (e.code === 'Escape') pressEnd();
+    if (e.code === 'KeyG') { setFX(!FX.on); FX.auto = false; }
   }
   if (['ArrowUp', 'ArrowDown', 'KeyW', 'KeyS'].includes(e.code)) aimMode = 'keys';
   keys[e.code] = true;
@@ -1160,13 +1457,67 @@ const embers = Array.from({ length: 34 }, () => ({ x: rand(0, W), y: rand(250, G
 const fog = Array.from({ length: 18 }, (_, i) => ({ x: rand(-100, W), y: rand(392, 452), w: rand(140, 280), h: rand(12, 26), s: rand(5, 14), front: i % 2 === 0 }));
 // light sources: torches, lantern, candles, windows (flame = which flame sprite to draw)
 // z = depth in the 3D scene (0 = play lane, negative = further back)
-const LIGHTS = [
+// ===================== Maps =====================
+// Every map shares the same play layout (hunter's perch on the left, a raised deck/balcony on the right), so all
+// enemy behaviour works everywhere; each map brings its own scenery, sky, lights and enemy roster (looks + stats).
+const MAPS = {
+  graveyard: { name: 'สุสานคฤหาสน์ต้องสาป', icon: '🏚️', desc: 'คฤหาสน์โกธิกใต้พระจันทร์เลือด ฝูงซอมบี้ นักบวชลัทธิ และค้างคาว' },
+  pirate:    { name: 'อ่าวโจรสลัดกระดูก', icon: '🏴‍☠️', desc: 'ชายหาดยามค่ำคืนข้างเรือโจรสลัดเกยตื้น ลูกเรือโครงกระดูกลุกขึ้นจากทราย',
+    look: { fog: '#0c1c26', sky: '#9cc4d8', ground: '#2c2a22' }, bosses: ['captain'],
+    // third way in: deckhands / cutthroats dig themselves up out of the beach, much closer than the pier entrance
+    sand: { chance: 0.25, after: 10, x: [360, 560], types: ['walker', 'runner'] } },
+};
+const MAP_IDS = Object.keys(MAPS);
+const curMap = () => MAPS[save.map] || MAPS.graveyard;
+// pirate roster: five skeleton crew designs riding on the five behaviour archetypes
+const MAP_ENEMIES = {
+  pirate: {
+    walker: { name: 'ลูกเรือโครงกระดูก', skeleton: true, hp: 22, speed: [30, 48], dmg: 6, reassemble: 0.35,
+      desc: 'เดินโซเซเข้ามาเป็นฝูง • 35% ประกอบร่างกลับขึ้นมาใหม่ 1 ครั้งด้วยเลือดครึ่งหนึ่ง' },
+    runner: { name: 'โจรดาบคู่', skeleton: true, hp: 13, speed: [92, 118], dmg: 4, atk: 0.5,
+      desc: 'วิ่งเร็วมาก ฟันรัวด้วยดาบโค้งสองเล่ม' },
+    bat:    { name: 'นกแก้วกระดูก', skeleton: true, hp: 10, speed: [78, 102], dmg: 4,
+      desc: 'บินวนกลางอากาศแล้วโฉบจิก ยิงยากเพราะตัวเล็ก' },
+    bandit: { name: 'มือปืนคาบศิลา', skeleton: true, musket: true, hp: 30, dmg: 9, atk: 3,
+      desc: 'ยืนยิงลูกตะกั่วจากระยะไกล ยิงช้าแต่แรง (ยิงลูกกระสุนทิ้งได้)' },
+    tank:   { name: 'ยักษ์สมอเรือ', skeleton: true, hp: 140, speed: [14, 20], dmg: 14, w: 36, h: 96, headH: 26, helmet: 40,
+      desc: 'ยักษ์อกถังไม้แบกสมอ สวมหมวกดำน้ำเหล็ก ต้องยิงหมวกให้แตกก่อนถึงจะเฮดช็อตได้' },
+  },
+};
+const enemyDefCache = {};
+function enemyDef(type) {
+  const ov = MAP_ENEMIES[save.map] && MAP_ENEMIES[save.map][type];
+  if (!ov) return TUNING.enemies[type];
+  const key = save.map + ':' + type;
+  return enemyDefCache[key] || (enemyDefCache[key] = Object.assign({}, TUNING.enemies[type], ov));
+}
+const BONE = '#d8cfb4', BONE_D = '#a89c80';
+const MAP_LOOKS = {
+  pirate: {
+    walker: () => ({ skin: BONE, skinDark: BONE_D, shirt: pick(['#e8e0d0', '#c8c0b0']), stripe: pick(['#a02a2a', '#2a4a8a']), pants: pick(['#2a3448', '#3a2e24']), band: pick(['#b02a2a', '#2a5a9a', '#c89a2a']), eye: '#5affd8' }),
+    runner: () => ({ skin: BONE, skinDark: BONE_D, shirt: '#8a2020', pants: '#2a2228', sash: '#b02a2a', eye: '#ffd84a' }),
+    bandit: () => ({ skin: BONE, skinDark: BONE_D, shirt: '#1e2a44', hood: '#1a1418', pants: '#1e2a44', eye: '#ff7a3a' }),
+    tank:   () => ({ skin: BONE, skinDark: BONE_D, shirt: '#5a3e24', pants: '#2a2228', eye: '#5affd8' }),
+  },
+};
+const lookFor = type => ((MAP_LOOKS[save.map] && MAP_LOOKS[save.map][type]) || LOOKS[type])();
+
+// per-map lights and soft glows (filled by buildWorld)
+const LIGHTS_GRAVEYARD = [
   { x: 212, y: GROUND - 78, z: -50, r: 95, c: '255,130,50', i: 1, flame: 'torch' },
   { x: 600, y: GROUND - 78, z: -50, r: 95, c: '255,130,50', i: 1, flame: 'torch' },
   { x: BX + 182, y: GROUND - 64, z: -24, r: 70, c: '255,160,70', i: 0.9, flame: 'lantern' },
   { x: 64, y: ROCK_TOP - 13, z: 0, r: 38, c: '255,180,100', i: 0.8, flame: 'candle' },
   { x: 176, y: ROCK_TOP - 13, z: 0, r: 38, c: '255,180,100', i: 0.8, flame: 'candle' },
 ];
+const LIGHTS_PIRATE = [
+  { x: 212, y: GROUND - 78, z: -50, r: 95, c: '255,140,60', i: 1, flame: 'torch' },
+  { x: 600, y: GROUND - 78, z: -50, r: 95, c: '255,140,60', i: 1, flame: 'torch' },
+  { x: BX + 196, y: PLATFORM.y - 50, z: -24, r: 70, c: '255,170,80', i: 0.9, flame: 'lantern' },
+  { x: 64, y: ROCK_TOP - 13, z: 0, r: 38, c: '255,180,100', i: 0.8, flame: 'candle' },
+  { x: 176, y: ROCK_TOP - 13, z: 0, r: 38, c: '255,180,100', i: 0.8, flame: 'candle' },
+];
+const LIGHTS = LIGHTS_GRAVEYARD.map(L => ({ ...L }));
 const lightning = { t: rand(6, 12), flash: 0, bolt: null };
 
 // ===================== Game state =====================
@@ -1194,7 +1545,7 @@ function reset() {
   runLoot = [];
   runCoins = 0;
   splats = []; fountains = []; screenBlood = [];
-  bossTimer = TUNING.bossEvery; bossCount = 0; bossWarned = false; announce = null; horde = 1;
+  bossTimer = bossEvery(); bossCount = 0; bossWarned = false; announce = null; horde = 1;
   decals = [];
   spawnTimer = 1.2;
   time = 0;
@@ -1204,11 +1555,13 @@ function reset() {
   deadTimer = 0;
   slowmo = 0;
   dropHintShown = false;
+  endedByPlayer = false; endArmed = 0;
   for (const pool of [bullets, eShots, particles, texts]) for (const p of pool) p.active = false;
 }
 
 function startGame() {
   sfx.init();
+  mapMode = false;
   if (!diffUnlocked(save.diff)) save.diff = 'normal';
   winReward = null;
   applyDiffLook();
@@ -1302,7 +1655,6 @@ function fireBullet(a, dmgMul = 1) {
   b.blast = W.blast || 0;
   b.ric = (W.ricochet || 0) + wm.ric;
   b.ricLoss = W.ricochet ? 0.25 : 0.3;
-  b.knock = wm.knock;
   b.falloff = !!W.falloff;
   b.ox = b.x; b.oy = b.y;
   b.wt = player.stats.wtype;
@@ -1361,24 +1713,25 @@ const LOOKS = {
   bandit: () => ({ skin: '#2a0e18', skinDark: '#1a0810', shirt: '#2a0e18', hood: '#5a1222', pants: '#2a0e18', eye: '#ff4ad0' }),
   abom:   () => ({ skin: '#8a7464', skinDark: '#5a4a40', shirt: '#4a2424', pants: '#2a1818', eye: '#ff3b30' }),
   lich:   () => ({ skin: '#1a1030', skinDark: '#100820', shirt: '#1a1030', hood: '#2e1a52', pants: '#1a1030', eye: '#7affd0' }),
+  captain: () => ({ skin: '#d8cfb4', skinDark: '#a89c80', shirt: '#7a1420', pants: '#1a1418', eye: '#5affd8' }),
 };
 
 function chooseType() {
-  const opts = Object.entries(TUNING.enemies).filter(([, d]) => time >= d.after);
+  const opts = Object.keys(TUNING.enemies).map(k => [k, enemyDef(k)]).filter(([, d]) => time >= d.after);
   let r = Math.random() * opts.reduce((s, [, d]) => s + d.weight, 0);
   for (const [k, d] of opts) { r -= d.weight; if (r <= 0) return k; }
   return 'walker';
 }
 
 function spawnEnemy(type = chooseType(), onPlatform) {
-  const def = TUNING.enemies[type];
+  const def = enemyDef(type);
   const D = curDiff();
-  const hp = Math.round(def.hp * D.hp * (1 + time * D.ramp / TUNING.hpRamp));
+  const hp = Math.max(1, Math.round(def.hp * D.hp * (1 + time * D.ramp / TUNING.hpRamp)));
   const speed = rand(...def.speed) * D.speed * (1 + time * D.ramp / TUNING.speedRamp);
   if (type === 'bat' || type === 'vamp') {
     const baseY = type === 'vamp' ? 150 : rand(110, 230);
     enemies.push({ type, def, x: W + 60, y: baseY, baseY, t: rand(0, TAU), hp, maxHp: hp, speed, flash: 0, attackCd: 0, diving: false,
-      mode: 'hover', diveT: 3, sumT: 6 });
+      mode: 'hover', diveT: 3, sumT: 6, skin: def.skeleton ? BONE : undefined });
     return;
   }
   if (onPlatform === undefined) {
@@ -1386,18 +1739,28 @@ function spawnEnemy(type = chooseType(), onPlatform) {
   }
   enemies.push({
     type, def, x: W + 30, y: onPlatform ? PLATFORM.y : GROUND, vy: 0, onPlatform,
-    hp, maxHp: hp, speed, flash: 0, attackCd: 0, walkT: rand(0, TAU), kx: 0,
+    hp, maxHp: hp, speed, flash: 0, attackCd: 0, walkT: rand(0, TAU),
     helmet: def.helmet || 0,
     standX: def.ranged ? (onPlatform ? rand(680, 880) : type === 'lich' ? rand(720, 800) : rand(520, 780)) : 0,
-    sumT: 5,
+    sumT: type === 'captain' ? 6 : 5, volT: 3, canT: 7, rage: false,
     standing: false, aimT: rand(1.0, 1.6),
-    ...LOOKS[type](),
+    ...lookFor(type),
   });
+  const sand = curMap().sand, e = enemies[enemies.length - 1];
+  if (sand && !onPlatform && sand.types.includes(type) && time >= sand.after && Math.random() < sand.chance) {
+    e.x = rand(sand.x[0], sand.x[1]);
+    e.emergeT = EMERGE;                                   // rising out of the sand (can be shot, can't act yet)
+    burst(e.x, GROUND - 4, 16, '#b8a880', 160, 4, true);
+    emitSmoke(e.x, GROUND - 8, 10, 26, 10, 1.6, '#6a6250', 0.45);
+  }
 }
+const EMERGE = 1.2;
+const emergeOff = e => (e.emergeT > 0 ? (e.emergeT / EMERGE) * e.def.h : 0);   // how deep below the sand it still is
 
 // Returns 'head' | 'body' | null
 const isFly = e => e.type === 'bat' || e.type === 'vamp';
 function hitTest(e, x, y) {
+  if (e.downT > 0) return null;                          // bullets pass over a bone pile
   if (e.type === 'vamp') {             // big flyer: head in the middle-top, wings and body around it
     if (Math.abs(x - e.x) < 14 && y > e.y - 34 && y < e.y - 12) return 'head';
     return Math.abs(x - e.x) < 60 && Math.abs(y - e.y) < 36 ? 'body' : null;
@@ -1405,7 +1768,8 @@ function hitTest(e, x, y) {
   if (isFly(e)) return Math.abs(x - e.x) < 20 && Math.abs(y - e.y) < 13 ? 'body' : null;
   const d = e.def;
   if (Math.abs(x - e.x) > d.w / 2 + 2) return null;
-  const dy = y - e.y;
+  const dy = y - e.y - emergeOff(e);
+  if (y > GROUND) return null;                           // the buried part can't be hit
   if (dy >= -d.h && dy < -d.h + d.headH) return 'head';
   if (dy >= -d.h + d.headH && dy <= 0) return 'body';
   return null;
@@ -1431,10 +1795,8 @@ function damageEnemy(e, b, part) {
   let dmg = head ? b.dmg * player.stats.headMul : b.dmg;
   const crit = Math.random() * 100 < TUNING.baseCrit + mod('crit');
   if (crit) dmg *= 2;
-  if (!isFly(e)) e.kx += (head ? 160 : 110) * (e.def.boss ? 0.08 : e.type === 'tank' ? 0.3 : 1) * (b.knock || 1);
   const hy = head ? headCenterY(e) : (isFly(e) ? e.y : e.y - e.def.h * 0.42);
-  const blood = e.type === 'bandit' ? '#5a1040' : '#7a1018';
-  sprayBlood(e.x, hy, b.vx, b.vy, head ? 26 : 12, e.type === 'bandit');
+  sprayBlood(e.x, hy, b.vx, b.vy, head ? 26 : 12, e.def.skeleton ? 'bone' : e.type === 'bandit');
   if (head) { floatText(e.x, e.y - e.def.h - 18, 'HEADSHOT!', '#e8c062', 15); headshots++; sfx.headshot(); }
   else sfx.hit();
   const dealt = dealDamage(e, dmg, crit ? 'crit' : head ? 'head' : 'hit', head);
@@ -1449,7 +1811,7 @@ const DMG_COLORS = { crit: '#ffd04a', head: '#e8c062', hit: '#f0e4d0', dot: '#ff
 
 // All damage goes through here: poison vulnerability, damage numbers, execute, death.
 function dealDamage(e, amount, kind, head = false) {
-  if (e.hp <= 0) return 0;
+  if (e.hp <= 0 || e.downT > 0) return 0;               // a collapsed skeleton is just a pile of bones until it rises
   if (e.poisonT > 0) amount *= 1 + e.poisonAmp / 100;
   amount = Math.max(1, Math.round(amount));
   e.hp -= amount;
@@ -1460,6 +1822,16 @@ function dealDamage(e, amount, kind, head = false) {
   if (e.hp > 0 && ex && !e.def.boss && (e.hp / e.maxHp) * 100 < ex) {
     floatText(e.x, y - 18, 'ประหาร!', '#e8dcc8', 16);
     e.hp = 0;
+  }
+  if (e.hp <= 0 && e.def.reassemble && !e.revived && Math.random() < e.def.reassemble) {
+    // skeleton deckhand: collapses into a bone pile, then pulls itself back together at half health
+    e.revived = true;
+    e.hp = Math.max(1, Math.round(e.maxHp * 0.5));
+    e.downT = 1.7;
+    e.burnT = e.bleedT = e.poisonT = 0; e.bleedStacks = 0;
+    sprayBlood(e.x, e.y - e.def.h * 0.5, 1, -0.5, 16, 'bone');
+    sfx.kill();
+    return amount;
   }
   if (e.hp <= 0) killEnemy(e, head);
   return amount;
@@ -1480,7 +1852,6 @@ function killEnemy(e, head) {
     announce = { text: `☠ ปราบ ${e.def.name} แล้ว!`, t: 2.5 };
     if (!curDiff().goal) {             // Endless: every boss kill makes the horde 1.5x bigger
       horde *= TUNING.hordeMul;
-      floatText(Math.min(W - 140, Math.max(140, e.x)), Math.max(120, e.y - 90), `ฝูงศัตรู x${fmtHorde()}!`, '#b48aff', 22);
     }
     const ilvl = Math.floor(time / 20) + curDiff().ilvl;
     const mk = [makeGear, makeWMod, makeMod, makeWeapon];
@@ -1596,6 +1967,23 @@ function chunk(x, y, vx, vy, size, color, life) {
   return p;
 }
 function breakApart(e, headshot) {
+  if (e.def.skeleton) {                                  // skeletons burst into a shower of bones and the skull rolls away
+    const d = e.def, fly = isFly(e), cy = fly ? e.y : e.y - d.h * 0.5;
+    sprayBlood(e.x, cy, 1, -0.5, fly ? 14 : 30, 'bone');
+    sprayBlood(e.x, cy, -1, -0.4, fly ? 6 : 12, 'bone');
+    const extra = fly ? ['#c02a2a', '#2a8a4a'] : [e.shirt || BONE, e.pants || BONE_D];
+    const colors = [BONE, BONE, BONE_D, BONE, ...extra];
+    const count = fly ? 10 : e.type === 'tank' ? 34 : 20;
+    for (let i = 0; i < count; i++) {
+      const w = fly ? 10 : d.w;
+      chunk(e.x + rand(-w / 2, w / 2), fly ? e.y : e.y - rand(5, d.h - 10), rand(60, 330), rand(-430, -120), i % 3 ? rand(3, 6) : rand(7, 12), colors[i % colors.length], rand(1.4, 2.2));
+    }
+    if (!fly) {
+      const h = chunk(e.x, headCenterY(e), headshot ? rand(250, 380) : rand(80, 180), headshot ? rand(-560, -420) : rand(-300, -180), d.headH * 0.8, BONE, 2.4);
+      if (h) { h.kind = 'head'; h.vr = rand(8, 14); h.eye = e.eye; }
+    }
+    return;
+  }
   if (isFly(e)) {
     for (let i = 0; i < 8; i++) chunk(e.x, e.y, rand(-150, 200), rand(-300, -60), rand(4, 8), i % 3 ? '#1e1426' : '#7a1018', rand(1, 1.6));
     return;
@@ -1625,7 +2013,24 @@ function breakApart(e, headshot) {
 }
 
 // Cultist staff orb position (relative to the cultist's feet)
-const orbPos = e => ({ x: e.x - e.def.w / 2 - 16, y: e.y - e.def.h + e.def.headH - 12 });
+const orbPos = e => e.type === 'captain' ? { x: e.x - e.def.w / 2 - 30, y: e.y - e.def.h + e.def.headH + 26 }
+  : e.def.musket ? { x: e.x - e.def.w / 2 - 34, y: e.y - e.def.h + e.def.headH + 13 }
+  : { x: e.x - e.def.w / 2 - 16, y: e.y - e.def.h + e.def.headH - 12 };
+
+// a lead ball fired from (x, y) at the hunter: pistol volleys and ship cannons (shootable like any enemy shot)
+function fireBall(x, y, spread, speedMul, dmg) {
+  const s = obtain(eShots);
+  if (!s) return;
+  const sh = shoulder();
+  const a = Math.atan2(sh.y + rand(-12, 18) - y, sh.x - x) + spread;
+  s.x = x; s.y = y; s.t = 0;
+  s.vx = Math.cos(a) * TUNING.banditShotSpeed * speedMul;
+  s.vy = Math.sin(a) * TUNING.banditShotSpeed * speedMul;
+  s.dmg = dmg; s.ball = true;
+  burst(x, y, 8, '#ffb04a', 140, 4, false);
+  emitSmoke(x - 6, y, 6, 14, 14, 1.3, '#8a8478', 0.5);
+  sfx.enemyShot();
+}
 
 function fireEnemyShot(e, spread = 0) {
   const s = obtain(eShots);
@@ -1638,7 +2043,9 @@ function fireEnemyShot(e, spread = 0) {
   s.vx = Math.cos(a) * TUNING.banditShotSpeed;
   s.vy = Math.sin(a) * TUNING.banditShotSpeed;
   s.dmg = e.def.dmg;
-  burst(o.x, o.y, 6, '#c86aff', 120, 4, false);
+  s.ball = !!e.def.musket;
+  if (s.ball) { burst(o.x, o.y, 8, '#ffb04a', 140, 4, false); emitSmoke(o.x - 6, o.y, 6, 12, 14, 1.2, '#8a8478', 0.5); }
+  else burst(o.x, o.y, 6, '#c86aff', 120, 4, false);
   sfx.enemyShot();
 }
 
@@ -1657,9 +2064,10 @@ function spawnDrop(e, item) {
   const y = isFly(e) ? e.y : e.y - e.def.h / 2;
   const floor = x > PLATFORM.x1 && y < PLATFORM.y ? PLATFORM.y : GROUND;
   drops.push({ item, x, y, vy: -220, floor, life: TUNING.dropLife, t: 0 });
-  if (!dropHintShown) { dropHintShown = true; floatText(x, y - 34, 'ยิงเพื่อเก็บ!', '#e8dcc8', 16); }
+  if (!dropHintShown && petWants(item)) { dropHintShown = true; floatText(x, y - 34, 'สัตว์เลี้ยงจะเก็บให้', '#e8dcc8', 15); }
 }
 
+const petWants = it => !!save.petPick[it.r];   // pet only fetches the rarities ticked on the pets screen
 function collectDrop(d) {
   const it = d.item, R = RARITIES[it.r];
   if (save.inv.length >= invCap()) {
@@ -1707,10 +2115,12 @@ function addDecal(x, color, size) {
 // ---------- blood ----------
 const BLOOD = ['#8a0f1a', '#a01020', '#6a0a12', '#7a0c18'];
 const BLOOD_CURSED = ['#5a1040', '#7a1a5a', '#3a0a2a'];
+const BONE_CHIPS = ['#d8cfb4', '#c8bea2', '#a89c80', '#e8e0cc'];
 
 // spray in the bullet's direction (exit wound) with some back-spray toward the shooter, plus a mist puff
 function sprayBlood(x, y, dx, dy, n, cursed) {
-  const cols = cursed ? BLOOD_CURSED : BLOOD;
+  const bone = cursed === 'bone';                        // skeletons shed bone chips and dust instead of blood
+  const cols = bone ? BONE_CHIPS : cursed ? BLOOD_CURSED : BLOOD;
   const len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len;
   for (let i = 0; i < n; i++) {
     const p = obtain(particles);
@@ -1728,9 +2138,9 @@ function sprayBlood(x, y, dx, dy, n, cursed) {
     const p = obtain(particles);
     if (!p) break;
     Object.assign(p, { x: x + rand(-4, 4), y: y + rand(-4, 4), vx: ux * rand(20, 60) + rand(-15, 15), vy: uy * rand(20, 60) - rand(5, 20),
-      life: 0.5, max: 0.5, size: rand(8, 14), color: cursed ? 'rgba(90,20,70,0.4)' : 'rgba(140,10,20,0.4)', grav: false, decal: false, kind: '', rot: 0, vr: 0 });
+      life: 0.5, max: 0.5, size: rand(8, 14), color: bone ? 'rgba(220,210,180,0.35)' : cursed ? 'rgba(90,20,70,0.4)' : 'rgba(140,10,20,0.4)', grav: false, decal: false, kind: '', rot: 0, vr: 0 });
   }
-  if (ux > 0.2 && Math.random() < 0.55) wallSplat(x + rand(6, 30), y + rand(-16, 12), 1, pick(cols));
+  if (!bone && ux > 0.2 && Math.random() < 0.55) wallSplat(x + rand(6, 30), y + rand(-16, 12), 1, pick(cols));
 }
 
 // a splat with droplets and drips, painted on the manor wall / chapel / balcony front behind the hit
@@ -1832,6 +2242,8 @@ function updateFx(dt) {
 }
 
 function hurtPlayer(raw, attacker) {
+  if (devOn() && save.devTune.god) return;                  // dev: invincible
+  if (curDiff().dmg <= 0) return;
   const amount = Math.max(1, Math.round(raw * curDiff().dmg * 100 / (100 + player.stats.def)));
   if (attacker && mod('thorns')) dealDamage(attacker, player.stats.damage * mod('thorns') / 100, 'thorns');
   player.hp -= amount;
@@ -1887,16 +2299,9 @@ function updateBullets(dt) {
         if (s.active && Math.abs(s.x - b.x) < 11 && Math.abs(s.y - b.y) < 11) {
           s.active = false; b.active = false;
           burst(b.x, b.y, 10, '#c86aff', 200, 4, false);
-          floatText(b.x, b.y - 18, 'DEFLECT!', '#d8a0ff', 15);
           sfx.deflect();
           break;
         }
-      }
-      if (!b.active) break;
-      // relics
-      for (const d of drops) {
-        if (b.homing) break;   // homing rounds fly past loot; they only chase enemies
-        if (d.life > 0 && Math.abs(d.x - b.x) < 16 && Math.abs(d.y - 20 - b.y) < 20) { collectDrop(d); b.active = false; break; }
       }
       if (!b.active) break;
       for (const e of enemies) {
@@ -1935,6 +2340,12 @@ function updateEnemies(dt) {
     if (e.hp <= 0) continue;
     e.flash -= dt;
     const def = e.def;
+    if (e.emergeT > 0) {                                 // digging out of the sand
+      e.emergeT -= dt;
+      if (Math.random() < dt * 14) burst(e.x + rand(-8, 8), GROUND - 2, 2, '#b8a880', 90, 3, true);
+      continue;
+    }
+    if (e.downT > 0) { e.downT -= dt; if (e.downT <= 0) { e.flash = 0.15; burst(e.x, e.y - def.h * 0.5, 10, '#5affd8', 120, 3, false); } continue; }
 
     // --- status effects: damage over time, slow, freeze ---
     let dps = 0;
@@ -1963,7 +2374,7 @@ function updateEnemies(dt) {
         const hx = 600 + Math.sin(e.t * 0.8) * 120, hy = e.baseY + Math.sin(e.t * 2.2) * 26;
         e.x += (hx - e.x) * Math.min(1, 1.5 * adt); e.y += (hy - e.y) * Math.min(1, 1.5 * adt);
         e.diveT -= adt;
-        if (e.diveT <= 0) { e.mode = 'dive'; floatText(e.x, e.y - 50, 'โฉบ!', '#ff4a5a', 16); }
+        if (e.diveT <= 0) { e.mode = 'dive'; }
       } else if (e.mode === 'dive') {
         const tx = s.x + 24, ty = s.y - 6, dx = tx - e.x, dy = ty - e.y, d = Math.hypot(dx, dy) || 1;
         e.x += dx / d * e.speed * 2.4 * adt; e.y += dy / d * e.speed * 2.4 * adt;
@@ -2011,6 +2422,29 @@ function updateEnemies(dt) {
         burst(e.x, e.y - e.def.h / 2, 16, e.type === 'abom' ? '#7a1018' : '#7affd0', 220, 6, false);
       }
     }
+    if (e.type === 'captain') {                      // Captain Blackbone's attack pattern
+      if (!e.rage && e.hp < e.maxHp * 0.5) {         // rage: faster, wider volleys, ghost fire
+        e.rage = true; e.speed *= 1.5; shake = Math.max(shake, 12); sfx.bossWarn();
+        burst(e.x, e.y - def.h / 2, 30, '#5affd8', 260, 7, false);
+      }
+      e.volT -= adt;
+      if (e.volT <= 0) {                             // flintlock volley: a fan of lead balls
+        e.volT = e.rage ? 2.4 : 4;
+        const o = orbPos(e), n = e.rage ? 5 : 3;
+        for (let i = 0; i < n; i++) fireBall(o.x, o.y, (i - (n - 1) / 2) * 0.12, 1, 8);
+      }
+      e.canT -= adt;
+      if (e.canT <= 0) {                             // "fire the cannons!": balls lobbed from the ship's gun ports
+        e.canT = e.rage ? 6 : 9;
+        for (let i = 0; i < 3; i++) fireBall(BX + 64 + i * 70, PLATFORM.y + 61, rand(-0.06, 0.06), 0.7, 12);
+        shake = Math.max(shake, 6); sfx.boom();
+      }
+      e.sumT -= adt;
+      if (e.sumT <= 0) {                             // crew boards from the ship deck
+        e.sumT = 10;
+        for (let i = 0; i < 2; i++) { spawnEnemy('walker', true); enemies[enemies.length - 1].x = W + 20 + i * 30; }
+      }
+    }
     if (def.ranged) {
       if (!e.standing && e.x <= e.standX && grounded) e.standing = true;
       e.walkT += adt * (e.standing ? 2 : 8);
@@ -2031,8 +2465,7 @@ function updateEnemies(dt) {
       e.attackCd -= adt;
       if (e.attackCd <= 0) { e.attackCd = def.atk; hurtPlayer(def.dmg, e); }
     }
-    e.x = Math.max(stopX, e.x + e.kx * dt);
-    e.kx *= Math.max(0, 1 - 10 * dt);
+    e.x = Math.max(stopX, e.x);
   }
   let n = 0;
   for (const e of enemies) if (e.hp > 0) enemies[n++] = e;
@@ -2072,6 +2505,11 @@ function updateDrops(dt) {
   for (const d of drops) if (d.item.r >= 3 && Math.random() < dt * (d.item.r === 4 ? 14 : 8)) mote(d.x, d.floor - 4, RARITIES[d.item.r].color);
   const top = Math.max(...EQ_SLOTS.map(s => save.eq[s] ? save.eq[s].r : -1));
   if (top >= 3 && Math.random() < dt * (top === 4 ? 12 : 7)) mote(player.x, player.y - rand(0, 40), RARITIES[top].color);
+  const partY = { head: 80, chest: 52, gloves: 46, legs: 24, boots: 5, weapon: 46 };
+  for (const k in partY) {
+    const g = save.eq[k];
+    if (g && g.r >= 2 && Math.random() < dt * g.r * 0.8) mote(player.x + (k === 'weapon' || k === 'gloves' ? 18 : 0), player.y - partY[k], RARITIES[g.r].color);
+  }
 }
 
 // The pet hovers behind the hunter, flies to the nearest loot, collects it on touch, then returns.
@@ -2080,7 +2518,7 @@ function updatePet(dt) {
   pet.t += dt;
   let target = null, bd = Infinity;
   for (const d of drops) {
-    if (d.life <= 0) continue;
+    if (d.life <= 0 || !petWants(d.item)) continue;
     const dist = Math.hypot(d.x - pet.x, d.y - 12 - pet.y);
     if (dist < bd) { bd = dist; target = d; }
   }
@@ -2099,7 +2537,7 @@ function updatePet(dt) {
   // magnet: nearby loot drifts toward the pet
   if (P.magnet) {
     for (const d of drops) {
-      if (d.life <= 0) continue;
+      if (d.life <= 0 || !petWants(d.item)) continue;
       const mx = pet.x - d.x, my = pet.y - (d.y - 12), md = Math.hypot(mx, my);
       if (md < P.magnet && md > 1) { d.x += mx / md * 140 * dt; d.y += my / md * 140 * dt; }
     }
@@ -2169,16 +2607,17 @@ function update(dt) {
   // --- Bosses: warning 3 s before, then spawn (max 2 alive; none right before a mode's goal) ---
   bossTimer -= dt;
   const D0 = curDiff(), aliveBosses = enemies.filter(e => e.def.boss).length;
-  const nextType = TUNING.bossOrder[bossCount % TUNING.bossOrder.length];
+  const order = curMap().bosses || TUNING.bossOrder;
+  const nextType = order[bossCount % order.length];
   if (!bossWarned && bossTimer <= 3 && !(D0.goal && time + bossTimer > D0.goal - 4)) {
     bossWarned = true;
-    announce = { text: `⚠ BOSS: ${TUNING.enemies[nextType].name}`, t: 3 };
+    announce = { text: `⚠ BOSS: ${enemyDef(nextType).name}`, t: 3 };
     sfx.bossWarn();
     shake = Math.max(shake, 5);
   }
   if (bossTimer <= 0) {
     if (aliveBosses >= 2 || (D0.goal && time > D0.goal - 4)) bossTimer = 5;
-    else { spawnBoss(nextType); bossTimer = TUNING.bossEvery; bossWarned = false; }
+    else { spawnBoss(nextType); bossTimer = bossEvery(); bossWarned = false; }
   }
   if (announce) { announce.t -= dt; if (announce.t <= 0) announce = null; }
 
@@ -2207,6 +2646,22 @@ function update(dt) {
   }
 }
 
+// Endless has no goal, so the hunter can choose to end the hunt: tap once to arm, again within 3 s to confirm.
+let endArmed = 0, endedByPlayer = false;
+const endBtnShown = () => state === 'playing' && !curDiff().goal;
+function pressEnd() {
+  if (!endBtnShown()) return;
+  if (!endArmed || performance.now() - endArmed > 3000) { endArmed = performance.now(); sfx.click ? sfx.click() : null; return; }
+  endArmed = 0;
+  endedByPlayer = true;
+  state = 'dead';
+  deadTimer = 0;
+  pointer.down = false;
+  if (kills > save.best) save.best = kills;
+  recordBest();
+  persist();
+}
+
 // ===================== 3D world: static voxel scenery (built once) =====================
 // box from game-space rect (x, y = top-left, w, h), centred at depth z with depth d
 function sbox(x, y, w, h, z, d, color, glow = false) {
@@ -2215,6 +2670,23 @@ function sbox(x, y, w, h, z, d, color, glow = false) {
 function sboxC(cx, cy, w, h, z, d, color, rot = 0) {
   pushBox(stSolid, cx, cy, z, w, h, d, rot, parseColor(color).col);
 }
+
+// window glass texture: faint cool tint, a bright rim at the top and two diagonal reflection streaks
+const GLASS = [];
+const GLASS_TEX = (() => {
+  const c = document.createElement('canvas');
+  c.width = 64; c.height = 128;
+  const g = c.getContext('2d');
+  const gr = g.createLinearGradient(0, 0, 0, 128);
+  gr.addColorStop(0, 'rgba(190,200,255,0.30)'); gr.addColorStop(0.5, 'rgba(120,120,190,0.06)'); gr.addColorStop(1, 'rgba(160,150,220,0.14)');
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 128);
+  g.save(); g.translate(32, 64); g.rotate(-0.55);
+  for (const [ox, w, a] of [[-14, 9, 0.38], [4, 3, 0.26], [22, 5, 0.18]]) { g.fillStyle = `rgba(235,235,255,${a})`; g.fillRect(ox, -120, w, 240); }
+  g.restore();
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = THREE.RepeatWrapping;
+  return t;
+})();
 
 // painted backdrop: sky, blood moon, mountains and castle (a plane far behind the play area)
 const SKY = { x0: -820, w: 2600, yTop: -320, yBot: 450, z: -900 };   // game-space extent of the backdrop
@@ -2270,17 +2742,54 @@ function deadTree3D(r, x, y, len, ang, depth, w, z) {
   for (let i = 0; i < n + 1; i++) deadTree3D(r, x2, y2, len * (0.55 + r() * 0.2), ang + (r() - 0.5) * 1.3, depth - 1, Math.max(2, w * 0.65), z + (r() - 0.5) * 16);
 }
 
-function buildWorld() {
-  const r = seeded(13);
-  stSolid.count = stGlow.count = 0;
-
-  // backdrop plane
-  const tex = new THREE.CanvasTexture(paintSky());
+// everything buildWorld adds to the scene (sky, glass, point lights) so a map switch can tear it down
+let worldObjs = [], builtMap = null;
+const addW = o => { scene.add(o); worldObjs.push(o); return o; };
+function addSky(canvas) {
+  const tex = new THREE.CanvasTexture(canvas);
   tex.magFilter = THREE.NearestFilter;
   tex.minFilter = THREE.NearestFilter;
   const sky = new THREE.Mesh(new THREE.PlaneGeometry(SKY.w, SKY.yBot - SKY.yTop), new THREE.MeshBasicMaterial({ map: tex, fog: false }));
   sky.position.set(SKY.x0 + SKY.w / 2, -(SKY.yTop + SKY.yBot) / 2, SKY.z);
-  scene.add(sky);
+  addW(sky);
+}
+// glass: a pane in front of every window with streaks of reflected moonlight that slowly glide across
+function addGlass(list) {
+  for (const [x, y, w, h, z] of list) {
+    const tx = GLASS_TEX.clone(); tx.needsUpdate = true;
+    const pane = new THREE.Mesh(QUAD, new THREE.MeshBasicMaterial({ map: tx, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.55, fog: false }));
+    pane.scale.set(w, h, 1);
+    pane.position.set(x + w / 2, -(y + h / 2), z);
+    pane.renderOrder = 8;
+    addW(pane);
+    GLASS.push({ tex: tx, ph: x * 0.013 });
+  }
+}
+function buildWorld() {
+  for (const o of worldObjs) { scene.remove(o); if (o.material && o.material.map) o.material.map.dispose(); }
+  worldObjs = [];
+  GLASS.length = 0;
+  const pirate = save.map === 'pirate';
+  LIGHTS.length = 0; LIGHTS.push(...(pirate ? LIGHTS_PIRATE : LIGHTS_GRAVEYARD).map(L => ({ ...L })));
+  STATIC_GLOWS.length = 0; STATIC_GLOWS.push(...(pirate ? GLOWS_PIRATE : GLOWS_GRAVEYARD));
+  const r = seeded(13);
+  stSolid.count = stGlow.count = 0;
+  (pirate ? buildPirate : buildGraveyard)(r);
+  for (const m of [stSolid, stGlow]) { m.instanceMatrix.needsUpdate = true; m.instanceColor.needsUpdate = true; }
+  // point lights for torches, lantern and candles (flicker in updateLights)
+  for (const L of LIGHTS) {
+    if (!L.flame) continue;
+    const cfg = { torch: [1.7, 330], lantern: [1.3, 240], candle: [0.6, 150] }[L.flame];
+    L.base = cfg[0];
+    L.pl = addW(new THREE.PointLight(new THREE.Color(`rgb(${L.c})`), cfg[0], cfg[1], 2));
+    L.pl.position.set(L.x, -L.y + 6, L.z + 8);
+  }
+  for (const e of embers) e.z = -220 + Math.random() * 320;
+  builtMap = save.map;
+}
+
+function buildGraveyard(r) {
+  addSky(paintSky());
 
   // ground slab, cobbles, the walking lane, grass, bones
   sbox(-900, GROUND, 2900, 160, -250, 1300, '#261c22');
@@ -2421,18 +2930,210 @@ function buildWorld() {
   }
   for (const hx of [PLATFORM.x1 + 60, PLATFORM.x1 + 280]) for (let i = 0; i < 6; i++) sbox(hx + (i % 2), PLATFORM.y + 14 + i * 5, 3, 4, 20, 3, '#2e2a34');
 
-  for (const m of [stSolid, stGlow]) { m.instanceMatrix.needsUpdate = true; m.instanceColor.needsUpdate = true; }
+  addGlass([[BX + 50, 196, 30, 62, -27.4], [BX + 150, 196, 30, 62, -27.4], [BX + 250, 196, 30, 62, -27.4], [BX + 400, 196, 30, 62, -27.4],
+    [BX + 249, GROUND - 117, 24, 44, -27.4], [262, 350, 28, 58, -179], [328, 350, 28, 58, -179]]);
+}
 
-  // point lights for torches, lantern and candles (flicker in updateLights)
-  for (const L of LIGHTS) {
-    if (!L.flame) continue;
-    const cfg = { torch: [1.7, 330], lantern: [1.3, 240], candle: [0.6, 150] }[L.flame];
-    L.base = cfg[0];
-    L.pl = new THREE.PointLight(new THREE.Color(`rgb(${L.c})`), cfg[0], cfg[1], 2);
-    L.pl.position.set(L.x, -L.y + 6, L.z + 8);
-    scene.add(L.pl);
+// ---------- Pirate cove: moonlit beach, a beached pirate ship (its deck is the raised lane), palms, treasure ----------
+function palm3D(r, x, z, h, lean) {
+  let px = x, py = GROUND;
+  for (let i = 0; i < h; i += 8) {                       // trunk: stacked rings curving with the lean
+    const t = i / h;
+    px = x + lean * t * t * h * 0.5;
+    sbox(px - 4, py - i - 8, 8, 8, z, 8, i % 16 ? '#5a4630' : '#4a3a26');
+    sbox(px - 4.5, py - i - 8, 9, 1.5, z, 8.5, '#3a2c1c');
   }
-  for (const e of embers) e.z = -220 + Math.random() * 320;
+  const tx = px, ty = GROUND - h;
+  for (let k = 0; k < 7; k++) {                          // fronds: drooping chains of leaf boxes
+    const a = -Math.PI / 2 + (k - 3) * 0.55 + (r() - 0.5) * 0.2, side = Math.cos(a);
+    for (let j = 0; j < 7; j++) {
+      const len = j * 7, droop = j * j * 0.55;
+      sboxC(tx + Math.cos(a) * len * 1.3, ty + Math.sin(a) * len * 0.5 + droop, 9, 3.5, z + (k % 3 - 1) * 6, 10 - j, j % 2 ? '#2a4a2a' : '#1e3a22', a + side * j * 0.08);
+    }
+  }
+  for (const [dx, dy] of [[-4, 4], [3, 5], [0, 8]]) sbox(tx + dx - 3, ty + dy - 2, 6, 6, z + 4, 6, '#3a2a18');   // coconuts
+}
+function buildPirate(r) {
+  addSky(paintSeaSky());
+  // beach sand + wet sand, sea behind with a foam line
+  sbox(-900, GROUND, 2900, 160, -80, 900, '#3a342a');
+  sbox(-900, GROUND + 3, 2900, 160, -700, 420, '#0e2a36');
+  sbox(-900, GROUND - 0.5, 2900, 1, -488, 10, '#7aa0a8');
+  for (let i = 0; i < 30; i++) sbox(-500 + r() * 2000, GROUND + 2.6, 30 + r() * 60, 0.8, -560 - r() * 260, 3, r() < 0.5 ? '#1e4250' : '#163644');
+  for (let i = 0; i < 380; i++) {
+    const x = -200 + r() * 1400, z = -440 + r() * 760, v = r();
+    sbox(x, GROUND - 1.2, 10 + r() * 14, 1.6, z, 8 + r() * 8, v < 0.4 ? '#443c30' : v < 0.8 ? '#4a4234' : '#52493a');
+  }
+  // the pier the dead walk along
+  for (let x = -200; x < 1300; x += 24) sbox(x, GROUND - 2, 22, 2.5, 0, 70, (x / 24) % 2 ? '#4e3826' : '#5a422c');
+  for (let x = -180; x < 1300; x += 96) { sbox(x, GROUND - 9, 6, 9, 37, 6, '#3a2818'); sbox(x, GROUND - 9, 6, 9, -37, 6, '#3a2818'); }
+  // shells, starfish, scattered bones
+  for (let i = 0; i < 16; i++) {
+    const x = 220 + r() * 700, z = 50 + r() * 120;
+    if (r() < 0.4) { sbox(x, GROUND - 3, 8, 3, z, 6, '#d8b8a0'); sbox(x + 2, GROUND - 4, 4, 1, z, 4, '#e8d0c0'); }
+    else if (r() < 0.5) { sbox(x, GROUND - 2, 12, 2, z, 3, '#c8603a'); sbox(x + 4, GROUND - 2, 3, 2, z - 4, 8, '#c8603a'); }
+    else sbox(x, GROUND - 3, 16, 3, z, 3, '#b0a694');
+  }
+  // the hunter's perch: stacked cargo crates with rope
+  [[52, 136, 84], [66, 108, 68], [84, 72, 54]].forEach(([x, w, d], row) => {
+    const y = GROUND - (row + 1) * 12;
+    sbox(x, y, w, 12, 0, d, row % 2 ? '#5a3e24' : '#64462a');
+    sbox(x, y, w, 1.5, 0, d + 0.5, '#3a2614');
+    for (let cx = x; cx < x + w; cx += 24) sbox(cx, y, 2, 12, d / 2 + 0.3, 1, '#3a2614');
+  });
+  sbox(60, ROCK_TOP - 2, 120, 2, 20, 2, '#a08a5a');       // rope across the top crate
+  // tiki torch posts
+  for (const tx of [212, 600]) {
+    sbox(tx - 3, GROUND - 74, 6, 74, -50, 6, '#8a7840');
+    for (let y = GROUND - 70; y < GROUND; y += 12) sbox(tx - 3.5, y, 7, 2, -50, 7, '#5a4a24');
+    sbox(tx - 7, GROUND - 78, 14, 6, -50, 14, '#4a3a1e');
+  }
+  // palms
+  palm3D(r, 30, -220, 150, 0.9); palm3D(r, 470, -170, 120, -0.7); palm3D(r, 560, -110, 165, 0.5); palm3D(r, -60, -60, 135, 0.6);
+  // treasure chest spilling gold
+  sbox(318, GROUND - 18, 34, 18, -86, 22, '#5a3a1e'); sbox(318, GROUND - 18, 34, 2, -86, 22.5, '#c9a35a');
+  sbox(318, GROUND - 9, 34, 2, -86, 22.5, '#c9a35a'); sbox(332, GROUND - 14, 6, 6, -74.6, 1, '#e8c062');
+  sboxC(335, GROUND - 26, 34, 4, -96, 22, '#5a3a1e', -0.55);
+  for (const [dx, h] of [[4, 6], [12, 9], [20, 7], [28, 5]]) sbox(318 + dx, GROUND - 18 - h, 7, h, -86, 16, '#ffd04a', true);
+  for (let i = 0; i < 10; i++) sbox(300 + r() * 70, GROUND - 2, 4, 2, -70 + r() * 20, 4, '#ffd04a', true);
+  // cannon on its carriage
+  sbox(402, GROUND - 14, 34, 8, -100, 18, '#4a3420');
+  for (const wx of [404, 426]) sbox(wx, GROUND - 10, 10, 10, -100, 22, '#3a2818');
+  sboxC(424, GROUND - 22, 40, 10, -100, 10, '#26262c', -0.2);
+  for (let i = 0; i < 3; i++) sbox(440 + i * 7, GROUND - 6, 6, 6, -80, 6, '#1e1e24');
+  // barrels and a rope coil
+  for (const [bxp, z] of [[250, -70], [262, -96], [520, -84]]) {
+    sbox(bxp, GROUND - 22, 18, 22, z, 18, '#5a3e26');
+    for (const yy of [4, 17]) sbox(bxp - 0.5, GROUND - 22 + yy, 19, 2, z, 19, '#2e2e34');
+  }
+  sbox(546, GROUND - 4, 18, 4, -64, 18, '#8a7448'); sbox(550, GROUND - 7, 10, 3, -64, 10, '#a08a5a');
+  // Jolly Roger on a pole
+  sbox(372, GROUND - 120, 4, 120, -150, 4, '#3a2a1a');
+  sbox(376, GROUND - 118, 38, 26, -150, 1.5, '#121014');
+  sbox(390, GROUND - 112, 10, 8, -149, 1, '#e8e0cc'); sbox(388, GROUND - 102, 14, 2, -149, 1, '#e8e0cc');
+  sbox(392, GROUND - 110, 2, 2, -148.5, 1, '#121014'); sbox(396, GROUND - 110, 2, 2, -148.5, 1, '#121014');
+  // broken rowboat
+  sboxC(492, GROUND - 6, 50, 10, -58, 22, '#4a3624', 0.12); sboxC(488, GROUND - 12, 46, 3, -58, 24, '#6a4c30', 0.12);
+  // rope fence along the dunes
+  for (let x = 190; x < 600; x += 40) sbox(x, GROUND - 26, 4, 26, -135, 4, '#4a3a26');
+  sbox(190, GROUND - 22, 410, 1.5, -135, 1.5, '#8a7448'); sbox(190, GROUND - 12, 410, 1.5, -135, 1.5, '#8a7448');
+  // beach shack with lit windows (where the chapel stands on the other map)
+  sbox(236, 334, 150, GROUND - 334, -190, 18, '#3e2c1e');
+  for (let x = 240; x < 386; x += 10) sbox(x, 336, 1.5, GROUND - 336, -180.6, 1, '#2a1c12');
+  for (let i = 0; i < 6; i++) sbox(226 + i * 6, 334 - i * 6, 170 - i * 12, 6, -190, 24, i % 2 ? '#5a4a2a' : '#6a5832');
+  sbox(352, 286, 12, 30, -196, 12, '#2a2020');            // chimney
+  for (const wx of [262, 328]) {
+    sbox(wx - 3, 352, 32, 36, -180.5, 1, '#1a1008');
+    sbox(wx, 356, 26, 30, -180, 1, '#f0a040', true);
+    sbox(wx + 12, 356, 2, 30, -179.4, 1, '#1a1008'); sbox(wx, 370, 26, 2, -179.4, 1, '#1a1008');
+  }
+  sbox(300, 396, 24, 54, -180.5, 2, '#2a1c12');            // door
+  sbox(280, 340, 60, 10, -179.5, 2, '#5a3a20'); sbox(304, 342, 12, 6, -178.4, 1, '#e8e0cc');   // sign with a skull
+
+  // ---- the beached pirate ship; its deck is the raised lane ----
+  const hullR = W + 360;
+  sbox(BX, PLATFORM.y, hullR - BX, GROUND - PLATFORM.y, -75, 90, '#3a2818');                  // hull side
+  for (let y = PLATFORM.y + 8; y < GROUND; y += 10) sbox(BX, y, hullR - BX, 1.5, -29.4, 1, '#24180e');
+  sbox(BX, PLATFORM.y + 36, hullR - BX, 6, -29.2, 1.5, '#7a2a1a');                             // painted stripe
+  for (let x = BX + 50; x < hullR - 40; x += 70) {                                             // gun ports + cannons
+    sbox(x, PLATFORM.y + 52, 22, 18, -29, 1.5, '#0e0806');
+    sbox(x + 4, PLATFORM.y + 57, 18, 8, -22, 14, '#26262c');
+    sbox(x - 2, PLATFORM.y + 50, 26, 2, -28.6, 2, '#5a3a20');
+  }
+  for (let i = 0; i < 40; i++) sbox(BX + r() * (hullR - BX), GROUND - 4 - r() * 26, 3, 3, -29, 2, r() < 0.5 ? '#4a5a4a' : '#5a6a5a');   // barnacles
+  for (let i = 0; i < 6; i++) {                                                                // bow: stepped taper
+    const w = 60 - i * 9;
+    sbox(BX - w + 4, PLATFORM.y + i * 22, w, 22, -60, 60 - i * 6, '#3a2818');
+  }
+  sboxC(BX - 60, PLATFORM.y - 22, 120, 6, -40, 6, '#4a3420', 0.32);                            // bowsprit
+  sbox(BX - 34, PLATFORM.y + 30, 10, 10, -28, 4, '#2e2e34');                                    // anchor ring
+  for (let i = 0; i < 7; i++) sbox(BX - 32 + (i % 2), PLATFORM.y + 40 + i * 7, 4, 6, -28, 4, '#3a3a42');
+  sbox(BX - 44, PLATFORM.y + 88, 28, 6, -28, 6, '#3a3a42'); sbox(BX - 32, PLATFORM.y + 70, 5, 24, -28, 5, '#3a3a42');
+  // deck (the platform enemies walk on), back rail, deck lantern post
+  sbox(PLATFORM.x1, PLATFORM.y, hullR - PLATFORM.x1, 12, 0, 64, '#5a4028');
+  for (let x = PLATFORM.x1; x < hullR; x += 18) sbox(x, PLATFORM.y - 0.2, 1.2, 0.5, 0, 64, '#3a2818');
+  for (let x = PLATFORM.x1 + 6; x < hullR; x += 22) sbox(x, PLATFORM.y - 24, 4, 24, -30, 4, '#4a3420');
+  sbox(PLATFORM.x1, PLATFORM.y - 26, hullR - PLATFORM.x1, 4, -30, 6, '#5a4028');
+  sbox(BX + 193, PLATFORM.y - 44, 6, 44, -24, 6, '#3a2818');
+  // stern castle with lit cabin windows
+  sbox(BX + 300, 196, 260, PLATFORM.y - 196, -60, 60, '#3a2818');
+  for (let y = 204; y < PLATFORM.y; y += 10) sbox(BX + 300, y, 260, 1.2, -29.6, 1, '#24180e');
+  sbox(BX + 296, 190, 268, 8, -58, 66, '#5a4028');
+  for (const wx of [BX + 330, BX + 380, BX + 430]) {
+    sbox(wx - 3, 220, 28, 38, -29.4, 1.5, '#0e0806');
+    sbox(wx, 223, 22, 32, -28.8, 1, '#f0a040', true);
+    sbox(wx + 10, 223, 2, 32, -28.2, 1, '#0e0806'); sbox(wx, 238, 22, 2, -28.2, 1, '#0e0806');
+  }
+  // masts, yards, tattered sails, crow's nest and the black flag
+  for (const [mx, top] of [[BX + 130, -70], [BX + 250, -20]]) {
+    sbox(mx - 5, top, 10, PLATFORM.y - top, -45, 10, '#4a3420');
+    for (const yy of [top + 40, top + 150]) sbox(mx - 70, yy, 140, 6, -45, 6, '#3a2818');
+    for (let sy = top + 46, row = 0; sy < top + 150; sy += 12, row++) {               // sail strips with torn gaps
+      for (let sx = mx - 64; sx < mx + 64; sx += 16) {
+        if (r() < 0.12 + row * 0.03) continue;
+        sbox(sx, sy, 16, 12, -52 - row * 1.2, 1.5, (row + sx / 16) % 2 < 1 ? '#a89e84' : '#968c74');
+      }
+    }
+    sbox(mx - 14, top + 14, 28, 10, -45, 28, '#3a2818');
+    sbox(mx + 5, top - 22, 30, 18, -45, 1.5, '#121014');
+    sbox(mx + 14, top - 18, 8, 6, -44, 1, '#e8e0cc'); sbox(mx + 12, top - 10, 12, 2, -44, 1, '#e8e0cc');
+  }
+  sboxC(BX + 190, 60, 2, 280, -45, 2, '#2a2016', 0.62); sboxC(BX + 70, 120, 2, 240, -45, 2, '#2a2016', -0.5);   // rigging
+  addGlass([[BX + 330, 223, 22, 32, -28], [BX + 380, 223, 22, 32, -28], [BX + 430, 223, 22, 32, -28], [262, 356, 26, 30, -179], [328, 356, 26, 30, -179]]);
+}
+
+// painted backdrop for the cove: indigo sky, pale moon, stars, the horizon with a moon road, a ghost ship and an island
+function paintSeaSky() {
+  const pxW = 1300, pxH = Math.round((SKY.yBot - SKY.yTop) / 2);
+  const c = document.createElement('canvas');
+  c.width = pxW; c.height = pxH;
+  const g = c.getContext('2d');
+  const r = seeded(31);
+  const horizon = Math.round(pxH * 0.66);
+  const bands = ['#050a14', '#08101c', '#0b1624', '#0e1c2c', '#122434', '#162c3c', '#1a3444', '#20404e'];
+  const bh = Math.ceil(horizon / bands.length);
+  bands.forEach((col, i) => { g.fillStyle = col; g.fillRect(0, i * bh, pxW, bh + 1); });
+  for (let i = 0; i < 220; i++) {
+    g.fillStyle = r() < 0.25 ? 'rgba(230,245,255,0.9)' : 'rgba(170,200,230,0.35)';
+    g.fillRect(Math.floor(r() * pxW), Math.floor(r() * horizon * 0.8), 1, 1);
+  }
+  const mx = Math.round((260 - SKY.x0) / 2), my = Math.round((-100 - SKY.yTop) / 2);
+  for (const [rad, a] of [[80, 0.05], [58, 0.08], [44, 0.14]]) { g.fillStyle = `rgba(200,235,255,${a})`; g.beginPath(); g.arc(mx, my, rad, 0, TAU); g.fill(); }
+  g.fillStyle = '#c8dce0'; g.beginPath(); g.arc(mx, my, 32, 0, TAU); g.fill();
+  g.fillStyle = '#e4f0ec'; g.beginPath(); g.arc(mx - 4, my - 4, 26, 0, TAU); g.fill();
+  g.fillStyle = '#b4c8cc';
+  for (const [cx, cy, cr] of [[-9, -3, 5], [8, 6, 7], [-2, 14, 3], [12, -11, 3]]) { g.beginPath(); g.arc(mx + cx, my + cy, cr, 0, TAU); g.fill(); }
+  // sea
+  const sea = ['#0c2230', '#0a1c28', '#081822', '#06121a'];
+  const sh = Math.ceil((pxH - horizon) / sea.length);
+  sea.forEach((col, i) => { g.fillStyle = col; g.fillRect(0, horizon + i * sh, pxW, sh + 1); });
+  for (let i = 0; i < 140; i++) {                          // moon road: broken shimmer lines under the moon
+    const y = horizon + 2 + r() * (pxH - horizon - 4), spread = 8 + (y - horizon) * 0.6;
+    g.fillStyle = `rgba(200,230,240,${0.15 + r() * 0.35})`;
+    g.fillRect(Math.round(mx - spread / 2 + (r() - 0.5) * spread), Math.round(y), Math.round(4 + r() * 14), 1);
+  }
+  for (let i = 0; i < 60; i++) { g.fillStyle = 'rgba(120,170,190,0.18)'; g.fillRect(Math.floor(r() * pxW), horizon + 3 + Math.floor(r() * (pxH - horizon)), 6 + Math.floor(r() * 20), 1); }
+  // island with palms on the left of the horizon
+  g.fillStyle = '#0a141c';
+  g.beginPath(); g.moveTo(120, horizon); g.quadraticCurveTo(200, horizon - 46, 300, horizon - 30); g.quadraticCurveTo(360, horizon - 20, 420, horizon); g.fill();
+  for (const [tx, h] of [[220, 50], [260, 64], [310, 44]]) {
+    g.fillRect(tx, horizon - 30 - h, 3, h);
+    for (let k = -2; k <= 2; k++) { g.save(); g.translate(tx + 1, horizon - 30 - h); g.rotate(k * 0.55); g.fillRect(-1, -2, 18, 3); g.restore(); }
+  }
+  // lighthouse on a rock far right, with a faint beam
+  const lx = 1080;
+  g.fillStyle = '#0a141c'; g.fillRect(lx - 40, horizon - 18, 90, 18);
+  g.fillRect(lx - 6, horizon - 70, 12, 52); g.fillStyle = '#f0e0a0'; g.fillRect(lx - 4, horizon - 78, 8, 8);
+  g.fillStyle = 'rgba(240,224,160,0.10)'; g.beginPath(); g.moveTo(lx, horizon - 74); g.lineTo(lx - 300, horizon - 130); g.lineTo(lx - 300, horizon - 96); g.fill();
+  // ghost ship on the horizon
+  const gx = 720;
+  g.fillStyle = 'rgba(110,190,170,0.35)';
+  g.fillRect(gx, horizon - 12, 90, 10); g.fillRect(gx + 10, horizon - 16, 70, 4);
+  for (const [mx2, h] of [[gx + 28, 58], [gx + 60, 46]]) {
+    g.fillRect(mx2, horizon - 12 - h, 3, h);
+    for (let k = 0; k < 3; k++) g.fillRect(mx2 - 14 + k * 2, horizon - 8 - h + 8 + k * 14, 28 - k * 4, 10);
+  }
+  return c;
 }
 
 // ===================== Draw: dynamic =====================
@@ -2600,6 +3301,220 @@ function drawBat(e) {
   if (e.hp < e.maxHp) drawHpBar(x, y - 24, e.hp / e.maxHp, 32);
 }
 
+// ---------- Pirate cove: the skeleton crew ----------
+function drawSkeleton(e) {
+  const d = e.def;
+  const x = Math.round(e.x), y = Math.round(e.y);
+  if (e.downT > 0) {                                      // collapsed deckhand: a heap of bones that twitches back together
+    const rise = Math.max(0, 1 - e.downT / 0.6), jit = Math.sin(performance.now() / 40) * (e.downT < 0.6 ? 1.5 : 0.4);
+    const pile = [[x - 14, y - 5, 12, 4, BONE], [x - 2, y - 6, 14, 4, BONE_D], [x - 10, y - 9, 10, 3, BONE], [x + 4, y - 10, 9, 3, BONE],
+      [x - 6, y - 12 - rise * 40, 12, 3, BONE_D], [x - 8 + jit, y - 20 - rise * 46, 16, 12, BONE]];
+    drawParts(ctx, pile, '#07040a', false);
+    ctx.fillStyle = '#0a0608'; ctx.fillRect(x - 6 + jit, y - 16 - rise * 46, 4, 4); ctx.fillRect(x + 1 + jit, y - 16 - rise * 46, 4, 4);
+    ctx.globalAlpha = 0.5 + Math.sin(performance.now() / 90) * 0.3; ctx.fillStyle = e.eye;
+    ctx.fillRect(x - 5 + jit, y - 15 - rise * 46, 2, 2); ctx.fillRect(x + 2 + jit, y - 15 - rise * 46, 2, 2); ctx.globalAlpha = 1;
+    return;
+  }
+  const white = e.flash > 0;
+  const gunner = !!d.musket, feral = e.type === 'runner', brute = e.type === 'tank';
+  const moving = !e.standing && e.x > player.x + 52;
+  const step = moving ? Math.sin(e.walkT) * (feral ? 6 : 4) : 0;
+  const bob = moving ? Math.round(Math.abs(Math.sin(e.walkT)) * 2) : (gunner ? Math.round(Math.sin(e.walkT) * 1.2) : 0);
+  const sway = Math.round(Math.sin(e.walkT * 0.5) * 2);
+  const lean = feral ? -7 : 0;
+  const legH = Math.round(d.h * 0.3), torsoH = d.h - d.headH - legH;
+  const topY = y - d.h - bob, torsoY = y - legH - torsoH - bob;
+  const hx = x - d.w / 2 + lean, tx = x - d.w / 2 + Math.round(lean / 2);
+  const lb = brute ? 8 : 4;                               // limb bone thickness
+  const parts = [];
+  // legs: bare shin bones under ragged trousers
+  parts.push([x + 2, y - legH, lb, legH + Math.min(0, Math.round(-step)), BONE_D]);
+  parts.push([x - 2 - lb, y - legH, lb, legH + Math.min(0, Math.round(step)), BONE]);
+  if (!feral) parts.push([tx + 1, y - legH - 2, d.w - 2, Math.round(legH * 0.55), e.pants]);
+  parts.push([x - lb - 4, y - 3, lb + 6, 3, BONE_D], [x, y - 3, lb + 5, 3, BONE_D]);          // feet
+  // back arm
+  parts.push([tx - 12, torsoY + 3 + sway, 14, lb - 1, BONE_D]);
+  // torso
+  if (brute) {
+    parts.push([tx - 3, torsoY, d.w + 6, torsoH, e.shirt]);                                // barrel chest
+  } else if (gunner) {
+    parts.push([tx - 2, torsoY, d.w + 4, torsoH + Math.round(legH * 0.55), e.shirt]);      // long navy coat
+  } else {
+    parts.push([x - 2, torsoY, 4, torsoH, BONE_D]);                                        // spine
+    for (let i = 0; i < 4; i++) parts.push([tx + 2, torsoY + 3 + i * Math.round(torsoH / 5), d.w - 4, 3, BONE]); // ribs
+    if (!feral) parts.push([tx, torsoY, Math.round(d.w * 0.45), Math.round(torsoH * 0.8), e.shirt]);         // half a striped shirt
+  }
+  parts.push([tx + 2, y - legH - 4, d.w - 4, 4, BONE_D]);                                 // pelvis
+  // skull + jaw
+  parts.push([hx, topY, d.w, d.headH - 5, BONE], [hx + 3, topY + d.headH - 6, d.w - 6, 6, BONE_D]);
+  // headgear
+  if (brute && e.helmet > 0) parts.push([hx - 4, topY - 6, d.w + 8, d.headH + 6, '#6a5a3a']);          // iron diving helmet
+  else if (gunner) parts.push([hx - 7, topY - 3, d.w + 14, 5, e.hood], [hx + 1, topY - 11, d.w - 2, 9, e.hood]);   // tricorn
+  else if (!brute) parts.push([hx - 1, topY - 2, d.w + 2, 6, feral ? e.sash : e.band], [hx + d.w, topY + 1, 5, 4, feral ? e.sash : e.band]);  // bandana + knot
+  // front arm and what it holds
+  parts.push([tx - 14, torsoY + 10 - sway, 16, lb, BONE]);
+  if (gunner) {
+    parts.push([tx - 36, torsoY + 11, 32, 3, '#3a3a42'], [tx - 8, torsoY + 9, 14, 5, '#5a3a20'], [tx + 4, torsoY + 12, 8, 6, '#5a3a20']);   // musket
+  } else if (feral) {
+    parts.push([tx - 30, torsoY + 4 - sway, 18, 3, '#c8ccd4'], [tx - 16, torsoY + 8 - sway, 4, 6, '#c9a35a']);      // cutlass 1
+    parts.push([tx - 22, torsoY + 18 + sway, 16, 3, '#b8bcc4'], [tx - 8, torsoY + 16 + sway, 4, 6, '#c9a35a']);    // cutlass 2
+  } else if (brute) {
+    const ax = tx + d.w - 1;                                                                // anchor over the shoulder
+    parts.push([ax, torsoY - 26, 6, 58, '#3a3a44'], [ax - 12, torsoY + 26, 30, 6, '#3a3a44'], [ax - 14, torsoY + 18, 6, 10, '#3a3a44'],
+      [ax + 14, torsoY + 18, 6, 10, '#3a3a44'], [ax - 3, torsoY - 32, 12, 8, '#2e2e36']);
+  } else {
+    parts.push([tx - 20, torsoY + 8 - sway, 5, 4, '#9a9ea8'], [tx - 22, torsoY + 4 - sway, 3, 6, '#9a9ea8']);     // hook hand
+  }
+  drawParts(ctx, parts, '#07040a', white);
+  if (white) return;
+
+  // surface details
+  ctx.fillStyle = 'rgba(255,240,220,0.25)';
+  ctx.fillRect(hx, topY, d.w, 2);
+  if (!brute && !gunner && !feral) {                                                       // shirt stripes
+    ctx.fillStyle = e.stripe;
+    for (let i = 0; i < 4; i++) ctx.fillRect(tx, torsoY + 2 + i * 6, Math.round(d.w * 0.45), 2);
+  }
+  if (feral) { ctx.fillStyle = e.sash; ctx.fillRect(tx, y - legH - 7 - bob, d.w, 4); }
+  if (gunner) {
+    ctx.fillStyle = '#c9a35a';
+    for (let i = 0; i < 4; i++) ctx.fillRect(tx + 3, torsoY + 4 + i * 8, 2, 2);            // brass buttons
+    ctx.fillStyle = '#7a2a2a'; ctx.fillRect(tx - 2, torsoY + torsoH - 6, d.w + 4, 3);      // red belt
+    ctx.fillStyle = '#c9a35a'; ctx.fillRect(hx - 7, topY - 3, d.w + 14, 1.5);              // gold hat trim
+  }
+  if (brute) {
+    ctx.fillStyle = '#2e2e34';
+    for (const yy of [3, Math.round(torsoH / 2), torsoH - 6]) ctx.fillRect(tx - 3, torsoY + yy, d.w + 6, 3);   // barrel hoops
+    ctx.fillStyle = '#3a2814';
+    for (let i = 5; i < d.w; i += 8) ctx.fillRect(tx - 3 + i, torsoY, 1.5, torsoH);       // staves
+    ctx.fillStyle = '#4a4a54';
+    for (let i = 0; i < 5; i++) ctx.fillRect(tx + d.w + 1, torsoY + 32 + i * 6, 3, 4);    // chain
+  }
+  // face: sockets, nose, teeth (behind the porthole if the helmet is still on)
+  if (brute && e.helmet > 0) {
+    ctx.fillStyle = '#8a7a52'; ctx.fillRect(hx - 4, topY - 6, d.w + 8, 2);
+    ctx.fillStyle = '#c9a35a'; ctx.fillRect(hx + 2, topY + 2, 18, 16);                     // brass porthole rim
+    ctx.fillStyle = '#123c3c'; ctx.fillRect(hx + 4, topY + 4, 14, 12);                     // glass
+    for (const [bx2, by2] of [[-2, -2], [d.w + 1, -2], [-2, d.headH - 4], [d.w + 1, d.headH - 4]]) { ctx.fillStyle = '#4a4030'; ctx.fillRect(hx + bx2, topY + by2, 3, 3); }   // rivets
+  } else {
+    ctx.fillStyle = '#0a0608';
+    const eyeY = topY + Math.round(d.headH * 0.3);
+    ctx.fillRect(hx + 2, eyeY - 1, 6, 6); ctx.fillRect(hx + 10, eyeY - 1, 6, 6);           // sockets
+    ctx.fillRect(hx + 8, eyeY + 6, 2, 3);                                                   // nose
+    for (let i = 0; i < d.w - 8; i += 3) ctx.fillRect(hx + 4 + i, topY + d.headH - 5, 1, 4); // teeth
+    if (feral) { ctx.fillRect(hx + 1, eyeY - 2, 8, 8); ctx.fillRect(hx, eyeY - 3, d.w, 1.5); }   // eye patch + strap
+    if (brute) { ctx.fillStyle = '#5a5040'; ctx.fillRect(hx + d.w - 8, topY + 1, 2, 8); }   // crack in the skull
+  }
+  // glowing eyes inside the sockets
+  const eyeY = topY + Math.round(d.headH * 0.3);
+  ctx.globalAlpha = 0.4; ctx.fillStyle = e.eye; ctx.fillRect(hx, eyeY - 3, 18, 10); ctx.globalAlpha = 1;
+  if (!(brute && e.helmet > 0)) {
+    if (!feral) ctx.fillRect(hx + 4, eyeY + 1, 3, 3);
+    ctx.fillRect(hx + 12, eyeY + 1, 3, 3);
+  } else { ctx.fillRect(hx + 7, eyeY + 2, 3, 3); ctx.fillRect(hx + 13, eyeY + 2, 3, 3); }
+  if (gunner && e.standing && e.aimT < 0.6) {                                               // fuse glow before the shot
+    const o = orbPos(e), k = 1 - e.aimT / 0.6;
+    ctx.globalAlpha = 0.5 + k * 0.45; ctx.fillStyle = '#ffd27a'; ctx.fillRect(o.x - 3 - k * 3, o.y - 3 - k * 3, 6 + k * 6, 6 + k * 6); ctx.globalAlpha = 1;
+    ctx.fillStyle = '#ff8a2a'; ctx.fillRect(o.x - 1.5, o.y - 1.5, 3, 3);
+  }
+  if (e.hp < e.maxHp) drawHpBar(x, topY - (brute && e.helmet > 0 ? 14 : gunner ? 16 : 10), e.hp / e.maxHp, d.w + 12);
+}
+
+// Captain Blackbone: giant skeleton in a gold-trimmed crimson coat, plumed tricorn, peg leg, flintlock and cutlass,
+// with a beard of ghostly green fire that flares up when he rages
+function drawCaptain(e) {
+  const d = e.def, x = Math.round(e.x), y = Math.round(e.y), now = performance.now();
+  const white = e.flash > 0;
+  const moving = e.x > player.x + 60;
+  const step = moving ? Math.sin(e.walkT) * 5 : 0;
+  const bob = moving ? Math.abs(Math.sin(e.walkT)) * 2.5 : Math.sin(now / 500) * 1.2;
+  const legH = Math.round(d.h * 0.3), torsoH = d.h - d.headH - legH;
+  const topY = y - d.h - bob, torsoY = y - legH - torsoH - bob;
+  const hx = x - d.w / 2 + 2, tx = x - d.w / 2;
+  const coat = e.rage ? '#8a1a2a' : '#7a1420', gold = '#d8a83a', fire = '#5affd8';
+  const charge = e.volT < 0.6 ? 1 - e.volT / 0.6 : 0;
+  const slash = Math.sin(now / 260) * 0.15;
+  drawParts(ctx, [
+    [x + 4, y - legH, 7, legH + Math.min(0, -step), '#5a3e24'],              // peg leg
+    [x + 3, y - 4, 9, 4, '#3a2814'],
+    [x - 12, y - legH, 7, legH + Math.min(0, step), BONE],                   // bone leg
+    [x - 15, y - 4, 13, 4, '#1a1418'],                                        // boot
+    [tx + d.w - 4, torsoY + 6, 18, 7, coat],                                  // back arm (sleeve) raising the cutlass
+    [tx + d.w + 10, torsoY - 22 + slash * 20, 4, 30, '#c8ccd4'], [tx + d.w + 7, torsoY + 6, 10, 4, gold],
+    [tx - 4, torsoY, d.w + 8, torsoH + legH - 6, coat],                       // long coat
+    [tx + 8, torsoY + 4, d.w - 16, torsoH - 6, BONE_D],                       // open coat: ribcage
+    [tx - 6, torsoY - 3, 14, 7, gold], [tx + d.w - 8, torsoY - 3, 14, 7, gold],   // epaulettes
+    [hx, topY, d.w - 4, d.headH - 6, BONE], [hx + 4, topY + d.headH - 7, d.w - 12, 7, BONE_D],   // skull + jaw
+    [hx - 12, topY - 4, d.w + 20, 7, '#141016'], [hx - 2, topY - 18, d.w, 15, '#141016'],          // tricorn
+    [tx - 18, torsoY + 20, 22, 8, coat], [tx - 24, torsoY + 18, 8, 12, '#e8e0cc'],               // pistol arm + lace cuff
+    [tx - 34, torsoY + 20, 14, 5, '#3a3a42'], [tx - 22, torsoY + 22, 6, 9, '#5a3a20'],            // flintlock
+  ], '#07040a', white);
+  if (white) return;
+  // coat trim, buttons, belt and buckle
+  ctx.fillStyle = gold;
+  ctx.fillRect(tx - 4, torsoY, 2, torsoH + legH - 6); ctx.fillRect(tx + d.w + 2, torsoY, 2, torsoH + legH - 6);
+  ctx.fillRect(tx - 4, torsoY + torsoH + legH - 8, d.w + 8, 2);
+  for (let i = 0; i < 4; i++) { ctx.fillRect(tx + 3, torsoY + 6 + i * 9, 3, 3); ctx.fillRect(tx + d.w - 6, torsoY + 6 + i * 9, 3, 3); }
+  ctx.fillStyle = '#2a1a14'; ctx.fillRect(tx - 4, torsoY + torsoH - 8, d.w + 8, 5);
+  ctx.fillStyle = gold; ctx.fillRect(x - 5, torsoY + torsoH - 9, 10, 7);
+  ctx.fillStyle = '#e8e0cc'; for (let i = 0; i < 4; i++) ctx.fillRect(tx + 10, torsoY + 8 + i * 7, d.w - 20, 2);   // ribs
+  // hat trim, plume and skull emblem
+  ctx.fillStyle = gold; ctx.fillRect(hx - 12, topY - 4, d.w + 20, 2);
+  ctx.fillStyle = '#e8e8f0'; ctx.fillRect(hx + d.w - 10, topY - 26, 6, 12); ctx.fillRect(hx + d.w - 6, topY - 30, 8, 6); ctx.fillRect(hx + d.w, topY - 32, 6, 5);
+  ctx.fillStyle = '#e8e0cc'; ctx.fillRect(hx + d.w / 2 - 5, topY - 14, 8, 6); ctx.fillRect(hx + d.w / 2 - 7, topY - 7, 12, 2);
+  // face
+  ctx.fillStyle = '#0a0608';
+  const eyeY = topY + 9;
+  ctx.fillRect(hx + 4, eyeY - 1, 8, 8); ctx.fillRect(hx + 16, eyeY - 1, 8, 8);
+  ctx.fillRect(hx + 12, eyeY + 9, 3, 4);
+  for (let i = 0; i < d.w - 14; i += 3) ctx.fillRect(hx + 6 + i, topY + d.headH - 6, 1, 5);
+  ctx.fillStyle = '#9a9ea8'; ctx.fillRect(hx + 2, eyeY - 3, 12, 2);                                    // brow scar
+  // eyes and beard of ghost fire
+  const er = e.rage ? 4 : 3;
+  ctx.globalAlpha = 0.5; ctx.fillStyle = fire; ctx.fillRect(hx + 2, eyeY - 4, 26, 13); ctx.globalAlpha = 1;
+  ctx.fillRect(hx + 6, eyeY + 1, er, er); ctx.fillRect(hx + 18, eyeY + 1, er, er);
+  for (let i = 0; i < 6; i++) {
+    const h = 8 + Math.sin(now / 90 + i * 1.7) * 4 + (e.rage ? 6 : 0);
+    ctx.globalAlpha = 0.55; ctx.fillStyle = i % 2 ? fire : '#a0ffe8';
+    ctx.fillRect(hx + 3 + i * 4, topY + d.headH, 4, h);
+  }
+  ctx.globalAlpha = 1;
+  if (e.rage) {                                                                                        // ghost fire licking the coat
+    ctx.globalAlpha = 0.4; ctx.fillStyle = fire;
+    for (let i = 0; i < 5; i++) ctx.fillRect(tx - 6 + i * 11, torsoY + torsoH + legH - 14 - Math.abs(Math.sin(now / 120 + i)) * 10, 8, 12);
+    ctx.globalAlpha = 1;
+  }
+  if (charge > 0) {                                                                                    // pistol about to fire
+    const o = orbPos(e);
+    ctx.globalAlpha = 0.5 + charge * 0.45; ctx.fillStyle = '#ffd27a'; ctx.fillRect(o.x - 3 - charge * 4, o.y - 3 - charge * 4, 6 + charge * 8, 6 + charge * 8);
+    ctx.globalAlpha = 1; ctx.fillStyle = '#ff8a2a'; ctx.fillRect(o.x - 1.5, o.y - 1.5, 3, 3);
+  }
+}
+
+// bone parrot: a skeletal bird with a few bright feathers left, flapping bone wings
+function drawParrot(e) {
+  const x = Math.round(e.x), y = Math.round(e.y);
+  const up = Math.sin(e.t * 18) > 0;
+  const wingY = up ? -14 : 4;
+  drawParts(ctx, [
+    [x - 22, y + wingY, 14, 3, BONE_D], [x - 18, y + wingY + 3, 10, 3, '#2a8a6a'],
+    [x + 8, y + wingY, 14, 3, BONE_D], [x + 8, y + wingY + 3, 10, 3, '#c02a2a'],
+    [x - 6, y - 6, 12, 11, BONE],                                       // ribcage body
+    [x + 5, y + 1, 12, 3, '#2a8a4a'], [x + 7, y + 4, 9, 2, '#2a5ab0'],   // tail feathers
+    [x - 11, y - 12, 10, 8, BONE],                                      // skull
+    [x - 16, y - 10, 6, 6, '#c8a858'],                                  // hooked beak
+    [x - 8, y - 17, 4, 5, '#c02a2a'], [x - 4, y - 18, 3, 6, '#e8b02a'], // crest
+    [x - 3, y + 5, 2, 4, BONE_D], [x + 2, y + 5, 2, 4, BONE_D],         // talons
+  ], '#07040a', e.flash > 0);
+  if (e.flash <= 0) {
+    ctx.fillStyle = '#0a0608'; ctx.fillRect(x - 8, y - 10, 4, 4);
+    ctx.globalAlpha = 0.45; ctx.fillStyle = '#5affd8'; ctx.fillRect(x - 10, y - 12, 8, 8); ctx.globalAlpha = 1;
+    ctx.fillStyle = '#5affd8'; ctx.fillRect(x - 7, y - 9, 2, 2);
+    ctx.fillStyle = '#a89c80'; for (let i = 0; i < 3; i++) ctx.fillRect(x - 4, y - 4 + i * 3, 8, 1);   // ribs
+  }
+  if (e.hp < e.maxHp) drawHpBar(x, y - 26, e.hp / e.maxHp, 32);
+}
+
 function drawHpBar(cx, y, frac, w) {
   ctx.fillStyle = 'rgba(0,0,0,0.7)';
   ctx.fillRect(cx - w / 2 - 1, y - 1, w + 2, 6);
@@ -2754,12 +3669,12 @@ const gearPal = slot => { const g = save.eq[slot]; return g ? { ...GEAR_PAL[g.r]
 
 // The hunter is assembled from whatever is equipped: every slot changes shape and colour by rarity.
 function drawPlayer() {
-  if (state === 'dead') return;
+  if (state === 'dead' && !endedByPlayer) return;
   const x = player.x, y = player.y;
   const hurt = player.hurt > 0;
   const now = performance.now();
-  const b = Math.round(Math.sin(now / 400));            // breathing bob
-  const wave = Math.round(Math.sin(now / 260) * 2);     // cape flutter
+  const b = Math.sin(now / 620) * 1.2;                  // slow, smooth breathing rise and fall
+  const wave = Math.sin(now / 300) * 2 + Math.sin(now / 130) * 0.6;   // cape flutter with a little gusting
   const hd = gearPal('head'), ch = gearPal('chest'), gl = gearPal('gloves'), lg = gearPal('legs'), bt = gearPal('boots');
   const C = ch || BARE.chest, L = lg || BARE.legs, B = bt || BARE.boots;
   const coat = hurt ? '#a03040' : C.m;
@@ -2854,13 +3769,17 @@ function drawPlayer() {
 
   // the equipped weapon, rotated around the shoulder
   const s = shoulder();
+  const z0 = ctx === V ? V.z0 : 0;
+  if (ctx === V) V.z0 += 8;                                // arm + gun sit in front of the torso, so belt and buttons can't poke through
   ctx.save();
   ctx.translate(s.x, s.y + b);
-  ctx.rotate(player.angle);
+  const idle = state === 'title' || player.fireCd <= 0 ? Math.sin(now / 900) * 0.025 + Math.sin(now / 370) * 0.008 : 0;   // the gun drifts with each breath
+  ctx.rotate(player.angle + idle);
   ctx.translate(-player.recoil, 0);
   drawGun(ctx, player.stats.wtype, coat, gl ? gl.m : skin, player.muzzle > 0);
   if (gl) { ctx.fillStyle = gl.t; ctx.fillRect(12, -3, 2, 8); if (gl.r >= 3) ctx.fillRect(15, -2, 5, 2); }
   ctx.restore();
+  if (ctx === V) V.z0 = z0;
 
   // reload bar above the head
   if (player.reloading > 0) {
@@ -2983,7 +3902,14 @@ function drawFlame(L, t) {
 }
 
 // fixed light sources in the scenery: [x, y, z, w, h, colour, intensity]
-const STATIC_GLOWS = [
+const GLOWS_PIRATE = [
+  [BX + 341, 240, -26, 60, 70, '#ff9a40', 0.34], [BX + 391, 240, -26, 60, 70, '#ff9a40', 0.34], [BX + 441, 240, -26, 60, 70, '#ff9a40', 0.34],
+  [275, 371, -178, 60, 60, '#ff9a40', 0.32], [341, 371, -178, 60, 60, '#ff9a40', 0.32],
+  [335, GROUND - 20, -84, 70, 40, '#ffc84a', 0.45],                                   // treasure gold
+  [120, GROUND - 22, 44, 40, 20, '#ffb04a', 0.18],
+  [260, -100, -880, 280, 280, '#bfe8ff', 0.26],                                      // pale moon halo
+];
+const GLOWS_GRAVEYARD = [
   [BX + 65, 230, -26, 80, 100, '#ff9a40', 0.32], [BX + 265, 230, -26, 80, 100, '#ff9a40', 0.32], [BX + 415, 230, -26, 80, 100, '#ff9a40', 0.32],
   [BX + 261, GROUND - 95, -26, 60, 80, '#ff8a30', 0.3],
   [276, 380, -178, 70, 100, '#d04a9a', 0.35], [342, 380, -178, 70, 100, '#d04a9a', 0.35],
@@ -2992,10 +3918,11 @@ const STATIC_GLOWS = [
   [521, GROUND - 7, -60, 30, 20, '#4ad0b0', 0.4], [591, GROUND - 7, -60, 30, 20, '#4ad0b0', 0.4],
   [260, -100, -880, 260, 260, '#ff4a3a', 0.3],                                      // blood moon halo
 ];
+const STATIC_GLOWS = GLOWS_GRAVEYARD.slice();
 
 // Build every moving thing as voxel boxes for this frame (via the V context)
 function drawWorld() {
-  dynSolid.count = dynGlow.count = dynTrans.count = dynFaint.count = softAdd.count = softMix.count = 0;
+  dynSolid.count = dynGlow.count = dynTrans.count = dynFaint.count = softAdd.count = softMix.count = smokeMesh.count = 0;
   ctx = V;
   const t = performance.now() / 1000;
   // player aura from high-tier gear (drawn first so it sits behind everything)
@@ -3003,8 +3930,28 @@ function drawWorld() {
     const top = Math.max(...EQ_SLOTS.map(s => save.eq[s] ? save.eq[s].r : -1));
     if (top >= 3) {
       const pulse = 0.75 + Math.sin(t * 3) * 0.25;
-      glowAt(player.x, player.y - 46, -12, 110, 150, RARITIES[top].color, (top === 4 ? 0.55 : 0.4) * pulse);
-      glowAt(player.x, player.y - 4, -12, 120, 26, RARITIES[top].color, 0.5 * pulse);
+      const fk = FX.on ? 0.5 : 1;
+      glowAt(player.x, player.y - 46, -12, 110, 150, RARITIES[top].color, (top === 4 ? 0.55 : 0.4) * pulse * fk);
+      glowAt(player.x, player.y - 4, -12, 120, 26, RARITIES[top].color, 0.5 * pulse * fk);
+    }
+    // every piece glows in its own rarity colour where it is worn (common pieces stay plain)
+    const sh = shoulder(), ca = Math.cos(player.angle), sa = Math.sin(player.angle);
+    const spots = {
+      head:   [player.x, player.y - 80, 46, 40],
+      chest:  [player.x, player.y - 52, 54, 46],
+      gloves: [sh.x + ca * 16, sh.y + sa * 16, 30, 30],
+      legs:   [player.x, player.y - 24, 42, 32],
+      boots:  [player.x, player.y - 5, 50, 18],
+      weapon: [sh.x + ca * 34, sh.y + sa * 34, 64, 30, player.angle],
+    };
+    for (const k in spots) {
+      const g = save.eq[k];
+      if (!g || g.r < 1) continue;
+      const [gx, gy, w, h, rot = 0] = spots[k];
+      const p = 0.8 + Math.sin(t * (2.4 + g.r * 0.5) + gx * 0.05) * 0.2;
+      const k2 = [0, 0.35, 0.45, 0.55, 0.7][g.r] * p, col = RARITIES[g.r].color;
+      glowAt(gx, gy, -10, w * 1.5, h * 1.5, col, k2 * (FX.on ? 0.55 : 1), rot);   // halo behind the body (bloom adds the rest)
+      if (!FX.on) glowAt(gx, gy, 14, w * 0.8, h * 0.8, col, k2 * 0.3, rot);       // faint tint on the piece itself
     }
   }
   // blood stains lie flat on the ground
@@ -3022,13 +3969,17 @@ function drawWorld() {
   }
   for (const d of drops) { V.begin(10, 8, true); drawDrop(d); }
   for (const e of enemies) {
-    V.begin(0, e.type === 'abom' ? 44 : e.type === 'vamp' ? 18 : e.type === 'lich' ? 22 : e.type === 'tank' ? 26 : isFly(e) ? 10 : 16);
-    isFly(e) ? drawBat(e) : drawHumanoid(e);
+    V.begin(0, e.type === 'abom' ? 44 : e.type === 'captain' ? 30 : e.type === 'vamp' ? 18 : e.type === 'lich' ? 22 : e.type === 'tank' ? 26 : isFly(e) ? 10 : 16);
+    const sunk = emergeOff(e);
+    if (sunk) { V.save(); V.translate(0, sunk); }            // the sand hides whatever is still below ground
+    e.type === 'captain' ? drawCaptain(e) : e.def.skeleton ? (isFly(e) ? drawParrot(e) : drawSkeleton(e)) : isFly(e) ? drawBat(e) : drawHumanoid(e);
     drawStatus(e);
+    if (sunk) V.restore();
   }
   V.begin(0, 3, true); drawAimGuide();
   V.begin(0, 18); drawPlayer();
   if (state === 'playing') { V.begin(-16, 10); drawPet(V, save.pet, pet.x, pet.y, pet.t, pet.face, 1); }
+  if (state === 'title') drawCampfire(t);
   // projectiles: each weapon has its own look; plain bullets take the strongest element's colour
   const elem = elementColor();
   for (const b of bullets) {
@@ -3068,7 +4019,8 @@ function drawWorld() {
     glowAt(L.x, L.y - 6, L.z + 6, 150 * big, 150 * big, `rgb(${L.c})`, 0.42 * fl());
     glowAt(L.x, L.y - 8, L.z + 7, 40 * big, 52 * big, '#fff0c0', 0.5 * fl());
   }
-  for (const [x, y, z, w, h, c, i] of STATIC_GLOWS) glowAt(x, y, z, w, h, c, i * (0.9 + Math.sin(t * 1.3 + x) * 0.1));
+  for (const [x, y, z, w, h, c, i] of STATIC_GLOWS) glowAt(x, y, z, w, h, c, i * (c === '#ff9a40' || c === '#ff8a30' ? flicker(t * 0.7, x) : 0.9 + Math.sin(t * 1.3 + x) * 0.1));
+  drawAtmosphere(t);
   if (state === 'playing' && player.muzzle > 0) {
     const s = shoulder(), W = player.stats.weapon;
     const c = W.color || '#ffb060';
@@ -3084,7 +4036,7 @@ function drawWorld() {
   for (const e of enemies) {
     if (e.hp <= 0) continue;
     if (e.def.ranged) { const o = orbPos(e), big = e.type === 'lich' ? 1.8 : 1; glowAt(o.x, o.y, 10, 46 * big, 46 * big, e.type === 'lich' ? '#5affc0' : '#a050ff', 0.7 + (e.standing && e.aimT < 0.6 ? 0.6 : 0)); }
-    if (e.def.boss) { const c = centerOf(e); glowAt(c.x, c.y, -6, 200, 220, e.type === 'lich' ? '#3affb0' : '#ff2a3a', 0.22 + Math.sin(t * 3) * 0.06); }
+    if (e.def.boss) { const c = centerOf(e); glowAt(c.x, c.y, -6, 200, 220, e.type === 'lich' || (e.type === 'captain' && e.rage) ? '#3affb0' : e.type === 'captain' ? '#ffb04a' : '#ff2a3a', 0.22 + Math.sin(t * 3) * 0.06); }
     if (e.burnT > 0) { const c = centerOf(e); glowAt(c.x, c.y, 10, 70, 90, '#ff7a2a', 0.45 * fl()); }
     if (e.frozenT > 0) { const c = centerOf(e); glowAt(c.x, c.y, 10, 60, 90, '#a8d8ff', 0.4); }
   }
@@ -3104,27 +4056,138 @@ function drawWorld() {
   }
 
   ctx = ctx2d;
+  smokeAlpha.needsUpdate = true; smokeMesh.instanceMatrix.needsUpdate = true; if (smokeMesh.instanceColor) smokeMesh.instanceColor.needsUpdate = true;
   for (const m of [dynSolid, dynGlow, dynTrans, dynFaint, softAdd, softMix]) { m.instanceMatrix.needsUpdate = true; m.instanceColor.needsUpdate = true; }
 }
 
 // tint the world for the chosen mode (hell = red haze, endless = violet, ...)
 function applyDiffLook() {
-  const L = curDiff().look;
-  scene.fog.color.set(L.fog);
-  renderer.setClearColor(L.fog);
-  hemi.color.set(L.sky);
-  hemi.groundColor.set(L.ground);
+  const L = curDiff().look, M = curMap().look;
+  const mix = (a, b) => (M ? new THREE.Color(b).lerp(new THREE.Color(a), 0.3) : new THREE.Color(a));   // map colour, tinted by the mode
+  scene.fog.color.copy(mix(L.fog, M && M.fog));
+  renderer.setClearColor(scene.fog.color);
+  hemi.color.copy(mix(L.sky, M && M.sky));
+  hemi.groundColor.copy(mix(L.ground, M && M.ground));
+}
+
+// Atmosphere: drifting cloud banks behind the manor, layered ground mist at several depths, moonlight shafts,
+// smoke from the torches / chimney / campfire, and sparks that lift off every flame.
+const smokes = [], sparks = [];
+let atmoLast = 0;
+const MISTS = Array.from({ length: 26 }, (_, i) => ({ x: Math.random() * 1700 - 400, y: GROUND - 6 - Math.random() * 26, z: -380 + (i % 6) * 70 + Math.random() * 30,
+  s: 160 + Math.random() * 180, v: 6 + Math.random() * 10, ph: Math.random() * TAU }));
+const CLOUDS = Array.from({ length: 12 }, () => ({ x: Math.random() * 2400 - 800, y: -40 + Math.random() * 200, z: -760 + Math.random() * 80,
+  s: 300 + Math.random() * 300, v: 4 + Math.random() * 6, ph: Math.random() * TAU }));
+function emitSmoke(x, y, z, size, rise, life, color, alpha) {
+  if (smokes.length < 260) smokes.push({ x, y, z, s: size, vx: rand(-4, 4), vy: -rise, life, max: life, color, a: alpha, rot: rand(0, TAU), vr: rand(-0.4, 0.4) });
+}
+function emitSpark(x, y, z, speed = 70) {
+  if (sparks.length < 220) sparks.push({ x, y, z, vx: rand(-16, 16), vy: -rand(speed * 0.6, speed), life: rand(0.6, 1.5), ph: rand(0, TAU) });
+}
+function drawAtmosphere(t) {
+  const dt = Math.min(0.05, atmoLast ? t - atmoLast : 0); atmoLast = t;
+  const fogC = scene.fog.color;
+  // cloud banks slide slowly across the sky
+  _scol.copy(fogC).lerp(new THREE.Color('#6a4a7a'), 0.35);
+  for (const c of CLOUDS) {
+    c.x += c.v * dt; if (c.x > 1700) c.x = -900;
+    smokeAt(c.x, c.y + Math.sin(t * 0.1 + c.ph) * 8, c.z, c.s, _scol, 0.22);
+  }
+  // moonlight shafts falling across the graveyard
+  for (let i = 0; i < 4; i++) glowAt(150 + i * 120, 250, -260 - i * 30, 46, 520, '#c8a0d0', 0.05 + Math.sin(t * 0.4 + i * 1.9) * 0.025, -0.42);
+  // low mist banks at several depths, gently breathing
+  _scol.copy(fogC).lerp(new THREE.Color('#b8a0c8'), 0.4);
+  for (const m of MISTS) {
+    m.x += m.v * dt; if (m.x > 1350) m.x = -450;
+    smokeAt(m.x, m.y + Math.sin(t * 0.5 + m.ph) * 3, m.z, m.s, _scol, 0.15 + Math.sin(t * 0.3 + m.ph) * 0.05);
+  }
+  // emitters: torch smoke + sparks, chimney smoke on the manor roof
+  for (const L of LIGHTS) {
+    if (L.flame !== 'torch') continue;
+    if (Math.random() < dt * 5) emitSmoke(L.x + rand(-2, 2), L.y - 14, L.z, 10, 26, rand(1.6, 2.6), '#2a2028', 0.38);
+    if (Math.random() < dt * 4) emitSpark(L.x + rand(-3, 3), L.y - 10, L.z + 2, 55);
+  }
+  if (Math.random() < dt * 3) {
+    if (save.map === 'pirate') emitSmoke(358 + rand(-2, 2), 282, -196, 18, 20, rand(4, 6), '#3a3a40', 0.3);
+    else emitSmoke(BX + 236 + rand(-3, 3), 70, -80, 26, 22, rand(4, 6), '#3a2c3a', 0.3);
+  }
+  if (state === 'title') {
+    if (Math.random() < dt * 9) emitSmoke(CAMP.fx + rand(-6, 6), GROUND - 48, 16, 16, 34, rand(2.2, 3.4), '#3a2e34', 0.42);
+    if (Math.random() < dt * 20) emitSpark(CAMP.fx + rand(-10, 10), GROUND - 30, 18, 95);
+  }
+  for (const p of smokes) {
+    p.life -= dt; p.x += (p.vx + Math.sin(t * 0.8 + p.y * 0.02) * 8) * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+    const k = 1 - p.life / p.max;                                  // 0 → 1 over its life: grow and fade
+    smokeAt(p.x, p.y, p.z, p.s * (1 + k * 2.6), p.color, p.a * Math.min(1, k * 5) * (1 - k), p.rot);
+  }
+  for (let i = smokes.length - 1; i >= 0; i--) if (smokes[i].life <= 0) smokes.splice(i, 1);
+  for (const p of sparks) {
+    p.life -= dt; p.vy += 12 * dt;
+    p.x += (p.vx + Math.sin(t * 6 + p.ph) * 20) * dt; p.y += p.vy * dt;
+    const col = p.life > 0.9 ? '#ffe08a' : p.life > 0.45 ? '#ff9a3a' : '#c8401a';
+    pushBox(dynGlow, p.x, p.y, p.z, 1.6, 1.6, 1.6, 0, parseColor(col).col);
+    if (p.life > 0.5) glowAt(p.x, p.y, p.z, 10, 10, col, 0.35);
+  }
+  for (let i = sparks.length - 1; i >= 0; i--) if (sparks[i].life <= 0) sparks.splice(i, 1);
+}
+
+// home screen: a voxel campfire beside the hunter, sparks drifting up, the pet resting nearby
+const campSparks = [];
+let campLast = 0;
+function drawCampfire(t) {
+  const dt = Math.min(0.05, campLast ? t - campLast : 0); campLast = t;
+  const fx = CAMP.fx, gy = GROUND;
+  // stone ring
+  V.begin(18, 12);
+  const stones = ['#4a4048', '#3a3238', '#565058', '#40383e'];
+  for (let i = 0; i < 7; i++) { V.fillStyle = stones[i % 4]; V.fillRect(fx - 32 + i * 9, gy - 7 + (i % 2), 8, 7 - (i % 2)); }
+  // crossed logs
+  V.begin(18, 26);
+  V.save(); V.translate(fx, gy - 8); V.rotate(-0.38);
+  V.fillStyle = '#4a2a18'; V.fillRect(-24, -4, 48, 8); V.fillStyle = '#6a3e22'; V.fillRect(-24, -4, 48, 3); V.fillStyle = '#d8a060'; V.fillRect(20, -3, 4, 6);
+  V.restore();
+  V.save(); V.translate(fx, gy - 8); V.rotate(0.38);
+  V.fillStyle = '#3e2414'; V.fillRect(-24, -4, 48, 8); V.fillStyle = '#5a3420'; V.fillRect(-24, -4, 48, 3); V.fillStyle = '#c89050'; V.fillRect(-24, -3, 4, 6);
+  V.restore();
+  V.fillStyle = '#ff5a1a'; V.fillRect(fx - 10, gy - 12, 20, 4);                         // glowing embers bed
+  // flames: layered tongues that flicker
+  V.begin(18, 14, true);
+  const tongues = [[-9, 26, '#c8281a', 9], [7, 30, '#d8381a', 9], [-2, 40, '#ff6a1a', 11], [-6, 30, '#ff8a2a', 7], [5, 24, '#ffb02a', 6], [-1, 18, '#fff0a0', 5]];
+  for (const [ox, h0, col, w] of tongues) {
+    const h = Math.round(h0 + Math.sin(t * 9 + ox) * 5 + Math.sin(t * 17 + ox * 3) * 3);
+    const sway = Math.round(Math.sin(t * 5 + ox) * 2);
+    V.fillStyle = col; V.fillRect(fx + ox - w / 2 + sway, gy - 10 - h, w, h);
+    V.fillRect(fx + ox - w / 4 + sway * 2, gy - 14 - h, w / 2, 5);
+  }
+  glowAt(fx, gy - 30, 22, 120, 110, '#ff7a2a', 0.5 + Math.sin(t * 13) * 0.06);
+  glowAt(fx, gy - 4, 10, 200, 30, '#ff8a3a', 0.35);
+  // hot core + heat shimmer glow pulsing with the flames
+  glowAt(fx, gy - 16, 24, 40, 30, '#fff0a0', 0.45 * flicker(t, 3.1));
+  // the pet rests on the other side of the hunter
+  V.begin(26, 10);
+  drawPet(V, save.pet, CAMP.fx + 48, GROUND - 34 + Math.sin(t * 2) * 3, t * 0.6, -1, 1);
+}
+
+// smooth fire flicker: layered sines plus an occasional gust dip (no frame-to-frame jitter)
+function flicker(t, seed) {
+  const f = Math.sin(t * 7.1 + seed) * 0.06 + Math.sin(t * 13.7 + seed * 2.3) * 0.045 + Math.sin(t * 23.3 + seed * 0.7) * 0.03;
+  const gust = Math.max(0, Math.sin(t * 0.9 + seed * 1.7) - 0.85) * 0.9;
+  return 1 + f - gust;
 }
 
 function updateLights() {
   const t = performance.now() / 1000;
-  for (const L of LIGHTS) if (L.pl) L.pl.intensity = L.base * (1 + Math.sin(t * 9 + L.x) * 0.08 + (Math.random() - 0.5) * 0.12);
+  for (const L of LIGHTS) if (L.pl) L.pl.intensity = L.base * flicker(t, L.x);
   if (state === 'playing' && player.muzzle > 0) {
     const s = shoulder();
     muzzleLight.position.set(s.x + Math.cos(player.angle) * 60, -(s.y + Math.sin(player.angle) * 60), 24);
     muzzleLight.intensity = 2.4;
   } else muzzleLight.intensity = 0;
   hemi.intensity = curDiff().look.hemi + lightning.flash * 1.6;
+  if (state === 'title') {
+    campLight.position.set(CAMP.fx, -(GROUND - 34), 40);
+    campLight.intensity = 1.5 * flicker(t, 7.3);
+  } else campLight.intensity = 0;
 }
 
 // 2D overlay: flying coins, floating numbers (projected from 3D), screen tints, HUD
@@ -3147,8 +4210,7 @@ function drawOverlay() {
     ctx.fillText(t.text, p.x, p.y);
   }
   ctx.globalAlpha = 1;
-  ctx.fillStyle = vignette;
-  ctx.fillRect(0, 0, W, H);
+  if (!FX.on) { ctx.fillStyle = vignette; ctx.fillRect(0, 0, W, H); }
   // blood on the screen when the hunter is hit: pixel blobs with drips that fade out
   for (const b of screenBlood) {
     ctx.globalAlpha = Math.min(0.85, b.life / 0.8);
@@ -3188,7 +4250,7 @@ function drawBossUI() {
     const bw = 360, x = W / 2 - bw / 2, f = Math.max(0, e.hp / e.maxHp);
     ctx.fillStyle = '#07040a'; ctx.fillRect(x - 3, y - 3, bw + 6, 20);
     ctx.fillStyle = '#3a0a10'; ctx.fillRect(x, y, bw, 14);
-    ctx.fillStyle = e.type === 'lich' ? '#3affb0' : '#d01a2a'; ctx.fillRect(x, y, bw * f, 14);
+    ctx.fillStyle = e.type === 'lich' || (e.type === 'captain' && e.rage) ? '#3affb0' : e.type === 'captain' ? '#e8a02a' : '#d01a2a'; ctx.fillRect(x, y, bw * f, 14);
     ctx.fillStyle = 'rgba(255,255,255,0.25)'; ctx.fillRect(x, y, bw * f, 4);
     ctx.fillStyle = '#c9a35a'; ctx.fillRect(x - 3, y - 3, 6, 6); ctx.fillRect(x + bw - 3, y - 3, 6, 6);
     ctx.font = 'bold 12px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -3235,6 +4297,13 @@ function drawParticles() {
 function drawEnemyShots() {
   for (const s of eShots) {
     if (!s.active) continue;
+    if (s.ball) {                                        // musket ball: dark lead with a hot orange core and a short trail
+      ctx.fillStyle = 'rgba(255,150,60,0.3)';
+      ctx.fillRect(Math.round(s.x - s.vx * 0.05) - 3, Math.round(s.y - s.vy * 0.05) - 3, 6, 6);
+      ctx.fillStyle = '#2a2a30'; ctx.fillRect(Math.round(s.x) - 5, Math.round(s.y) - 5, 10, 10);
+      ctx.fillStyle = '#ff9a3a'; ctx.fillRect(Math.round(s.x) - 2, Math.round(s.y) - 2, 4, 4);
+      continue;
+    }
     const wob = Math.sin(s.t * 20) * 1.5;
     ctx.fillStyle = 'rgba(160,60,255,0.35)';
     ctx.fillRect(Math.round(s.x - s.vx * 0.04) - 4, Math.round(s.y - s.vy * 0.04) - 4, 8, 8);
@@ -3369,7 +4438,6 @@ function drawHUD() {
     ctx.fillStyle = player.reloading > 0 ? '#5a5a66' : '#c8c8d8'; ctx.fillRect(20, H - 44, bw * frac, 18);
     ctx.fillStyle = '#07040a'; ctx.font = 'bold 13px system-ui, sans-serif';
     ctx.fillText(`${player.ammo} / ${mag}`, 26, H - 34);
-    if (player.reloading > 0) { ctx.fillStyle = '#c8c8d8'; ctx.font = 'bold 16px system-ui, sans-serif'; ctx.fillText('กำลังบรรจุกระสุน...', 232, H - 33); }
     return;
   }
   const gap = mag > 12 ? 13 : 18, rw = mag > 12 ? 7 : 10;
@@ -3384,20 +4452,17 @@ function drawHUD() {
       ctx.fillRect(x + 1, y + 2, 2, 10);
     }
   }
-  const msgX = 20 + mag * gap + 8;
-  ctx.font = 'bold 16px system-ui, sans-serif';
-  ctx.textAlign = 'left';
-  if (player.reloading > 0) {
-    ctx.fillStyle = '#c8c8d8';
-    ctx.fillText('กำลังบรรจุกระสุน...', msgX, H - 33);
-  } else if (player.ammo === 0) {
-    ctx.fillStyle = '#ff4a5a';
-    ctx.fillText('กระสุนหมด!', msgX, H - 33);
-  }
-
 }
 
 function drawCornerButtons() {
+  if (endBtnShown()) {                                   // Endless: "end hunt" pill, turns red while waiting for confirmation
+    const b = END_BTN, armed = endArmed && performance.now() - endArmed < 3000;
+    ctx.fillStyle = armed ? 'rgba(170,20,30,0.9)' : 'rgba(7,4,10,0.75)';
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(b.x - b.w / 2, b.y - b.h / 2, b.w, b.h, b.h / 2) : ctx.rect(b.x - b.w / 2, b.y - b.h / 2, b.w, b.h); ctx.fill();
+    ctx.strokeStyle = armed ? '#ffb0b0' : '#b48aff'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#f0e4d0'; ctx.font = `bold ${isTouch ? 14 : 13}px system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(armed ? 'ยืนยัน?' : '⏹ สิ้นสุด', b.x, b.y + 1);
+  }
   const m = MUTE_BTN;
   ctx.fillStyle = 'rgba(7,4,10,0.75)';
   ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, TAU); ctx.fill();
@@ -3425,12 +4490,23 @@ function drawCornerButtons() {
   }
 }
 
+const GAME_CAM = { tx: CAM.tx, ty: CAM.ty, dist: CAM.dist };
+const TITLE_CAM = { tx: 330, ty: -(GROUND - 95), dist: 430 };
+const CAMP = { px: 212, fx: 268 };                       // where the hunter rests and the fire burns on the home screen
+let lastDraw = performance.now();
 function draw() {
+  const now = performance.now(), ddt = Math.min(0.05, (now - lastDraw) / 1000);
+  lastDraw = now;
+  const tc = state === 'title' ? TITLE_CAM : GAME_CAM, k = 1 - Math.exp(-ddt * 3.2);
+  for (const key of ['tx', 'ty', 'dist']) CAM[key] += (tc[key] - CAM[key]) * k;
+  if (state === 'title') { player.x = CAMP.px; player.y = GROUND; player.angle = 0.62; player.muzzle = 0; }
   const j = shake > 0 ? shake * 0.9 : 0;
   placeCamera(j ? rand(-j, j) : 0, j ? rand(-j, j) : 0);
   drawWorld();
   updateLights();
-  renderer.render(scene, camera);
+  for (const gp of GLASS) gp.tex.offset.x = Math.sin(now / 1000 * 0.18 + gp.ph) * 0.35;   // reflection glides across the glass
+  if (FX.on) { FX.grade.uniforms.uTime.value = (now / 1000) % 100; FX.composer.render(); }
+  else renderer.render(scene, camera);
   drawOverlay();
 }
 
@@ -3439,20 +4515,241 @@ const menuEl = document.getElementById('menu');
 const shopEl = document.getElementById('shop');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+// ---------- profile picker: developer (everything unlocked) or player (from zero) ----------
+const profileEl = document.getElementById('profile');
+function profileStat(key) {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(key) || 'null'); } catch (_) {}
+  if (!s) return 'ยังไม่มีเซฟ — เริ่มใหม่';
+  const cleared = DIFF_IDS.filter(id => s.cleared && s.cleared[id]).map(id => DIFFS[id].name);
+  return `🪙 ${(s.coins || 0).toLocaleString()} • ของ ${(s.inv || []).length} ชิ้น${cleared.length ? ` • ผ่าน: ${cleared.join(', ')}` : ''}`;
+}
+function showProfile() {
+  state = 'title';
+  document.getElementById('profDevStat').textContent = profileStat(PROFILES.dev);
+  document.getElementById('profPlayerStat').textContent = profileStat(PROFILES.player);
+  resetArmed = 0; document.getElementById('profReset').classList.remove('armed');
+  document.getElementById('profReset').textContent = '↺ ล้างเซฟผู้เล่น (เริ่มใหม่จาก 0)';
+  for (const el of [homeEl, menuEl, shopEl, gearEl, petsEl]) el.classList.add('hidden');
+  profileEl.classList.remove('hidden');
+}
+// developer slot: every mode cleared, every pet owned, a legendary of every gun / armour piece / mod, deep pockets
+function applyDevUnlocks() {
+  save.coins = Math.max(save.coins, 999999);
+  for (const id of DIFF_IDS) save.cleared[id] = true;
+  save.pets = PET_IDS.slice();
+  if (!save.devSeeded) {
+    save.devSeeded = true;
+    for (const id of WEAPON_IDS) if (!save.eq.weapon || id !== save.eq.weapon.type) save.inv.push(makeWeapon(12, id, 4));
+    for (const sl of SLOT_IDS) save.inv.push(makeGear(12, sl, 4));
+    for (const id of MOD_IDS) save.inv.push(makeMod(12, id, 4));
+    for (const id of WMOD_IDS) save.inv.push(makeWMod(12, id, 4));
+  }
+}
+function chooseProfile(id) {
+  sfx.init();
+  profile = id; SAVE_KEY = PROFILES[id];
+  const fresh = loadSave(SAVE_KEY);
+  for (const k of Object.keys(save)) delete save[k];
+  Object.assign(save, fresh);
+  ensureWeapon();
+  sanitizeSockets();
+  refundRemovedUpgrades();
+  if (id === 'dev') applyDevUnlocks();
+  if (!diffUnlocked(save.diff)) save.diff = 'normal';
+  persist();
+  profileEl.classList.add('hidden');
+  if (builtMap !== save.map) buildWorld();
+  reset();
+  applyDiffLook();
+  showHome();
+}
+let resetArmed = 0;
+profileEl.addEventListener('click', e => {
+  const c = e.target.closest('[data-prof]');
+  if (c) chooseProfile(c.dataset.prof);
+});
+document.getElementById('profReset').addEventListener('click', () => {
+  const b = document.getElementById('profReset');
+  if (!resetArmed || performance.now() - resetArmed > 3000) {
+    resetArmed = performance.now(); b.classList.add('armed'); b.textContent = 'กดอีกครั้งเพื่อยืนยันการล้างเซฟผู้เล่น';
+    setTimeout(() => { if (resetArmed && performance.now() - resetArmed >= 3000) showProfile(); }, 3100);
+    return;
+  }
+  try { localStorage.removeItem(PROFILES.player); } catch (_) {}
+  sfx.boom && sfx.boom();
+  showProfile();
+});
+document.getElementById('homeProfile').addEventListener('click', showProfile);
+
+// ---------- developer: difficulty tuning menu ----------
+const tuneEl = document.getElementById('tune');
+const TUNE_ROWS = [
+  { k: 'hp',      name: 'เลือดศัตรู',            sub: 'คูณเลือดพื้นฐานของศัตรูทุกตัว รวมบอส',   min: 0.05, max: 50,  step: 0.05 },
+  { k: 'dmg',     name: 'ดาเมจของศัตรู',         sub: 'คูณแรงตีของศัตรู • 0 = ไม่เสียเลือด',      min: 0,    max: 50,  step: 0.05 },
+  { k: 'speed',   name: 'ความเร็วศัตรู',          sub: 'คูณความเร็วเดิน / บิน',                  min: 0.1,  max: 10,  step: 0.05 },
+  { k: 'spawn',   name: 'อัตราการเกิดศัตรู',      sub: 'มากกว่า = เกิดถี่ขึ้น',                   min: 0.1,  max: 20,  step: 0.05 },
+  { k: 'ramp',    name: 'ความยากเพิ่มตามเวลา',    sub: 'ยิ่งมาก ศัตรูยิ่งโหดเร็วตามเวลาที่ผ่านไป', min: 0,    max: 10,  step: 0.05 },
+  { k: 'boss',    name: 'บอสมาทุกๆ',             sub: 'วินาที',                                 min: 5,    max: 600, step: 1,   unit: ' วิ' },
+  { k: 'goal',    name: 'เวลาที่ต้องรอด',         sub: 'วินาที • ผ่านด่านเมื่อรอดครบ',           min: 10,   max: 3600, step: 1,  unit: ' วิ', timed: true },
+  { k: 'lootMul', name: 'อัตราดรอปของ',          sub: 'คูณโอกาสดรอปจากการฆ่า',                  min: 0,    max: 50,  step: 0.05 },
+  { k: 'coin',    name: 'เหรียญที่ได้',            sub: 'คูณเหรียญจากการฆ่า',                     min: 0,    max: 50,  step: 0.05 },
+];
+let tuneMode = 'normal';                                  // which map the menu is editing
+const tuneRowsFor = id => TUNE_ROWS.filter(r => !r.timed || DIFFS_BASE[id].goal);   // Endless has no survival goal
+const tuneChanged = id => tuneRowsFor(id).filter(r => DIFFS[id][r.k] !== DIFFS_BASE[id][r.k]).length;
+const fmtNum = v => String(+(+v).toFixed(2));
+function tuneSummary() {
+  const edited = DIFF_IDS.filter(tuneChanged).map(id => DIFFS[id].name);
+  return (save.devTune.god ? 'อมตะ • ' : '') + (edited.length ? `ปรับแล้ว: ${edited.join(', ')}` : 'ทุกด่านเป็นค่ามาตรฐาน');
+}
+function renderTune() {
+  const D = DIFFS[tuneMode], B = DIFFS_BASE[tuneMode];
+  document.getElementById('tuneTabs').innerHTML = DIFF_IDS.map(id => {
+    const n = tuneChanged(id);
+    return `<button class="${id === tuneMode ? 'on' : ''}" data-mode="${id}" style="--dc:${DIFFS[id].color}">${esc(DIFFS[id].name)}<small>${n ? `ปรับ ${n} ค่า` : ''}</small></button>`;
+  }).join('');
+  document.getElementById('tuneBase').innerHTML = `<span style="color:${D.color}">■</span> ด่าน${esc(D.name)} • ค่าทางขวาคือค่ามาตรฐานของด่าน กด ↺ เพื่อคืนค่าทีละช่อง`;
+  document.getElementById('tuneRows').innerHTML = tuneRowsFor(tuneMode).map(r => `
+    <div class="tuneRow${D[r.k] !== B[r.k] ? ' changed' : ''}">
+      <b>${esc(r.name)}<small>${esc(r.sub)}</small></b>
+      <span class="std">มาตรฐาน ${fmtNum(B[r.k])}${r.unit || ''}<button data-std="${r.k}" title="คืนค่ามาตรฐาน">↺</button></span>
+      <input type="number" inputmode="decimal" data-k="${r.k}" min="${r.min}" max="${r.max}" step="${r.step}" value="${fmtNum(D[r.k])}">
+    </div>`).join('');
+  document.getElementById('tuneGod').checked = !!save.devTune.god;
+}
+function showTune() {
+  if (!devOn()) return;
+  sfx.init();
+  tuneMode = DIFFS[save.diff] ? save.diff : 'normal';
+  renderTune();
+  for (const el of [homeEl, menuEl, shopEl, gearEl, petsEl]) el.classList.add('hidden');
+  tuneEl.classList.remove('hidden');
+}
+function markTab() {
+  const tab = document.querySelector(`#tuneTabs [data-mode="${tuneMode}"] small`), n = tuneChanged(tuneMode);
+  if (tab) tab.textContent = n ? `ปรับ ${n} ค่า` : '';
+}
+// typing a number applies it straight away when valid; out-of-range values are flagged and clamped on leaving the box
+document.getElementById('tuneRows').addEventListener('input', e => {
+  const inp = e.target.closest('input[data-k]');
+  if (!inp) return;
+  const r = TUNE_ROWS.find(x => x.k === inp.dataset.k), v = parseFloat(inp.value);
+  const ok = Number.isFinite(v) && v >= r.min && v <= r.max;
+  inp.classList.toggle('bad', !ok);
+  if (!ok) return;
+  DIFFS[tuneMode][r.k] = r.step >= 1 ? Math.round(v) : v;
+  inp.closest('.tuneRow').classList.toggle('changed', DIFFS[tuneMode][r.k] !== DIFFS_BASE[tuneMode][r.k]);
+  persistTune(); markTab();
+});
+document.getElementById('tuneRows').addEventListener('change', e => {
+  const inp = e.target.closest('input[data-k]');
+  if (!inp) return;
+  const r = TUNE_ROWS.find(x => x.k === inp.dataset.k);
+  let v = parseFloat(inp.value);
+  if (!Number.isFinite(v)) v = DIFFS[tuneMode][r.k];
+  v = Math.min(r.max, Math.max(r.min, v));
+  DIFFS[tuneMode][r.k] = r.step >= 1 ? Math.round(v) : v;
+  inp.value = fmtNum(DIFFS[tuneMode][r.k]); inp.classList.remove('bad');
+  inp.closest('.tuneRow').classList.toggle('changed', DIFFS[tuneMode][r.k] !== DIFFS_BASE[tuneMode][r.k]);
+  persistTune(); markTab();
+});
+document.getElementById('tuneRows').addEventListener('click', e => {
+  const b = e.target.closest('[data-std]');
+  if (!b) return;
+  DIFFS[tuneMode][b.dataset.std] = DIFFS_BASE[tuneMode][b.dataset.std];
+  persistTune(); sfx.pickup(); renderTune();
+});
+document.getElementById('tuneTabs').addEventListener('click', e => {
+  const b = e.target.closest('[data-mode]');
+  if (!b) return;
+  tuneMode = b.dataset.mode;
+  renderTune();
+});
+document.getElementById('tuneGod').addEventListener('change', e => { save.devTune.god = e.target.checked; persist(); });
+document.getElementById('tuneReset').addEventListener('click', () => { Object.assign(DIFFS[tuneMode], DIFFS_BASE[tuneMode]); persistTune(); sfx.pickup(); renderTune(); });
+document.getElementById('tuneBack').addEventListener('click', () => { tuneEl.classList.add('hidden'); showHome(); });
+
+// ---------- home screen (campfire) ----------
+const homeEl = document.getElementById('home');
+function showHome() {
+  state = 'title';
+  mapMode = false;
+  document.getElementById('homeCoins').textContent = save.coins;
+  const D = curDiff();
+  document.getElementById('homeMapSub').textContent = `${curMap().icon} ${curMap().name} • ${D.name}`;
+  document.getElementById('homePetSub').textContent = `คู่หู: ${curPet().name}`;
+  const up = UPGRADES.filter(u => lvl(u.id) < u.max && save.coins >= upgradeCost(u, lvl(u.id))).length;
+  const ub = document.getElementById('homeUpBadge'), ib = document.getElementById('homeInvBadge');
+  ub.textContent = up; ub.classList.toggle('hidden', !up);
+  ib.textContent = `${save.inv.length}/${invCap()}`; ib.classList.toggle('hidden', !save.inv.length);
+  document.getElementById('homeTuneBtn').classList.toggle('hidden', !devOn());
+  if (devOn()) document.getElementById('homeTuneSub').textContent = tuneSummary();
+  document.getElementById('homeProfile').textContent = profile === 'dev' ? '🛠️ โหมดผู้พัฒนา • เปลี่ยน' : '🎮 โหมดผู้เล่น • เปลี่ยน';
+  document.getElementById('homeHint').textContent = isTouch ? 'กดค้างเพื่อยิง • ลากนิ้วเพื่อเล็ง' : 'เล็งด้วยเมาส์ • คลิกค้างเพื่อยิง • T = AUTO';
+  for (const el of [menuEl, shopEl, gearEl, petsEl, profileEl, tuneEl]) el.classList.add('hidden');
+  homeEl.classList.remove('hidden');
+}
+function goHome() {
+  sfx.init();
+  reset();
+  applyDiffLook();
+  showHome();
+}
+let mapMode = false;          // the #menu panel doubles as the map (mode select) opened from home
+function showMap() {
+  sfx.init();
+  mapMode = true;
+  showMenu();
+}
+function chooseMap(id) {
+  if (!MAPS[id] || id === save.map) return;
+  save.map = id;
+  persist();
+  buildWorld();
+  reset();
+  applyDiffLook();
+  sfx.pickup && sfx.pickup();
+}
+document.getElementById('menuBody').addEventListener('click', e => {
+  const b = e.target.closest('[data-map]');
+  if (!b) return;
+  chooseMap(b.dataset.map);
+  showMenu();
+});
+homeEl.addEventListener('click', e => {
+  const b = e.target.closest('[data-go]');
+  if (!b) return;
+  sfx.init();
+  ({ map: showMap, inv: showGear, pet: showPets, up: showShop, tune: showTune })[b.dataset.go]();
+});
+document.getElementById('homeBtn').addEventListener('click', () => { mapMode = false; goHome(); });
+document.getElementById('mapBack').addEventListener('click', () => { mapMode = false; goHome(); });
+
 function showMenu() {
+  if (state === 'title' && !mapMode) { showHome(); return; }
+  homeEl.classList.add('hidden');
   const body = document.getElementById('menuBody');
   const controls = isTouch
     ? 'กดค้างเพื่อยิง • ลากนิ้วขึ้นลงเพื่อเล็ง • ปุ่ม AUTO ยิงให้ตลอด'
-    : 'เล็งด้วยเมาส์ • คลิกค้างเพื่อยิงต่อเนื่อง • R รีโหลด • T เปิด/ปิด AUTO • M เสียง • F เต็มจอ';
+    : 'เล็งด้วยเมาส์ • คลิกค้างเพื่อยิงต่อเนื่อง • R รีโหลด • T เปิด/ปิด AUTO • M เสียง • F เต็มจอ • G เอฟเฟกต์กราฟิก • Esc สิ้นสุด (Endless)';
   // mode picker (locked modes need the previous one cleared)
   const D = curDiff(), bst = save.bests[save.diff];
+  const mapRow = state === 'title' ? `<div class="mapRow">${MAP_IDS.map(id => {
+    const M = MAPS[id], ros = Object.keys(TUNING.enemies).filter(k => !TUNING.enemies[k].boss).map(k => {
+      const df = (MAP_ENEMIES[id] || {})[k];
+      return df ? df.name : { walker: 'ซอมบี้', runner: 'ผีดิบวิ่ง', bat: 'ค้างคาว', bandit: 'นักบวชลัทธิ', tank: 'ยักษ์เกราะ' }[k];
+    });
+    return `<button class="mapCard${id === save.map ? ' on' : ''}" data-map="${id}"><span class="mIcon">${M.icon}</span><b>${esc(M.name)}</b>
+      <span class="mDesc">${esc(M.desc)}</span><span class="mFoes">ศัตรู: ${esc(ros.join(' • '))}</span></button>`;
+  }).join('')}</div>` : '';
   const diffRow = `<div class="diffRow">${DIFF_IDS.map(id => {
     const d = DIFFS[id], open = diffUnlocked(id), on = id === save.diff;
     return `<button class="diffBtn${on ? ' on' : ''}" data-diff="${id}" ${open ? '' : 'disabled'} style="--dc:${d.color}">
       ${open ? '' : '🔒 '}${esc(d.name)}${save.cleared[id] ? ' ✔' : ''}<small>${d.goal ? `รอด ${formatTime(d.goal)}` : 'ไม่มีที่สิ้นสุด'}</small></button>`;
   }).join('')}</div>
-    <p class="sub diffInfo">${D.goal ? `ศัตรูเลือด x${D.hp} • ตีแรง x${D.dmg} • เหรียญ x${D.coin} • ของดีขึ้น +${D.ilvl} เลเวล • ผ่านแล้วได้ +${D.bonus}🪙 + ของรางวัล`
-      : `ยากขึ้นเรื่อยๆ ไม่มีที่สิ้นสุด • เหรียญ x${D.coin}`}${bst ? ` • สถิติ: ฆ่า ${bst.kills} / รอด ${formatTime(bst.time)}` : ''}
+    <p class="sub diffInfo">${D.goal ? `รอดให้ครบ ${formatTime(D.goal)} • บอสทุก ${D.boss} วิ • ผ่านแล้วได้ +${D.bonus}🪙 + ของรางวัล`
+      : `ยากขึ้นเรื่อยๆ ไม่มีที่สิ้นสุด • บอสทุก ${D.boss} วิ`}${tuneChanged(save.diff) ? ' • <span style="color:#8ac0ff">⚙️ ปรับแต่งโดยผู้พัฒนา</span>' : ''}${bst ? ` • สถิติ: ฆ่า ${bst.kills} / รอด ${formatTime(bst.time)}` : ''}
       ${!diffUnlocked('hard') ? '<br><span class="muted">ผ่านโหมด "ปานกลาง" เพื่อปลดล็อก "ยาก" • ผ่าน "ยาก" เพื่อปลดล็อก "นรก"</span>' : ''}</p>`;
   if (state === 'win') {
     document.getElementById('menuTitle').textContent = 'Victory';
@@ -3470,8 +4767,8 @@ function showMenu() {
       ${diffRow}`;
     document.getElementById('playBtn').textContent = 'ล่าต่อ';
   } else if (state === 'dead') {
-    document.getElementById('menuTitle').textContent = 'You Died';
-    document.getElementById('menuTag').textContent = 'นักล่าล้มลง... แต่คืนนี้ยังไม่จบ';
+    document.getElementById('menuTitle').textContent = endedByPlayer ? 'Hunt Over' : 'You Died';
+    document.getElementById('menuTag').textContent = endedByPlayer ? `จบการล่าโหมด Endless — รอดได้ ${formatTime(time)}` : 'นักล่าล้มลง... แต่คืนนี้ยังไม่จบ';
     body.innerHTML = `
       <div class="stats">
         <div><b>${kills}</b><span>ฆ่า</span></div>
@@ -3483,17 +4780,21 @@ function showMenu() {
         `<span style="color:${RARITIES[it.r].color}">${itemIconHTML(it)} ${esc(itemName(it))}</span>`).join('')}${runLoot.length > 10 ? `<span>+${runLoot.length - 10}</span>` : ''}</div>` : ''}
       <p class="sub">เหรียญทั้งหมด 🪙 ${save.coins}</p>
       ${diffRow}`;
-    document.getElementById('playBtn').textContent = 'ลุกขึ้นสู้อีกครั้ง';
+    document.getElementById('playBtn').textContent = endedByPlayer ? 'ล่าใหม่อีกรอบ' : 'ลุกขึ้นสู้อีกครั้ง';
   } else {
-    document.getElementById('menuTitle').textContent = 'Dead Wave';
-    document.getElementById('menuTag').textContent = 'คืนพระจันทร์สีเลือด... พวกมันกำลังมา';
+    document.getElementById('menuTitle').textContent = 'แผนที่';
+    document.getElementById('menuTag').textContent = 'เลือกสมรภูมิของคืนนี้';
     body.innerHTML = `
-      <p class="sub">ยิงหัว = ดาเมจแรงกว่า • ยิงวัตถุเรืองแสงที่ศัตรูทิ้งไว้เพื่อเก็บ • ยิงลูกเวทของลัทธิทิ้งได้</p>
-      <p class="sub">เหรียญ 🪙 ${save.coins}</p>
+      ${mapRow}
+      <p class="sub" style="margin-top:8px">ระดับความยาก • เหรียญ 🪙 ${save.coins}</p>
       ${diffRow}`;
     document.getElementById('playBtn').textContent = 'เริ่มล่า';
   }
   document.getElementById('menuHint').textContent = controls;
+  // map mode: only start + back; result screens: everything plus a way home
+  const inMap = state === 'title';
+  for (const id of ['gearBtn', 'petBtn', 'shopBtn', 'homeBtn']) document.getElementById(id).classList.toggle('hidden', inMap);
+  document.getElementById('mapBack').classList.toggle('hidden', !inMap);
   const affordable = UPGRADES.filter(u => lvl(u.id) < u.max && save.coins >= upgradeCost(u, lvl(u.id))).length;
   document.getElementById('shopBtn').textContent = affordable ? `อัปเกรด (${affordable})` : 'อัปเกรด';
   document.getElementById('gearBtn').textContent = save.inv.length ? `อุปกรณ์ (${save.inv.length})` : 'อุปกรณ์';
@@ -3508,11 +4809,13 @@ const petsEl = document.getElementById('pets');
 function showPets() {
   sfx.init();
   renderPets();
-  menuEl.classList.add('hidden');
+  menuEl.classList.add('hidden'); homeEl.classList.add('hidden');
   petsEl.classList.remove('hidden');
 }
 function renderPets() {
   document.getElementById('petCoins').textContent = save.coins;
+  document.getElementById('petPick').innerHTML = '<span>🐾 เก็บของระดับ:</span>' + RARITIES.map((R, i) =>
+    `<label style="color:${R.color}"><input type="checkbox" data-r="${i}" ${save.petPick[i] ? 'checked' : ''}> ${esc(R.name)}</label>`).join('');
   document.getElementById('petGrid').innerHTML = PET_IDS.map(id => {
     const P = PETS[id], owned = save.pets.includes(id), active = save.pet === id;
     const bonus = [
@@ -3547,6 +4850,12 @@ document.getElementById('petGrid').addEventListener('click', e => {
   sfx.pickup();
   renderPets();
 });
+document.getElementById('petPick').addEventListener('change', e => {
+  const cb = e.target.closest('input[data-r]');
+  if (!cb) return;
+  save.petPick[Number(cb.dataset.r)] = cb.checked;
+  persist();
+});
 document.getElementById('petBack').addEventListener('click', () => { sfx.init(); showMenu(); });
 document.getElementById('petBtn').addEventListener('click', showPets);
 
@@ -3560,7 +4869,7 @@ function showGear() {
   gearSel = null;
   gearNotice = '';
   renderGear();
-  menuEl.classList.add('hidden');
+  menuEl.classList.add('hidden'); homeEl.classList.add('hidden');
   gearEl.classList.remove('hidden');
 }
 
@@ -3604,7 +4913,7 @@ function renderGear() {
     const sel = gearSel && gearSel.from === 'inv' && gearSel.id === it.id ? ' sel' : '';
     const sub = it.kind === 'gear' ? `Lv${it.ilvl}` : it.kind === 'weapon' ? `+${it.bonus}%` : it.kind === 'wmod' ? (WMOD_FIXED.includes(it.type) ? `+${it.v}` : `${it.v}%`) : (it.type === 'pierce' || it.type === 'mag' ? `+${it.value}` : `${it.value}%`);
     return `<button class="invItem${sel}${it.r >= 3 ? ' aura' + it.r : ''}" style="border-color:${RARITIES[it.r].color}" data-inv="${it.id}" title="${esc(itemName(it))}">${itemIconHTML(it)}<small>${sub}</small></button>`;
-  }).join('') : '<div class="invEmpty">ยังไม่มีของ — ฆ่าศัตรูแล้วยิงของที่ดรอปเพื่อเก็บ</div>';
+  }).join('') : '<div class="invEmpty">ยังไม่มีของ — ฆ่าศัตรูแล้วสัตว์เลี้ยงจะเก็บของที่ดรอปให้</div>';
   for (const t of document.querySelectorAll('#gear .tab')) t.classList.toggle('on', t.dataset.tab === invTab);
   document.getElementById('detail').innerHTML = renderDetail();
   renderSalvage();
@@ -3669,8 +4978,10 @@ const gearScore = g => g.hp + g.def * 2.5 + g.sockets.length * 12;
 let gearNotice = '';
 
 function autoEquip() {
+  const P = save.autoPick;
+  if (!P.gear && !P.weapon && !P.mod && !P.wmod) { gearNotice = 'เลือกอย่างน้อย 1 อย่างที่จะให้สวมใส่'; gearSel = null; renderGear(); return; }
   let swapped = 0, socketed = 0;
-  for (const s of SLOT_IDS) {
+  if (P.gear) for (const s of SLOT_IDS) {
     const cur = save.eq[s];
     let best = cur, bs = cur ? gearScore(cur) : -1;
     for (const it of save.inv) {
@@ -3693,7 +5004,7 @@ function autoEquip() {
   }
   // weapon: keep the same gun type (it's a play style choice) but take the strongest copy of it
   const cw = save.eq.weapon;
-  if (cw) {
+  if (cw && P.weapon) {
     const wScore = w => w.bonus + w.sockets.length * 6;
     let best = cw;
     for (const it of save.inv) if (it.kind === 'weapon' && it.type === cw.type && wScore(it) > wScore(best)) best = it;
@@ -3709,7 +5020,7 @@ function autoEquip() {
   }
   // fill empty sockets: rarest / strongest mods first, skipping types already at their cap
   const totals = gearTotals().mods;
-  const mods = save.inv.filter(i => i.kind === 'mod').sort((a, b) => b.r - a.r || b.value - a.value);
+  const mods = P.mod ? save.inv.filter(i => i.kind === 'mod').sort((a, b) => b.r - a.r || b.value - a.value) : [];
   for (const m of mods) {
     if ((totals[m.type] || 0) >= MODS[m.type].cap) continue;
     const slot = SLOT_IDS.find(s => save.eq[s] && save.eq[s].sockets.includes(null));   // armour mods: armour only
@@ -3720,9 +5031,20 @@ function autoEquip() {
     totals[m.type] = (totals[m.type] || 0) + m.value;
     socketed++;
   }
+  // sockets full: swap a weaker socketed mod for a stronger one of the same type from the bag
+  if (P.mod) for (const m of mods) {
+    if (!save.inv.includes(m)) continue;
+    for (const s of SLOT_IDS) {
+      const g = save.eq[s]; if (!g) continue;
+      const i = g.sockets.findIndex(x => x && x.kind === 'mod' && x.type === m.type && x.value < m.value);
+      if (i < 0) continue;
+      save.inv = save.inv.filter(x => x !== m); save.inv.push(g.sockets[i]); g.sockets[i] = m; socketed++;
+      break;
+    }
+  }
   // weapon mods go into the gun: rarest first, one of each type before doubling up
   const gun = save.eq.weapon;
-  if (gun) {
+  if (gun && P.wmod) {
     const wmods = save.inv.filter(i => i.kind === 'wmod').sort((a, b) => b.r - a.r || b.v - a.v);
     for (const pass of [0, 1]) {
       for (const m of wmods) {
@@ -3735,6 +5057,13 @@ function autoEquip() {
         socketed++;
       }
     }
+    // gun full: replace a weaker weapon mod of the same type
+    for (const m of wmods) {
+      if (!save.inv.includes(m)) continue;
+      const i = gun.sockets.findIndex(x => x && x.kind === 'wmod' && x.type === m.type && (x.r < m.r || (x.r === m.r && x.v < m.v)));
+      if (i < 0) continue;
+      save.inv = save.inv.filter(x => x !== m); save.inv.push(gun.sockets[i]); gun.sockets[i] = m; socketed++;
+    }
   }
   persist();
   sfx.pickup();
@@ -3746,6 +5075,10 @@ function autoEquip() {
   renderGear();
 }
 document.getElementById('autoEquip').addEventListener('click', autoEquip);
+for (const cb of document.querySelectorAll('#autoPick input')) {
+  cb.checked = !!save.autoPick[cb.dataset.k];
+  cb.addEventListener('change', () => { save.autoPick[cb.dataset.k] = cb.checked; persist(); });
+}
 
 function renderDetail() {
   const it = selectedItem();
@@ -3887,7 +5220,7 @@ document.getElementById('gearBtn').addEventListener('click', showGear);
 function showShop() {
   sfx.init();
   renderShop();
-  menuEl.classList.add('hidden');
+  menuEl.classList.add('hidden'); homeEl.classList.add('hidden');
   shopEl.classList.remove('hidden');
 }
 
@@ -3947,6 +5280,9 @@ function buyUpgrade(id) {
 }
 
 function hideMenus() {
+  tuneEl.classList.add('hidden');
+  profileEl.classList.add('hidden');
+  homeEl.classList.add('hidden');
   menuEl.classList.add('hidden');
   shopEl.classList.add('hidden');
   gearEl.classList.add('hidden');
@@ -3973,8 +5309,13 @@ document.getElementById('shopGrid').addEventListener('click', e => {
 // ===================== Main loop =====================
 const rotateEl = document.getElementById('rotate');
 let last = performance.now();
+let slowT = 0;
 function frame(now) {
   const real = Math.min(0.05, (now - last) / 1000); // clamp: avoid warping after tab switch
+  if (FX.on && FX.auto !== false && !document.hidden) {        // < ~25 fps for 4 s: drop post-processing
+    slowT = (now - last) > 40 && (now - last) < 250 ? slowT + real : Math.max(0, slowT - real * 0.5);
+    if (slowT > 4) { setFX(false); slowT = 0; }
+  }
   last = now;
   const isPortrait = portrait();
   rotateEl.classList.toggle('show', isPortrait);
@@ -3994,7 +5335,7 @@ resize();
 buildWorld();
 applyDiffLook();
 reset();
-showMenu();
+showProfile();
 requestAnimationFrame(frame);
 
 // Debug handle for testing in the console
@@ -4015,7 +5356,7 @@ window.DW = {
   drop: (kind = 'gear', x = 500, r) => spawnDrop({ type: 'bat', x, y: 200 }, kind === 'gear' ? makeGear(3, undefined, r) : makeMod(3, undefined, r)),
   makeGear, makeMod, makeWeapon, makeWMod, gearTotals, spawnBoss,
   get bossTimer() { return bossTimer; }, set bossTimer(v) { bossTimer = v; },
-  get horde() { return horde; }, killEnemy,
+  get horde() { return horde; }, killEnemy, showMenu, FX, dealDamage, buildWorld,
   get pet() { return pet; },
   toScreen, screenToGame, CAM, placeCamera, renderer,
   refreshStats() { player.stats = computeStats(); player.maxHp = player.stats.maxHp; },
